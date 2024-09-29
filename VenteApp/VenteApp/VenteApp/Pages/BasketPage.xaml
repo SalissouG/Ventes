@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.BasketPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Center">
+
+            <!-- Basket Card -->
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Padding="20"
+                   BackgroundColor="White"
+                  >
+
+                <VerticalStackLayout Spacing="20">
+
+                    <!-- Card Header with Title and Total Button -->
+                    <Grid ColumnDefinitions="*,auto">
+                        <Label Text="Panier"
+                               FontSize="20"
+                               VerticalOptions="Center" />
+
+                        <Label Text="Total"
+                               FontSize="20"
+                               VerticalOptions="Center" Grid.Column="1" /> 
+                    </Grid>
+
+                    <!-- Table Headers -->
+                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                        <Label Text="Nom" />
+                        <Label Text="Description" />
+                        <Label Text="Quantité" />
+                        <Label Text="Prix" />
+                        <Label Text="Supprimer" />
+                    </HorizontalStackLayout>
+
+                    <!-- Example Basket Items (can be dynamically populated later) -->
+                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                        <Label Text="Produit A" />
+                        <Label Text="Description A" />
+                        <Label Text="2" />
+                        <Label Text="20 €" />
+                        <Button Text="Supprimer"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                WidthRequest="100"
+                                HeightRequest="30"
+                                CornerRadius="10" />
+                    </HorizontalStackLayout>
+
+                    <!-- Footer Button: Retour -->
+                    <Button Text="Retour"
+                            WidthRequest="150"
+                            HeightRequest="40"
+                            CornerRadius="10"
+                            Clicked="OnRetourClicked"
+                            HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

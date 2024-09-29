@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.DashboardPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="20">
+
+            <!-- Date and Search Controls -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <!-- Date Debut Picker -->
+
+                <Label Text="Date début:" VerticalOptions="Center" />
+                <DatePicker Date="{Binding DateDebut}" />
+
+                <!-- Date Fin Picker -->
+                <Label Text="Date fin:" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding DateFin}"  />
+
+                <!-- Search Entry -->
+                <Entry Placeholder="Recherche" WidthRequest="200" x:Name="SearchEntry" />
+                <Button Text="Rechercher"
+                        Command="{Binding SearchCommand}"
+                        CommandParameter="{Binding Text, Source={x:Reference SearchEntry}}" />
+            </HorizontalStackLayout>
+
+            <!-- Table Headers -->
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*"
+                  BackgroundColor="LightGray"
+                  Padding="5">
+                <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
+                <Label Text="Description" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
+                <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
+                <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
+                <Label Text="Date Limite" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
+                <Label Text="Prix de ventes" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
+                <Label Text="Quantité vendu" FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Start" />
+                <Label Text="Actions" FontAttributes="Bold" Grid.Column="7" Grid.ColumnSpan="2" HorizontalOptions="Start" />
+            </Grid>
+
+            <!-- List of Filtered Sales -->
+            <ListView ItemsSource="{Binding FilteredSales}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*"
+                                  Padding="5">
+                                <Label Text="{Binding Nom}" Grid.Column="0"  HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" Grid.Column="1" HorizontalOptions="Start" />
+                                <Label Text="{Binding Categorie}" Grid.Column="2" HorizontalOptions="Start" />
+                                <Label Text="{Binding Taille}" Grid.Column="3"  HorizontalOptions="Start" />
+                                <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" HorizontalOptions="Start" />
+                                <Label Text="{Binding PrixDeVentes, StringFormat='{0:C}'}" Grid.Column="5" HorizontalOptions="Start" />
+                                <Label Text="{Binding QuantiteVendu}" Grid.Column="6" HorizontalOptions="Start" />
+                                <Button Text="Modifier" Grid.Column="7" WidthRequest="80" HorizontalOptions="Start"/>
+                                <Button Text="Supprimer" Grid.Column="8" WidthRequest="80" BackgroundColor="Red" TextColor="White" HorizontalOptions="Start" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

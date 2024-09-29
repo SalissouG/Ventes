@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.CreateUserPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,30"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+
+            <!-- Nom Entry -->
+            <Label
+                Text="Nom"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Nom"
+                x:Name="NomEntry"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
+
+            <!-- Prenom Entry -->
+            <Label
+                Text="Prenom"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Prenom"
+                x:Name="PrenomEntry"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
+
+            <!-- Numero de téléphone Entry -->
+            <Label
+                Text="Numero de téléphone"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Numero de téléphone"
+                x:Name="PhoneNumberEntry"
+                Keyboard="Telephone"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
+
+            <!-- Adresse Entry -->
+            <Label
+                Text="Addresse"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Adresse"
+                x:Name="AdresseEntry"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
+
+            <!-- Email Entry -->
+            <Label
+                Text="Email"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Email"
+                x:Name="EmailEntry"
+                Keyboard="Email"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
+
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <Button Text="Enregistrer" 
+                        Clicked="OnSaveUserClicked"
+                        WidthRequest="150"/>
+                <Button Text="Annuler" 
+                        Clicked="OnCancelClicked"
+                        WidthRequest="150"/>
+            </HorizontalStackLayout>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

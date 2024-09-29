@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,30"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+
+            <!-- Title -->
+            <Label
+                Text="Page connexion"
+                FontSize="28"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontAttributes="Bold" />
+
+            <!-- Phone Number/Email Entry -->
+            <Label
+                Text="Numero de téléphone / Email"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Enter your phone number or email"
+                x:Name="PhoneNumberEntry"
+                Keyboard="Email"
+                WidthRequest="300"
+                HorizontalOptions="Center" />
+
+            <!-- Password Entry -->
+            <Label
+                Text="Password"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Enter your password"
+                IsPassword="True"
+                x:Name="PasswordEntry"
+                WidthRequest="300"
+                HorizontalOptions="Center" />
+
+            <!-- Login Button -->
+            <Button
+                Text="Connexion"
+                FontSize="16"
+                WidthRequest="200"
+                HeightRequest="50"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                Clicked="OnLoginClicked" />
+
+            <!-- Create User Link -->
+            <Button
+                Text="Creation utilisateur"
+                FontSize="12"
+                HorizontalOptions="Center"
+                TextColor="LightBlue"
+                Clicked="OnCreateUserClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
