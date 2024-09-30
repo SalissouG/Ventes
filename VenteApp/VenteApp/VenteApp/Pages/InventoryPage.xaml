@@ -3,66 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.InventoryPage">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="20">
 
-            <!-- Search and Add Button -->
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
-                <Entry Placeholder="Recherche" WidthRequest="400" />
-                <Button Text="Rechercher" />
-            </HorizontalStackLayout>
+        <ScrollView>
+            <VerticalStackLayout Padding="40" Spacing="20">
 
-            <!-- Table Headers -->
-            <Grid ColumnDefinitions="*,*,*,*,*,*,*"
-                  BackgroundColor="LightGray"
-                  Padding="5"
-                  RowSpacing="5">
-                <Label Text="Product Name" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
-                <Label Text="Stock Level" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
-                <Label Text="Location" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
-                <Label Text="Supplier" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
-                <Label Text="Last Updated" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
-                <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" />
-            </Grid>
+                <!-- Search and Add Product Button -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                    <Entry Placeholder="Recherche" WidthRequest="400" />
+                    <Button Text="Rechercher" />
+                </HorizontalStackLayout>
 
-            <!-- Inventory List -->
-            <ListView ItemsSource="{Binding InventoryItems}" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid ColumnDefinitions="*,*,*,*,*,*,*"
-                                  Padding="5"
-                                  RowSpacing="5">
 
-                                <!-- Inventory Data Columns -->
-                                <Label Text="{Binding ProductName}" Grid.Column="0" HorizontalOptions="Start" />
-                                <Label Text="{Binding StockLevel}" Grid.Column="1" HorizontalOptions="Start" />
-                                <Label Text="{Binding Location}" Grid.Column="2" HorizontalOptions="Start" />
-                                <Label Text="{Binding Supplier}" Grid.Column="3" HorizontalOptions="Start" />
-                                <Label Text="{Binding LastUpdated, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" HorizontalOptions="Start" />
+                <!-- Product List with Header -->
+                <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
 
-                                <!-- Action Buttons -->
-                                <Button Text="Modifier"
-                                        Grid.Column="5"
-                                        WidthRequest="80"
-                                        HorizontalOptions="Start"
-                                        Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
-                                <Button Text="Supprimer"
-                                        Grid.Column="6"
-                                        WidthRequest="80"
-                                        BackgroundColor="Red"
-                                        TextColor="White"
-                                        HorizontalOptions="Start"
-                                        Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
+                    <!-- ListView Header -->
+                    <ListView.Header>
+                        <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*">
+                            <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                            <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
+                            <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                            <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Quantité" FontAttributes="Bold" Grid.Column="4" />
+                    </Grid>
+                    </ListView.Header>
+
+                    <!-- Product List Content -->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*">
+
+                                    <!-- Product Data Columns -->
+                                    <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
+                                    <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
+                                    <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
+                                    <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
+                                    <Label Text="{Binding Quantite}" Grid.Column="4" VerticalOptions="Center" />
                             </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
 
-</ContentPage>
+    </ContentPage>

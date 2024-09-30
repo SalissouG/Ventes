@@ -1,13 +1,36 @@
 ﻿
+using System.ComponentModel;
+
 namespace VenteApp
 {
-    public class Sale
+    public class Sale : INotifyPropertyChanged
     {
-        public string ProductName { get; set; }
-        public int QuantitySold { get; set; }
-        public decimal SalePrice { get; set; }
-        public decimal TotalPrice => QuantitySold * SalePrice;  // Calculated property
-        public DateTime SaleDate { get; set; }
+        public string Nom { get; set; }
+        public string Description { get; set; }
+        public decimal Prix { get; set; }
+        private int quantite;
+        public int Quantite
+        {
+            get => quantite;
+            set
+            {
+                quantite = value;
+                OnPropertyChanged(nameof(Quantite));
+                OnPropertyChanged(nameof(TotalPrice)); // Recalculate total price when quantity changes
+            }
+        }
+        public string Categorie { get; set; }
+        public string Taille { get; set; }
+        public DateTime DateLimite { get; set; }
+
+        // Total price calculated based on quantity and price
+        public decimal TotalPrice => Quantite * Prix;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

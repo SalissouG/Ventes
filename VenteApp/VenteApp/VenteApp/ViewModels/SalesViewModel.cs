@@ -1,41 +1,28 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace VenteApp
 {
-    public class SalesViewModel
+    public class SalesViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Sale> Sales { get; set; }
 
-        // Commands for editing and deleting sales
-        public ICommand EditCommand { get; }
-        public ICommand DeleteCommand { get; }
-
         public SalesViewModel()
         {
-            // Initialize with sample data
+            // Initialize with some sample data
             Sales = new ObservableCollection<Sale>
-        {
-            new Sale { ProductName = "Laptop", QuantitySold = 2, SalePrice = 1500, SaleDate = DateTime.Now.AddDays(-2) },
-            new Sale { ProductName = "Smartphone", QuantitySold = 5, SalePrice = 800, SaleDate = DateTime.Now.AddDays(-5) },
-        };
+            {
+                new Sale { Nom = "Ordinateur", Description = "Ordinateur portable", Prix = 1200m, Quantite = 0, Categorie = "Électronique", Taille = "N/A", DateLimite = DateTime.Now.AddMonths(6) },
+                new Sale { Nom = "T-shirt", Description = "T-shirt coton", Prix = 25m, Quantite = 0, Categorie = "Vêtements", Taille = "L", DateLimite = DateTime.Now.AddMonths(12) }
+            };
 
-            // Commands
-            EditCommand = new Command<Sale>(OnEditSale);
-            DeleteCommand = new Command<Sale>(OnDeleteSale);
         }
 
-        private void OnEditSale(Sale sale)
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
         {
-            // Handle the edit action (e.g., navigate to an edit page)
-            App.Current.MainPage.DisplayAlert("Edit", $"Edit Sale for: {sale.ProductName}", "OK");
-        }
-
-        private void OnDeleteSale(Sale sale)
-        {
-            // Remove the sale from the collection
-            Sales.Remove(sale);
-            App.Current.MainPage.DisplayAlert("Deleted", $"Deleted Sale for: {sale.ProductName}", "OK");
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

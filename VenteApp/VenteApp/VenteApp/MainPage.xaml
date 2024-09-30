@@ -52,14 +52,6 @@
                 HorizontalOptions="Center"
                 Clicked="OnLoginClicked" />
 
-            <!-- Create User Link -->
-            <Button
-                Text="Creation utilisateur"
-                FontSize="12"
-                HorizontalOptions="Center"
-                TextColor="LightBlue"
-                Clicked="OnCreateUserClicked" />
-
         </VerticalStackLayout>
     </ScrollView>
 

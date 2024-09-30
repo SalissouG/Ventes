@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VenteApp.CreateUserPage">
+             x:Class="VenteApp.CreateProductPage"
+             Title="Produit">
 
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,30"
+            Spacing="15"
+            Padding="20,20"
             VerticalOptions="Center"
             HorizontalOptions="Center">
+
+            <!-- Description Entry -->
+            <Label
+                Text="Description"
+                FontSize="14"
+                HorizontalOptions="Start" />
+            <Entry
+                Placeholder="Description"
+                x:Name="DescriptionEntry"
+                WidthRequest="300"
+                HorizontalOptions="Start" />
 
             <!-- Nom Entry -->
             <Label
@@ -21,64 +33,70 @@
                 WidthRequest="300"
                 HorizontalOptions="Start" />
 
-            <!-- Prenom Entry -->
+            <!-- Prix Entry -->
             <Label
-                Text="Prenom"
+                Text="Prix"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Prenom"
-                x:Name="PrenomEntry"
+                Placeholder="Prix"
+                x:Name="PrixEntry"
                 WidthRequest="300"
+                Keyboard="Numeric"
                 HorizontalOptions="Start" />
 
-            <!-- Numero de téléphone Entry -->
+            <!-- Quantité Entry -->
             <Label
-                Text="Numero de téléphone"
+                Text="Quantité"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Numero de téléphone"
-                x:Name="PhoneNumberEntry"
-                Keyboard="Telephone"
+                Placeholder="Quantité"
+                x:Name="QuantiteEntry"
                 WidthRequest="300"
+                Keyboard="Numeric"
                 HorizontalOptions="Start" />
 
-            <!-- Adresse Entry -->
+            <!-- Catégorie Entry -->
             <Label
-                Text="Addresse"
+                Text="Catégorie"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Adresse"
-                x:Name="AdresseEntry"
+                Placeholder="Catégorie"
+                x:Name="CategorieEntry"
                 WidthRequest="300"
                 HorizontalOptions="Start" />
 
-            <!-- Email Entry -->
+            <!-- Taille Entry -->
             <Label
-                Text="Email"
+                Text="Taille"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Email"
-                x:Name="EmailEntry"
-                Keyboard="Email"
+                Placeholder="Taille"
+                x:Name="TailleEntry"
                 WidthRequest="300"
                 HorizontalOptions="Start" />
 
+            <!-- Date Limite Picker -->
+            <Label
+                Text="Date Limite"
+                FontSize="14"
+                HorizontalOptions="Start" />
+                    <DatePicker
+                x:Name="DateLimitePicker"
+                WidthRequest="300"
+                HorizontalOptions="Start" />            
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-                <Button Text="Enregistrer" 
-                        Clicked="OnSaveUserClicked"
+                <Button Text="Enregistrer"
+                        Clicked="OnSaveProductClicked"
                         WidthRequest="150"/>
-                <Button Text="Annuler" 
+                <Button Text="Annuler"
                         Clicked="OnCancelClicked"
                         WidthRequest="150"/>
             </HorizontalStackLayout>
-
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

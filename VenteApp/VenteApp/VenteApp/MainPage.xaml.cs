@@ -33,10 +33,6 @@
             DisplayAlert("Forgot Password", "Redirecting to forgot password page", "OK");
         }
 
-        private async void OnCreateUserClicked(object sender, EventArgs e)
-        {
-            // Navigate to the Create User page
-            await Navigation.PushAsync(new CreateUserPage());
-        }
+       
     }
 }

@@ -9,46 +9,63 @@
             <!-- Basket Card -->
             <Frame BorderColor="LightGray"
                    CornerRadius="10"
-                   HasShadow="True"
                    Padding="20"
                    BackgroundColor="White"
-                  >
+                   HorizontalOptions="Center">
 
                 <VerticalStackLayout Spacing="20">
 
-                    <!-- Card Header with Title and Total Button -->
+                    <!-- Card Header with Title and Total -->
                     <Grid ColumnDefinitions="*,auto">
                         <Label Text="Panier"
                                FontSize="20"
                                VerticalOptions="Center" />
 
-                        <Label Text="Total"
+                        <Label Text="{Binding TotalPrice, StringFormat='Total: {0:C}'}"
                                FontSize="20"
-                               VerticalOptions="Center" Grid.Column="1" /> 
+                               VerticalOptions="Center"
+                               Grid.Column="1" />
                     </Grid>
 
-                    <!-- Table Headers -->
-                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                        <Label Text="Nom" />
-                        <Label Text="Description" />
-                        <Label Text="Quantité" />
-                        <Label Text="Prix" />
-                        <Label Text="Supprimer" />
-                    </HorizontalStackLayout>
+                    <!-- ListView with Header for column titles -->
+                    <ListView ItemsSource="{Binding CartItems}" HasUnevenRows="True" SeparatorVisibility="None">
 
-                    <!-- Example Basket Items (can be dynamically populated later) -->
-                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                        <Label Text="Produit A" />
-                        <Label Text="Description A" />
-                        <Label Text="2" />
-                        <Label Text="20 €" />
-                        <Button Text="Supprimer"
-                                BackgroundColor="Red"
-                                TextColor="White"
-                                WidthRequest="100"
-                                HeightRequest="30"
-                                CornerRadius="10" />
-                    </HorizontalStackLayout>
+                        <!-- Header for the ListView -->
+                        <ListView.Header>
+                            <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
+                                <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="1" />
+                                <Label Text="Total Prix" FontAttributes="Bold" Grid.Column="2" />
+                                <!-- Update to Total Price -->
+                                <Label Text="" FontAttributes="Bold" Grid.Column="3" />
+                            </Grid>
+                        </ListView.Header>
+
+                        <!-- ListView Content Template -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="5" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
+
+                                        <!-- Basket Item Data -->
+                                        <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
+                                        <Label Text="{Binding Quantite}" Grid.Column="1" VerticalOptions="Center" />
+                                        <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="2" VerticalOptions="Center" />
+                                        <!-- Show Total Price -->
+
+                                        <!-- Remove Button -->
+                                        <Button Text="Supprimer"
+                                                BackgroundColor="Red"
+                                                TextColor="White"
+                                                Command="{Binding BindingContext.RemoveCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding .}"
+                                                WidthRequest="100"
+                                                Grid.Column="3" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <!-- Footer Button: Retour -->
                     <Button Text="Retour"

@@ -17,12 +17,13 @@
                   BackgroundColor="LightGray"
                   Padding="5"
                   RowSpacing="5">
-                <Label Text="Product Name" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
-                <Label Text="Quantity Sold" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
-                <Label Text="Sale Price" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
-                <Label Text="Total Price" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
-                <Label Text="Sale Date" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
-                <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" />
+                <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
+                <Label Text="Description" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
+                <Label Text="Prix" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
+                <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
+                <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
+                <Label Text="Date Limite" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
+                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Start" />
             </Grid>
 
             <!-- Sales List -->
@@ -35,41 +36,33 @@
                                   RowSpacing="5">
 
                                 <!-- Sale Data Columns -->
-                                <Label Text="{Binding ProductName}" Grid.Column="0" HorizontalOptions="Start" />
-                                <Label Text="{Binding QuantitySold}" Grid.Column="1" HorizontalOptions="Start" />
-                                <Label Text="{Binding SalePrice, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" />
-                                <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="3" HorizontalOptions="Start" />
-                                <Label Text="{Binding SaleDate, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" HorizontalOptions="Start" />
+                                <Label Text="{Binding Nom}" Grid.Column="0" HorizontalOptions="Start" />
+                                <Label Text="{Binding Description}" Grid.Column="1" HorizontalOptions="Start" />
+                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" />
+                                <Label Text="{Binding Categorie}" Grid.Column="3" HorizontalOptions="Start" />
+                                <Label Text="{Binding Taille}" Grid.Column="4" HorizontalOptions="Start" />
+                                <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="5" HorizontalOptions="Start" />
 
-                                <!-- Action Buttons -->
-                                <Button Text="Modifier"
-                                        Grid.Column="5"
-                                        WidthRequest="80"
-                                        HorizontalOptions="Start"
-                                        Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
-                                <Button Text="Supprimer"
-                                        Grid.Column="6"
-                                        WidthRequest="80"
-                                        BackgroundColor="Red"
-                                        TextColor="White"
-                                        HorizontalOptions="Start"
-                                        Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
+                                <!-- Increment/Decrement Buttons and Quantity Display -->
+                                <HorizontalStackLayout Grid.Column="6" HorizontalOptions="Start">
+                                    <Button Text="-" Clicked="OnDecrementClicked" />
+                                    <Entry Text="{Binding Quantite}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Button Text="+" Clicked="OnIncrementClicked" />
+                                </HorizontalStackLayout>
+
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Action Buttons (Ajouter au panier, Rupture de stock) -->
+            <!-- Action Buttons -->
             <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Voir le panier"
-                Clicked="OnVoirLePanierClicked" />
+                <Button Text="Voir le Panier"
+                        Clicked="OnShowBasketClicked" />
             </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>
-

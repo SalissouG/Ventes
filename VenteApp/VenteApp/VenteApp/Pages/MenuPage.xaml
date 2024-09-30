@@ -7,24 +7,20 @@
     <FlyoutPage.Flyout>
         <ContentPage Title="Menu">
             <VerticalStackLayout Padding="10" Spacing="10">
-                <Button x:Name="UsersButton" Text="Utilisateurs" Clicked="OnUsersClicked">
-                </Button>
-                <!-- Similar VisualStateManager for other buttons -->
-                <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">
-                    <!-- Add VisualStateManager for ClientsButton -->
-                </Button>
                 <Button x:Name="ProductsButton" Text="Produits" Clicked="OnProductsClicked">
                     <!-- Add VisualStateManager for ProductsButton -->
-                </Button>
-                <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
-                    <!-- Add VisualStateManager for InventoryButton -->
                 </Button>
                 <Button x:Name="SalesButton" Text="Ventes" Clicked="OnSalesClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
+                <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
+                    <!-- Add VisualStateManager for InventoryButton -->
+                </Button>
+
                 <Button x:Name="DashboardButton" Text="Total des ventes" Clicked="OnDashboardClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
+                
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

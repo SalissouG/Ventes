@@ -2,58 +2,27 @@ namespace VenteApp
 {
     public partial class MenuPage : FlyoutPage
     {
+        // Define the color you want to use for the buttons
+        private readonly Color SelectedButtonColor = Color.FromHex("#512bd4");  // Purple color from image
+
         public MenuPage()
         {
             InitializeComponent();
 
             // Set UsersPage as the default Detail page
-            Detail = new NavigationPage(new UsersPage());
+            Detail = new NavigationPage(new SalesPage());
             ResetButtonStyles();  // Reset styles for all buttons
-            UsersButton.BackgroundColor = Colors.LightBlue;
-            UsersButton.TextColor = Colors.White;
+            SalesButton.BackgroundColor = SelectedButtonColor;  // Highlight Users button
+            SalesButton.TextColor = Colors.White;
         }
 
-        // Navigate to Users Page
-        private async void OnUsersClicked(object sender, EventArgs e)
-        {
-            Detail = new NavigationPage(new UsersPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            UsersButton.BackgroundColor = Colors.LightBlue;
-            UsersButton.TextColor = Colors.White;
-        }
-
-        private void ResetButtonStyles()
-        {
-            UsersButton.BackgroundColor = Colors.Transparent;
-            ClientsButton.BackgroundColor = Colors.Transparent;
-            ProductsButton.BackgroundColor = Colors.Transparent;
-            InventoryButton.BackgroundColor = Colors.Transparent;
-            SalesButton.BackgroundColor = Colors.Transparent;
-            DashboardButton.BackgroundColor = Colors.Transparent;
-
-            UsersButton.TextColor = Colors.Black;
-            ClientsButton.TextColor = Colors.Black;
-            ProductsButton.TextColor = Colors.Black;
-            InventoryButton.TextColor = Colors.Black;
-            SalesButton.TextColor = Colors.Black;
-            DashboardButton.TextColor = Colors.Black;
-        }
-
-        // Navigate to Clients Page
-        private async void OnClientsClicked(object sender, EventArgs e)
-        {
-            Detail = new NavigationPage(new ClientsPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            ClientsButton.BackgroundColor = Colors.LightBlue;
-            ClientsButton.TextColor = Colors.White;
-        }
 
         // Navigate to Products Page
         private async void OnProductsClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new ProductsPage());
             ResetButtonStyles();  // Reset styles for all buttons
-            ProductsButton.BackgroundColor = Colors.LightBlue;
+            ProductsButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             ProductsButton.TextColor = Colors.White;
         }
 
@@ -62,7 +31,7 @@ namespace VenteApp
         {
             Detail = new NavigationPage(new InventoryPage());
             ResetButtonStyles();  // Reset styles for all buttons
-            InventoryButton.BackgroundColor = Colors.LightBlue;
+            InventoryButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             InventoryButton.TextColor = Colors.White;
         }
 
@@ -70,7 +39,7 @@ namespace VenteApp
         {
             Detail = new NavigationPage(new SalesPage());
             ResetButtonStyles();  // Reset styles for all buttons
-            SalesButton.BackgroundColor = Colors.LightBlue;
+            SalesButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             SalesButton.TextColor = Colors.White;
         }
 
@@ -78,8 +47,24 @@ namespace VenteApp
         {
             Detail = new NavigationPage(new DashboardPage());
             ResetButtonStyles();  // Reset styles for all buttons
-            DashboardButton.BackgroundColor = Colors.LightBlue;
+            DashboardButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             DashboardButton.TextColor = Colors.White;
+        }
+
+        // Reset all buttons to default style
+        private void ResetButtonStyles()
+        {
+            // Reset background color and text color for all buttons
+            ProductsButton.BackgroundColor = Colors.Transparent;
+            InventoryButton.BackgroundColor = Colors.Transparent;
+            SalesButton.BackgroundColor = Colors.Transparent;
+            DashboardButton.BackgroundColor = Colors.Transparent;
+
+            // Reset text color to black (default)
+            ProductsButton.TextColor = Colors.Black;
+            InventoryButton.TextColor = Colors.Black;
+            SalesButton.TextColor = Colors.Black;
+            DashboardButton.TextColor = Colors.Black;
         }
     }
 }

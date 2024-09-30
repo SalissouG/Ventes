@@ -9,13 +9,12 @@
             <!-- Date and Search Controls -->
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <!-- Date Debut Picker -->
-
                 <Label Text="Date début:" VerticalOptions="Center" />
                 <DatePicker Date="{Binding DateDebut}" />
 
                 <!-- Date Fin Picker -->
                 <Label Text="Date fin:" VerticalOptions="Center"/>
-                <DatePicker Date="{Binding DateFin}"  />
+                <DatePicker Date="{Binding DateFin}" />
 
                 <!-- Search Entry -->
                 <Entry Placeholder="Recherche" WidthRequest="200" x:Name="SearchEntry" />
@@ -24,36 +23,36 @@
                         CommandParameter="{Binding Text, Source={x:Reference SearchEntry}}" />
             </HorizontalStackLayout>
 
-            <!-- Table Headers -->
-            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*"
-                  BackgroundColor="LightGray"
-                  Padding="5">
-                <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
-                <Label Text="Description" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
-                <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
-                <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
-                <Label Text="Date Limite" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
-                <Label Text="Prix de ventes" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
-                <Label Text="Quantité vendu" FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Start" />
-                <Label Text="Actions" FontAttributes="Bold" Grid.Column="7" Grid.ColumnSpan="2" HorizontalOptions="Start" />
-            </Grid>
+            <!-- ListView with Header for Sales -->
+            <ListView ItemsSource="{Binding FilteredSales}" HasUnevenRows="True" SeparatorVisibility="None">
 
-            <!-- List of Filtered Sales -->
-            <ListView ItemsSource="{Binding FilteredSales}" HasUnevenRows="True">
+                <!-- ListView Header -->
+                <ListView.Header>
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,auto,auto">
+                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Date Limite" FontAttributes="Bold" Grid.Column="4" />
+                        <Label Text="Prix de ventes" FontAttributes="Bold" Grid.Column="5" />
+                        <Label Text="Quantité vendu" FontAttributes="Bold" Grid.Column="6" />
+                    </Grid>
+                </ListView.Header>
+
+                <!-- ListView Content -->
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*"
-                                  Padding="5">
-                                <Label Text="{Binding Nom}" Grid.Column="0"  HorizontalOptions="Start"/>
-                                <Label Text="{Binding Description}" Grid.Column="1" HorizontalOptions="Start" />
-                                <Label Text="{Binding Categorie}" Grid.Column="2" HorizontalOptions="Start" />
-                                <Label Text="{Binding Taille}" Grid.Column="3"  HorizontalOptions="Start" />
-                                <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" HorizontalOptions="Start" />
-                                <Label Text="{Binding PrixDeVentes, StringFormat='{0:C}'}" Grid.Column="5" HorizontalOptions="Start" />
-                                <Label Text="{Binding QuantiteVendu}" Grid.Column="6" HorizontalOptions="Start" />
-                                <Button Text="Modifier" Grid.Column="7" WidthRequest="80" HorizontalOptions="Start"/>
-                                <Button Text="Supprimer" Grid.Column="8" WidthRequest="80" BackgroundColor="Red" TextColor="White" HorizontalOptions="Start" />
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,auto,auto" HorizontalOptions="FillAndExpand">
+
+                                <!-- Sale Data Columns -->
+                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
+                                <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
+                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" VerticalOptions="Center" />
+                                <Label Text="{Binding PrixDeVentes, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center" />
+                                <Label Text="{Binding QuantiteVendu}" Grid.Column="6" VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
