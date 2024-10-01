@@ -1,53 +1,70 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Windows.Input;
 
 namespace VenteApp
 {
-    public class SalesViewModel : INotifyPropertyChanged
+    public class SalesViewModel : BindableObject
     {
         public ObservableCollection<Sale> Sales { get; set; }
-        public List<Product> Products { get; set; }
+        public List<Product> AllProducts { get; set; } // To store all products for search
+        public ICommand SearchCommand { get; }
 
         public SalesViewModel()
         {
-            // Initialize the product list
-            Products = new List<Product>
-            {
-                new Product { Nom = "Laptop", Description = "Gaming Laptop", Prix = 1500, Quantite = 10, Categorie = "Electronics", Taille = "N/A", DateLimite = DateTime.Now.AddMonths(12) },
-                new Product { Nom = "Shirt", Description = "Cotton T-Shirt", Prix = 20, Quantite = 50, Categorie = "Clothing", Taille = "M", DateLimite = DateTime.Now.AddMonths(6) },
-                new Product { Nom = "Phone", Description = "Smartphone", Prix = 800, Quantite = 30, Categorie = "Electronics", Taille = "N/A", DateLimite = DateTime.Now.AddMonths(24) }
-            };
+            LoadSales();
 
-            // Convert the product list to sales list
-            Sales = new ObservableCollection<Sale>(ConvertProductsToSales(Products));
+            // Initialize the search command
+            SearchCommand = new Command<string>(OnSearchSales);
         }
 
-        // Method to convert Product list to Sale list
+        // Load all products from the database and convert to sales
+        private void LoadSales()
+        {
+            using (var db = new AppDbContext())
+            {
+                // Load products from the database
+                AllProducts = db.Products.ToList();
+
+                // Convert products to sales
+                Sales = new ObservableCollection<Sale>(ConvertProductsToSales(AllProducts));
+            }
+        }
+
+        // Search sales based on product name (case-insensitive)
+        private void OnSearchSales(string query)
+        {
+            using (var db = new AppDbContext())
+            {
+                // Perform a case-insensitive search in the database
+                var filteredProducts = db.Products
+                                         .Where(p => p.Nom.ToLower().Contains(query.ToLower())) // Case-insensitive search
+                                         .ToList();
+
+                // Convert filtered products to sales
+                var filteredSales = ConvertProductsToSales(filteredProducts);
+
+                // Update the Sales ObservableCollection
+                Sales.Clear();
+                foreach (var sale in filteredSales)
+                {
+                    Sales.Add(sale);
+                }
+            }
+        }
+
+        // Convert product list to sale list
         private List<Sale> ConvertProductsToSales(List<Product> products)
         {
-            var sales = new List<Sale>();
-
-            foreach (var product in products)
+            return products.Select(product => new Sale
             {
-                sales.Add(new Sale
-                {
-                    Nom = product.Nom,
-                    Description = product.Description,
-                    Prix = product.Prix,
-                    Quantite = 0,
-                    Categorie = product.Categorie,
-                    Taille = product.Taille,
-                    DateLimite = product.DateLimite
-                });
-            }
-
-            return sales;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                Nom = product.Nom,
+                Description = product.Description,
+                Prix = product.Prix,
+                Quantite = 0,  // Initialize sales quantity as 0
+                Categorie = product.Categorie,
+                Taille = product.Taille,
+                DateLimite = product.DateLimite
+            }).ToList();
         }
     }
 }

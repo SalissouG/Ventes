@@ -1,12 +1,27 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace VenteApp
 {
-    public partial class BasketPage : ContentPage
+    public partial class BasketPage : ContentPage, INotifyPropertyChanged
     {
         public ObservableCollection<Sale> CartItems { get; set; }
-        public decimal TotalPrice => CartService.Instance.GetTotalPrice(); // Dynamically calculate total price
+
+        private decimal totalPrice;
+        public decimal TotalPrice
+        {
+            get => totalPrice;
+            set
+            {
+                if (totalPrice != value)
+                {
+                    totalPrice = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ICommand RemoveCommand { get; }
 
@@ -20,7 +35,10 @@ namespace VenteApp
             // Bind cart items to the ObservableCollection in CartService
             CartItems = CartService.Instance.CartItems;
 
-            BindingContext = this; // Bind the BasketPage to its ViewModel
+            // Set the initial total price
+            TotalPrice = CartService.Instance.GetTotalPrice();
+
+            BindingContext = this;
 
             this.Title = "Panier";
         }
@@ -29,18 +47,44 @@ namespace VenteApp
         private void OnRemoveItem(Sale sale)
         {
             CartService.Instance.RemoveFromCart(sale);
-            // Trigger UI updates
-            OnPropertyChanged(nameof(CartItems));
-            OnPropertyChanged(nameof(TotalPrice)); // Update the total price after removing an item
+            // Update UI
+            TotalPrice = CartService.Instance.GetTotalPrice();
         }
 
-        // Override OnAppearing to refresh the data when the page is navigated to
+        // Override OnAppearing to refresh data
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Ensure the UI is refreshed with the latest data from CartService
-            OnPropertyChanged(nameof(CartItems));
-            OnPropertyChanged(nameof(TotalPrice));
+            TotalPrice = CartService.Instance.GetTotalPrice();
+        }
+
+        // Event handler for incrementing the quantity
+        private void OnIncrementClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
+
+            sale.Quantite += 1;
+            CartService.Instance.AddToCart(sale);
+
+            // Update TotalPrice
+            TotalPrice = CartService.Instance.GetTotalPrice();
+        }
+
+        // Event handler for decrementing the quantity
+        private void OnDecrementClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
+
+            if (sale.Quantite > 0)
+            {
+                sale.Quantite -= 1;
+                CartService.Instance.AddToCart(sale);
+            }
+
+            // Update TotalPrice
+            TotalPrice = CartService.Instance.GetTotalPrice();
         }
 
         // Event handler for the "Retour" button (Go back to SalesPage)
@@ -53,35 +97,22 @@ namespace VenteApp
         private void OnViderClicked(object sender, EventArgs e)
         {
             CartService.Instance.CartItems.Clear();
+            TotalPrice = 0;
             CartItems.Clear();
         }
 
         private void OnValiderClicked(object sender, EventArgs e)
         {
             CartService.Instance.CartItems.Clear();
+            TotalPrice = 0;
             CartItems.Clear();
         }
 
-        private void OnIncrementClicked(object sender, EventArgs e)
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            var button = (Button)sender;
-            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
-
-            // Increment the quantity
-            sale.Quantite += 1;
-        }
-
-        // Event handler for decrementing the quantity
-        private void OnDecrementClicked(object sender, EventArgs e)
-        {
-            var button = (Button)sender;
-            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
-
-            // Decrement the quantity, but ensure it doesn't go below 0
-            if (sale.Quantite > 0)
-            {
-                sale.Quantite -= 1;
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

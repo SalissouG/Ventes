@@ -25,5 +25,14 @@ public partial class ProductsPage : ContentPage
         // Rediriger vers la page de création de produit
         await Navigation.PushAsync(new CreateProductPage(product));
     }
-    
+
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (BindingContext is ProductViewModel viewModel)
+        {
+            viewModel.SearchCommand.Execute(e.NewTextValue);
+        }
+    }
+
+
 }

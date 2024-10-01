@@ -4,49 +4,47 @@
              x:Class="VenteApp.InventoryPage">
 
 
-        <ScrollView>
-            <VerticalStackLayout Padding="40" Spacing="20">
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="20">
 
-                <!-- Search and Add Product Button -->
-                <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
-                    <Entry Placeholder="Recherche" WidthRequest="400" />
-                    <Button Text="Rechercher" />
-                </HorizontalStackLayout>
+            <!-- Search and Add Product Button -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Rechercher" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={RelativeSource AncestorType={x:Type Entry}}}" />
+            </HorizontalStackLayout>
 
+            <!-- Product List with Header -->
+            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
 
-                <!-- Product List with Header -->
-                <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
-
-                    <!-- ListView Header -->
-                    <ListView.Header>
-                        <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*">
-                            <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                            <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                            <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
-                            <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                <!-- ListView Header -->
+                <ListView.Header>
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*">
+                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
                         <Label Text="Quantité" FontAttributes="Bold" Grid.Column="4" />
                     </Grid>
-                    </ListView.Header>
+                </ListView.Header>
 
-                    <!-- Product List Content -->
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*">
-
-                                    <!-- Product Data Columns -->
-                                    <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                    <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
-                                    <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
-                                    <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
-                                    <Label Text="{Binding Quantite}" Grid.Column="4" VerticalOptions="Center" />
+                <!-- Product List Content -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*">
+                                <!-- Product Data Columns -->
+                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
+                                <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
+                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding Quantite}" Grid.Column="4" VerticalOptions="Center" />
                             </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-            </VerticalStackLayout>
-        </ScrollView>
+        </VerticalStackLayout>
+    </ScrollView>
 
-    </ContentPage>
+</ContentPage>

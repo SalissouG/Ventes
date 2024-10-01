@@ -1,10 +1,11 @@
-﻿
+﻿using System;
 using System.ComponentModel;
 
 namespace VenteApp
 {
     public class Sale : INotifyPropertyChanged
     {
+        public Guid Id { get; set; }
         public string Nom { get; set; }
         public string Description { get; set; }
         public decimal Prix { get; set; }
@@ -32,5 +33,4 @@ namespace VenteApp
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }

@@ -7,9 +7,10 @@
         <VerticalStackLayout Padding="40" Spacing="20">
 
             <!-- Search and Add Product Button -->
+            <!-- Search Bar with Search Command -->
             <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
-                <Entry Placeholder="Recherche" WidthRequest="400" />
-                <Button Text="Rechercher" />
+                <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Rechercher" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={RelativeSource AncestorType={x:Type Entry}}}" />
             </HorizontalStackLayout>
 
             <!-- Add Product Button -->

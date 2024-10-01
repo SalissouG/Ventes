@@ -1,14 +1,22 @@
-namespace VenteApp;
-
-public partial class InventoryPage : ContentPage
+namespace VenteApp
 {
-	public InventoryPage()
-	{
-		InitializeComponent();
+    public partial class InventoryPage : ContentPage
+    {
+        public InventoryPage()
+        {
+            InitializeComponent();
+            this.Title = "Inventaires";
 
-		this.Title = "Inventaires";
+            BindingContext = new InventoryViewModel();
+        }
 
-        BindingContext = new InventoryViewModel();
-
+        // Search as the user types
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (BindingContext is InventoryViewModel viewModel)
+            {
+                viewModel.SearchCommand.Execute(e.NewTextValue);
+            }
+        }
     }
 }

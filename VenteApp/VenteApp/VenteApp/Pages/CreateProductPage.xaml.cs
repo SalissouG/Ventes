@@ -1,9 +1,13 @@
+using System;
+using Microsoft.Maui.Controls;
+
 namespace VenteApp
 {
     public partial class CreateProductPage : ContentPage
     {
-        private Product _productToEdit; // Product being edited
+        private Product _productToEdit;  // Product being edited
 
+        // Constructor for creating a new product or editing an existing one
         public CreateProductPage(Product product = null)
         {
             InitializeComponent();
@@ -12,13 +16,12 @@ namespace VenteApp
 
             if (product != null)
             {
-                // If editing, set the product fields
-                _productToEdit = product;
+                _productToEdit = product; // If editing, load product data
                 LoadProductDetails(_productToEdit);
             }
         }
 
-        // Load the details of the product being edited into the form fields
+        // Load product details into the form for editing
         private void LoadProductDetails(Product product)
         {
             NomEntry.Text = product.Nom;
@@ -30,14 +33,15 @@ namespace VenteApp
             DateLimitePicker.Date = product.DateLimite;
         }
 
+        // Save the product (create or update)
         private async void OnSaveProductClicked(object sender, EventArgs e)
         {
             try
             {
                 if (_productToEdit == null)
                 {
-                    // Create a new product if _productToEdit is null (for new product creation)
-                    Product newProduct = new Product
+                    // Creating a new product
+                    var newProduct = new Product
                     {
                         Nom = NomEntry.Text,
                         Description = DescriptionEntry.Text,
@@ -45,41 +49,50 @@ namespace VenteApp
                         Quantite = int.Parse(QuantiteEntry.Text),
                         Categorie = CategorieEntry.Text,
                         Taille = TailleEntry.Text,
-                        DateLimite = DateLimitePicker.Date // Get the selected date
+                        DateLimite = DateLimitePicker.Date
                     };
 
-                    // Save the new product to the database using ProductService
-                    await DisplayAlert("Produit Créé", $"Produit {newProduct.Nom} a été ajouté avec succès.", "OK");
+                    using (var db = new AppDbContext())
+                    {
+                        db.Products.Add(newProduct);
+                        await db.SaveChangesAsync(); // Save new product to the database
+                    }
+
+                    await DisplayAlert("Produit Créé", $"Produit {newProduct.Nom} ajouté avec succès.", "OK");
                 }
                 else
                 {
-                    // Update the existing product's details
-                    _productToEdit.Nom = NomEntry.Text;
-                    _productToEdit.Description = DescriptionEntry.Text;
-                    _productToEdit.Prix = decimal.Parse(PrixEntry.Text);
-                    _productToEdit.Quantite = int.Parse(QuantiteEntry.Text);
-                    _productToEdit.Categorie = CategorieEntry.Text;
-                    _productToEdit.Taille = TailleEntry.Text;
-                    _productToEdit.DateLimite = DateLimitePicker.Date;
+                    // Updating an existing product
+                    using (var db = new AppDbContext())
+                    {
+                        var product = db.Products.Find(_productToEdit.Id);
+                        product.Nom = NomEntry.Text;
+                        product.Description = DescriptionEntry.Text;
+                        product.Prix = decimal.Parse(PrixEntry.Text);
+                        product.Quantite = int.Parse(QuantiteEntry.Text);
+                        product.Categorie = CategorieEntry.Text;
+                        product.Taille = TailleEntry.Text;
+                        product.DateLimite = DateLimitePicker.Date;
 
-                    // Update the product in the database using ProductService
-                    await DisplayAlert("Produit Modifié", $"Produit {_productToEdit.Nom} a été modifié avec succès.", "OK");
+                        await db.SaveChangesAsync();  // Update the product in the database
+                    }
+
+                    await DisplayAlert("Produit Modifié", $"Produit {_productToEdit.Nom} modifié avec succès.", "OK");
                 }
 
-                // Navigate back to the product list
+                // Navigate back to the product list page
                 await Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                // Handle errors (e.g., if parsing fails)
                 await DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
 
+        // Cancel and go back to the product list page
         private async void OnCancelClicked(object sender, EventArgs e)
         {
-            // Navigate back to the previous page
-            await Navigation.PopAsync();
+            await Navigation.PopAsync(); // Return to the previous page
         }
     }
 }

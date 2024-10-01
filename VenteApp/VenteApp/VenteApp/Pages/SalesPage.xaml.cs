@@ -1,3 +1,4 @@
+
 namespace VenteApp
 {
     public partial class SalesPage : ContentPage
@@ -48,5 +49,14 @@ namespace VenteApp
             // Navigate to the BasketPage to show the cart items
             await Navigation.PushAsync(new BasketPage());
         }
+
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (BindingContext is SalesViewModel viewModel)
+            {
+                viewModel.SearchCommand.Execute(e.NewTextValue);
+            }
+        }
+
     }
 }

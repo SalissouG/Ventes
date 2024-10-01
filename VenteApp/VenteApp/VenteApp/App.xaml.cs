@@ -6,6 +6,11 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
+        using (var db = new AppDbContext())
+        {
+            db.Database.EnsureCreated();  // Create database if it doesn't exist
+        }
+
         MainPage = new NavigationPage(new MenuPage());
     }
 }
