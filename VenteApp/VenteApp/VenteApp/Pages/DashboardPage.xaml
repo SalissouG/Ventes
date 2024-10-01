@@ -51,8 +51,8 @@
                                 <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
                                 <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
                                 <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" VerticalOptions="Center" />
-                                <Label Text="{Binding PrixDeVentes, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center" />
-                                <Label Text="{Binding QuantiteVendu}" Grid.Column="6" VerticalOptions="Center" />
+                                <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center" />
+                                <Label Text="{Binding Quantite}" Grid.Column="6" VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

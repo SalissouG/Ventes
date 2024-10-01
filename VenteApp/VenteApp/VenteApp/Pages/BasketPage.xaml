@@ -34,8 +34,8 @@
                         <ListView.Header>
                             <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
                                 <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="1" />
-                                <Label Text="Total Prix" FontAttributes="Bold" Grid.Column="2" />
+                                <Label Text="Prix" FontAttributes="Bold" Grid.Column="1" />
+                                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="2" />
                                 <!-- Update to Total Price -->
                                 <Label Text="" FontAttributes="Bold" Grid.Column="3" />
                             </Grid>
@@ -49,8 +49,14 @@
 
                                         <!-- Basket Item Data -->
                                         <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                        <Label Text="{Binding Quantite}" Grid.Column="1" VerticalOptions="Center" />
-                                        <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="2" VerticalOptions="Center" />
+                                       
+                                        <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center" />
+                                        <!-- Increment/Decrement Buttons and Quantity Display -->
+                                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="Start">
+                                            <Button Text="-" Clicked="OnDecrementClicked" />
+                                            <Entry Text="{Binding Quantite}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                            <Button Text="+" Clicked="OnIncrementClicked" />
+                                        </HorizontalStackLayout>
                                         <!-- Show Total Price -->
 
                                         <!-- Remove Button -->
@@ -68,12 +74,26 @@
                     </ListView>
 
                     <!-- Footer Button: Retour -->
-                    <Button Text="Retour"
-                            WidthRequest="150"
-                            HeightRequest="40"
-                            CornerRadius="10"
-                            Clicked="OnRetourClicked"
-                            HorizontalOptions="Center" />
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Button Text="Retourner"
+                                WidthRequest="150"
+                                HeightRequest="40"
+                                CornerRadius="10"
+                                Clicked="OnRetournerClicked" />
+                        <Button Text="Vider"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                WidthRequest="150"
+                                HeightRequest="40"
+                                CornerRadius="10"
+                                Clicked="OnViderClicked" />
+                        <Button Text="Valider"
+                                WidthRequest="150"
+                                HeightRequest="40"
+                                CornerRadius="10"
+                                Clicked="OnValiderClicked" />        
+                    </HorizontalStackLayout>
+                   
 
                 </VerticalStackLayout>
             </Frame>

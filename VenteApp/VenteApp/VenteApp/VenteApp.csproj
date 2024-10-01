@@ -47,6 +47,12 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	
+	<ItemGroup>
+    <None Update="VenteApp.deps.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\BasketPage.xaml">

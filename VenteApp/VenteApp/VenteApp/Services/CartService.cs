@@ -20,7 +20,7 @@ namespace VenteApp
             if (existingItem != null)
             {
                 // If the item already exists in the cart, increase its quantity
-                existingItem.Quantite += sale.Quantite;
+                existingItem.Quantite = sale.Quantite;
             }
             else
             {

@@ -21,6 +21,8 @@ namespace VenteApp
             CartItems = CartService.Instance.CartItems;
 
             BindingContext = this; // Bind the BasketPage to its ViewModel
+
+            this.Title = "Panier";
         }
 
         // Method to remove item from the cart
@@ -42,10 +44,44 @@ namespace VenteApp
         }
 
         // Event handler for the "Retour" button (Go back to SalesPage)
-        private async void OnRetourClicked(object sender, EventArgs e)
+        private async void OnRetournerClicked(object sender, EventArgs e)
         {
             // Navigate back to the previous page (SalesPage)
             await Navigation.PopAsync();
+        }
+
+        private void OnViderClicked(object sender, EventArgs e)
+        {
+            CartService.Instance.CartItems.Clear();
+            CartItems.Clear();
+        }
+
+        private void OnValiderClicked(object sender, EventArgs e)
+        {
+            CartService.Instance.CartItems.Clear();
+            CartItems.Clear();
+        }
+
+        private void OnIncrementClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
+
+            // Increment the quantity
+            sale.Quantite += 1;
+        }
+
+        // Event handler for decrementing the quantity
+        private void OnDecrementClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
+
+            // Decrement the quantity, but ensure it doesn't go below 0
+            if (sale.Quantite > 0)
+            {
+                sale.Quantite -= 1;
+            }
         }
     }
 }
