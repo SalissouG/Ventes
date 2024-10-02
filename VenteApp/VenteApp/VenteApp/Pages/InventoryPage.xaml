@@ -10,7 +10,6 @@
             <!-- Search and Add Product Button -->
             <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Rechercher" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={RelativeSource AncestorType={x:Type Entry}}}" />
             </HorizontalStackLayout>
 
             <!-- Product List with Header -->

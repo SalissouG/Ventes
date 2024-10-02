@@ -103,10 +103,55 @@ namespace VenteApp
 
         private void OnValiderClicked(object sender, EventArgs e)
         {
-            CartService.Instance.CartItems.Clear();
-            TotalPrice = 0;
-            CartItems.Clear();
+            try
+            {
+                using (var db = new AppDbContext())
+                {
+                    foreach (var sale in CartItems)
+                    {
+                        // Verify that the product exists in the database
+                        var product = db.Products.FirstOrDefault(p => p.Id == sale.ProductId);
+                        if (product == null)
+                        {
+                            DisplayAlert("Erreur", $"Produit avec ID {sale.ProductId} n'existe pas dans la base de données.", "OK");
+                            return;
+                        }
+
+                        var saleTransaction = new SaleTransaction
+                        {
+                            ProductId = sale.ProductId, // Foreign key to Product
+                            Quantite = sale.Quantite,
+                            DateDeVente = DateTime.Now
+                        };
+
+                        db.SaleTransactions.Add(saleTransaction); // Add the sale transaction
+                    }
+
+                    int changes = db.SaveChanges(); // Save changes to the database
+                    if (changes > 0)
+                    {
+                        DisplayAlert("Succès", $"{changes} transaction(s) ajoutée(s) avec succès.", "OK");
+                    }
+                    else
+                    {
+                        DisplayAlert("Erreur", "Aucune transaction ajoutée.", "OK");
+                    }
+                }
+
+                // Clear the cart and update the UI
+                CartService.Instance.CartItems.Clear();
+                TotalPrice = 0;
+                CartItems.Clear();
+
+                // Navigate to the ProductsPage
+                Navigation.PushAsync(new ProductsPage());
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
+            }
         }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

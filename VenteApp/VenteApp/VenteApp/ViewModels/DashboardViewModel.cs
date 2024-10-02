@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 
 namespace VenteApp
 {
@@ -7,7 +8,7 @@ namespace VenteApp
     {
         private DateTime _dateDebut;
         private DateTime _dateFin;
-        private ObservableCollection<Sale> _filteredSales;
+        private ObservableCollection<SaleTransaction> _filteredSales;
 
         public DateTime DateDebut
         {
@@ -31,7 +32,7 @@ namespace VenteApp
             }
         }
 
-        public ObservableCollection<Sale> FilteredSales
+        public ObservableCollection<SaleTransaction> FilteredSales
         {
             get => _filteredSales;
             set
@@ -45,56 +46,59 @@ namespace VenteApp
 
         public DashboardViewModel()
         {
-            // Sample sales data
-            List<Sale> salesData = new List<Sale>
-            {
-                new Sale { Nom = "Laptop", Description = "Gaming Laptop", Categorie = "Electronics", Taille = "N/A", DateLimite = DateTime.Now.AddMonths(3), Quantite = 5, Prix = 1200m },
-                new Sale { Nom = "Shirt", Description = "Cotton T-shirt", Categorie = "Clothing", Taille = "M", DateLimite = DateTime.Now.AddMonths(6), Quantite= 20, Prix = 25m },
-            };
-
-            // Initialize dashboard data
-            Dashboard dashboard = new Dashboard
-            {
-                DateDebut = DateTime.Now.AddMonths(-1),
-                DateFin = DateTime.Now,
-                SalesData = salesData
-            };
-
-            DateDebut = dashboard.DateDebut;
-            DateFin = dashboard.DateFin;
+            DateDebut = DateTime.Now.AddMonths(-1);
+            DateFin = DateTime.Now;
 
             // Initialize filtered sales
-            FilteredSales = new ObservableCollection<Sale>(dashboard.SalesData);
+            FilteredSales = new ObservableCollection<SaleTransaction>();
 
-            // Command to search
-            SearchCommand = new Command<string>(OnSearch);
+            // Load sales from the database
+            LoadSalesFromDatabase();
         }
 
+        // Method to load sales data from the database
+        private void LoadSalesFromDatabase()
+        {
+            using (var db = new AppDbContext())
+            {
+                var salesData = db.SaleTransactions
+                                  .Include(sale => sale.Product) // Include the related Product
+                                  .ToList();
+
+                FilteredSales = new ObservableCollection<SaleTransaction>(salesData);
+            }
+        }
+
+        // Filter sales based on date range
         private void FilterSales()
         {
-            // Filter based on date range
-            var allSales = new List<Sale>
+            using (var db = new AppDbContext())
             {
-                new Sale { Nom = "Laptop", Description = "Gaming Laptop", Categorie = "Electronics", Taille = "N/A", DateLimite = DateTime.Now.AddMonths(3), Quantite = 5, Prix = 1200m },
-                new Sale { Nom = "Shirt", Description = "Cotton T-shirt", Categorie = "Clothing", Taille = "M", DateLimite = DateTime.Now.AddMonths(6), Quantite= 20, Prix = 25m },
-            };
+                // Fetch sales data from the database within the specified date range
+                var filteredSalesData = db.SaleTransactions
+                                          .Include(sale => sale.Product) // Include the Product details
+                                          .Where(sale => sale.DateDeVente >= DateDebut && sale.DateDeVente <= DateFin)
+                                          .ToList();
 
-            //FilteredSales = new ObservableCollection<SaleDashboard>(allSales.Where(sale => sale.DateLimite >= DateDebut && sale.DateLimite <= DateFin));
-            FilteredSales = new ObservableCollection<Sale>(allSales.Where(sale => true));
+                // Populate the FilteredSales collection with filtered data
+                FilteredSales = new ObservableCollection<SaleTransaction>(filteredSalesData);
+            }
         }
 
-        private void OnSearch(string searchTerm)
+        // Search for sales based on the product name or description
+        public void OnSearch(string searchTerm)
         {
-            if (string.IsNullOrEmpty(searchTerm))
+            using (var db = new AppDbContext())
             {
-                FilterSales();  // Reset filter if search is empty
-                return;
-            }
+                var filteredSales = db.SaleTransactions
+                                      .Include(sale => sale.Product)
+                                      .Where(sale => sale.Product.Nom.ToLower().Contains(searchTerm.ToLower()) ||
+                                                     sale.Product.Description.ToLower().Contains(searchTerm.ToLower()))
+                                      .Where(sale => sale.DateDeVente >= DateDebut && sale.DateDeVente <= DateFin)
+                                      .ToList();
 
-            FilteredSales = new ObservableCollection<Sale>(
-                FilteredSales.Where(sale => sale.Nom.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                            sale.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-            );
+                FilteredSales = new ObservableCollection<SaleTransaction>(filteredSales);
+            }
         }
     }
 }

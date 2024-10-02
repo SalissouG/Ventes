@@ -11,6 +11,17 @@
             VerticalOptions="Center"
             HorizontalOptions="Center">
 
+            <!-- Nom Entry -->
+            <Label
+                Text="Nom"
+                FontSize="14"
+                HorizontalOptions="Start" />
+                    <Entry
+                Placeholder="Nom"
+                x:Name="NomEntry"
+                WidthRequest="300"
+                HorizontalOptions="Start" />    
+
             <!-- Description Entry -->
             <Label
                 Text="Description"
@@ -19,17 +30,6 @@
             <Entry
                 Placeholder="Description"
                 x:Name="DescriptionEntry"
-                WidthRequest="300"
-                HorizontalOptions="Start" />
-
-            <!-- Nom Entry -->
-            <Label
-                Text="Nom"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Nom"
-                x:Name="NomEntry"
                 WidthRequest="300"
                 HorizontalOptions="Start" />
 
@@ -78,16 +78,7 @@
                 x:Name="TailleEntry"
                 WidthRequest="300"
                 HorizontalOptions="Start" />
-
-            <!-- Date Limite Picker -->
-            <Label
-                Text="Date Limite"
-                FontSize="14"
-                HorizontalOptions="Start" />
-                    <DatePicker
-                x:Name="DateLimitePicker"
-                WidthRequest="300"
-                HorizontalOptions="Start" />            
+                
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                 <Button Text="Enregistrer"

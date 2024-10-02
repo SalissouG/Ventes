@@ -59,7 +59,8 @@ namespace VenteApp
             {
                 // Fetch products matching the search query
                 var filteredProducts = db.Products
-                                         .Where(p => p.Nom.Contains(query))
+                                         .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
+                                                     p.Description.ToLower().Contains(query.ToLower()))
                                          .ToList();
 
                 // Update the ObservableCollection

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 namespace VenteApp
@@ -47,7 +46,8 @@ namespace VenteApp
                 using (var db = new AppDbContext())
                 {
                     var filteredProducts = db.Products
-                                             .Where(p => p.Nom.ToLower().Contains(query.ToLower())) // Case-insensitive search
+                                             .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
+                                                     p.Description.ToLower().Contains(query.ToLower()))
                                              .ToList();
 
                     // Update the ObservableCollection

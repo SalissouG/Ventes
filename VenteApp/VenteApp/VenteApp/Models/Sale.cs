@@ -6,6 +6,8 @@ namespace VenteApp
     public class Sale : INotifyPropertyChanged
     {
         public Guid Id { get; set; }
+
+        public Guid ProductId{ get; set; }
         public string Nom { get; set; }
         public string Description { get; set; }
         public decimal Prix { get; set; }
@@ -23,6 +25,8 @@ namespace VenteApp
         public string Categorie { get; set; }
         public string Taille { get; set; }
         public DateTime DateLimite { get; set; }
+
+        public DateTime DateDeVente { get; set; }
 
         // Total price calculated based on quantity and price
         public decimal TotalPrice => Quantite * Prix;

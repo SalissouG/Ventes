@@ -1,6 +1,3 @@
-using System;
-using Microsoft.Maui.Controls;
-
 namespace VenteApp
 {
     public partial class CreateProductPage : ContentPage
@@ -30,7 +27,6 @@ namespace VenteApp
             QuantiteEntry.Text = product.Quantite.ToString();
             CategorieEntry.Text = product.Categorie;
             TailleEntry.Text = product.Taille;
-            DateLimitePicker.Date = product.DateLimite;
         }
 
         // Save the product (create or update)
@@ -49,7 +45,6 @@ namespace VenteApp
                         Quantite = int.Parse(QuantiteEntry.Text),
                         Categorie = CategorieEntry.Text,
                         Taille = TailleEntry.Text,
-                        DateLimite = DateLimitePicker.Date
                     };
 
                     using (var db = new AppDbContext())
@@ -72,7 +67,6 @@ namespace VenteApp
                         product.Quantite = int.Parse(QuantiteEntry.Text);
                         product.Categorie = CategorieEntry.Text;
                         product.Taille = TailleEntry.Text;
-                        product.DateLimite = DateLimitePicker.Date;
 
                         await db.SaveChangesAsync();  // Update the product in the database
                     }
@@ -81,7 +75,7 @@ namespace VenteApp
                 }
 
                 // Navigate back to the product list page
-                await Navigation.PopAsync();
+                await Navigation.PushAsync(new ProductsPage());
             }
             catch (Exception ex)
             {

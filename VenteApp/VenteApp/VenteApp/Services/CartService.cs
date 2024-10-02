@@ -26,7 +26,10 @@ namespace VenteApp
             {
                 // Add a new item to the cart
                 CartItems.Add(new Sale
-                {
+                {   
+                    Id = sale.Id,
+                    ProductId = sale.ProductId,
+                    DateDeVente = sale.DateDeVente,
                     Nom = sale.Nom,
                     Description = sale.Description,
                     Prix = sale.Prix,

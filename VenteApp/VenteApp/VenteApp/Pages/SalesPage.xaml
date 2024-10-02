@@ -9,11 +9,10 @@
             <!-- Search Bar with Search Command -->
             <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Rechercher" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={RelativeSource AncestorType={x:Type Entry}}}" />
             </HorizontalStackLayout>
 
             <!-- Table Headers -->
-            <Grid ColumnDefinitions="*,*,*,*,*,*,*"
+            <Grid ColumnDefinitions="*,*,*,*,*,*"
                   BackgroundColor="LightGray"
                   Padding="5"
                   RowSpacing="5">
@@ -22,8 +21,7 @@
                 <Label Text="Prix" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
                 <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
                 <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
-                <Label Text="Date Limite" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
-                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="6" HorizontalOptions="Start" />
+                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
             </Grid>
 
             <!-- Sales List -->
@@ -31,7 +29,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnDefinitions="*,*,*,*,*,*,*"
+                            <Grid ColumnDefinitions="*,*,*,*,*,*"
                                   Padding="5"
                                   RowSpacing="5">
 
@@ -41,10 +39,9 @@
                                 <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" />
                                 <Label Text="{Binding Categorie}" Grid.Column="3" HorizontalOptions="Start" />
                                 <Label Text="{Binding Taille}" Grid.Column="4" HorizontalOptions="Start" />
-                                <Label Text="{Binding DateLimite, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="5" HorizontalOptions="Start" />
 
                                 <!-- Increment/Decrement Buttons and Quantity Display -->
-                                <HorizontalStackLayout Grid.Column="6" HorizontalOptions="Start">
+                                <HorizontalStackLayout Grid.Column="5" HorizontalOptions="Start">
                                     <Button Text="-" Clicked="OnDecrementClicked" />
                                     <Entry Text="{Binding Quantite}" HorizontalOptions="Center" VerticalOptions="Center" />
                                     <Button Text="+" Clicked="OnIncrementClicked" />

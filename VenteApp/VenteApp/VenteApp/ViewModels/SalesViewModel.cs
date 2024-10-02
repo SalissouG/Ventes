@@ -37,7 +37,8 @@ namespace VenteApp
             {
                 // Perform a case-insensitive search in the database
                 var filteredProducts = db.Products
-                                         .Where(p => p.Nom.ToLower().Contains(query.ToLower())) // Case-insensitive search
+                                         .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
+                                                     p.Description.ToLower().Contains(query.ToLower()))
                                          .ToList();
 
                 // Convert filtered products to sales
@@ -57,13 +58,14 @@ namespace VenteApp
         {
             return products.Select(product => new Sale
             {
+                ProductId = product.Id,
                 Nom = product.Nom,
                 Description = product.Description,
                 Prix = product.Prix,
                 Quantite = 0,  // Initialize sales quantity as 0
                 Categorie = product.Categorie,
                 Taille = product.Taille,
-                DateLimite = product.DateLimite
+                DateDeVente = DateTime.Now
             }).ToList();
         }
     }
