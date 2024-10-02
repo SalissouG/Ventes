@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VenteApp
 {
-    public class DashboardViewModel : BindableObject
+    public class HistoricalViewModel : BindableObject
     {
         private DateTime _dateDebut;
         private DateTime _dateFin;
@@ -44,7 +44,7 @@ namespace VenteApp
 
         public ICommand SearchCommand { get; }
 
-        public DashboardViewModel()
+        public HistoricalViewModel()
         {
             DateDebut = DateTime.Now.AddMonths(-1);
             DateFin = DateTime.Now;
@@ -93,7 +93,8 @@ namespace VenteApp
                 var filteredSales = db.SaleTransactions
                                       .Include(sale => sale.Product)
                                       .Where(sale => sale.Product.Nom.ToLower().Contains(searchTerm.ToLower()) ||
-                                                     sale.Product.Description.ToLower().Contains(searchTerm.ToLower()))
+                                                     sale.Product.Description.ToLower().Contains(searchTerm.ToLower()) ||
+                                                     sale.Product.Categorie.ToLower().Contains(searchTerm.ToLower()))
                                       .Where(sale => sale.DateDeVente >= DateDebut && sale.DateDeVente <= DateFin)
                                       .ToList();
 

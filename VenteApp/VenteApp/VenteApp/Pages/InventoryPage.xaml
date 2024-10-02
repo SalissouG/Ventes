@@ -8,7 +8,7 @@
         <VerticalStackLayout Padding="40" Spacing="20">
 
             <!-- Search and Add Product Button -->
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+            <HorizontalStackLayout>
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
             </HorizontalStackLayout>
 
@@ -22,7 +22,7 @@
                         <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
                         <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
                         <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Quantité" FontAttributes="Bold" Grid.Column="4" />
+                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="4" />
                     </Grid>
                 </ListView.Header>
 

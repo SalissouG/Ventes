@@ -51,6 +51,12 @@
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\HistoricalPage.xaml.cs">
+	    <DependentUpon>HistoricalPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 	
 	<ItemGroup>
     <None Update="VenteApp.deps.json">
@@ -65,7 +71,7 @@
 	  <MauiXaml Update="Pages\CreateProductPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\DashboardPage.xaml">
+	  <MauiXaml Update="Pages\HistoricalPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\InventoryPage.xaml">

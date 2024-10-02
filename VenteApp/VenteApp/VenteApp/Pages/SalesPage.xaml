@@ -7,8 +7,9 @@
         <VerticalStackLayout Padding="40" Spacing="20">
 
             <!-- Search Bar with Search Command -->
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+            <HorizontalStackLayout Spacing="20">
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Voir le panier" Clicked="OnShowBasketClicked" />
             </HorizontalStackLayout>
 
             <!-- Table Headers -->
@@ -18,9 +19,9 @@
                   RowSpacing="5">
                 <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" HorizontalOptions="Start" />
                 <Label Text="Description" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="Start" />
-                <Label Text="Prix" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
-                <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
-                <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
+                <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" HorizontalOptions="Start" />
+                <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" HorizontalOptions="Start" />
+                <Label Text="Prix" FontAttributes="Bold" Grid.Column="4" HorizontalOptions="Start" />
                 <Label Text="Quantité" FontAttributes="Bold" Grid.Column="5" HorizontalOptions="Start" />
             </Grid>
 
@@ -36,10 +37,9 @@
                                 <!-- Sale Data Columns -->
                                 <Label Text="{Binding Nom}" Grid.Column="0" HorizontalOptions="Start" />
                                 <Label Text="{Binding Description}" Grid.Column="1" HorizontalOptions="Start" />
-                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="2" HorizontalOptions="Start" />
-                                <Label Text="{Binding Categorie}" Grid.Column="3" HorizontalOptions="Start" />
-                                <Label Text="{Binding Taille}" Grid.Column="4" HorizontalOptions="Start" />
-
+                                <Label Text="{Binding Categorie}" Grid.Column="2" HorizontalOptions="Start" />
+                                <Label Text="{Binding Taille}" Grid.Column="3" HorizontalOptions="Start" />
+                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="4" HorizontalOptions="Start" />
                                 <!-- Increment/Decrement Buttons and Quantity Display -->
                                 <HorizontalStackLayout Grid.Column="5" HorizontalOptions="Start">
                                     <Button Text="-" Clicked="OnDecrementClicked" />
@@ -54,10 +54,7 @@
             </ListView>
 
             <!-- Action Buttons -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Voir le Panier"
-                        Clicked="OnShowBasketClicked" />
-            </HorizontalStackLayout>
+           
 
         </VerticalStackLayout>
     </ScrollView>

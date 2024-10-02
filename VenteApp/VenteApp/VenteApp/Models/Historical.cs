@@ -1,7 +1,7 @@
 ﻿
 namespace VenteApp
 {
-    public class Dashboard
+    public class Historical
     {
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }

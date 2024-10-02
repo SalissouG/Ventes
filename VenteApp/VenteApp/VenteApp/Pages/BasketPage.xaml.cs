@@ -87,20 +87,6 @@ namespace VenteApp
             TotalPrice = CartService.Instance.GetTotalPrice();
         }
 
-        // Event handler for the "Retour" button (Go back to SalesPage)
-        private async void OnRetournerClicked(object sender, EventArgs e)
-        {
-            // Navigate back to the previous page (SalesPage)
-            await Navigation.PopAsync();
-        }
-
-        private void OnViderClicked(object sender, EventArgs e)
-        {
-            CartService.Instance.CartItems.Clear();
-            TotalPrice = 0;
-            CartItems.Clear();
-        }
-
         private void OnValiderClicked(object sender, EventArgs e)
         {
             try

@@ -13,11 +13,14 @@
                 <Button x:Name="SalesButton" Text="Ventes" Clicked="OnSalesClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
+                <Button x:Name="BasketButton" Text="Panier" Clicked="OnBasketClicked">
+                    <!-- Add VisualStateManager for SalesButton -->
+                </Button>
                 <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
                     <!-- Add VisualStateManager for InventoryButton -->
                 </Button>
 
-                <Button x:Name="DashboardButton" Text="Total des ventes" Clicked="OnDashboardClicked">
+                <Button x:Name="HistoricalButton" Text="Historiques" Clicked="OnHistoricalClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
                 

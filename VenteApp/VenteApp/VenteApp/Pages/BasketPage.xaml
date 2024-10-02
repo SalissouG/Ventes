@@ -75,19 +75,9 @@
 
                     <!-- Footer Button: Retour -->
                     <HorizontalStackLayout HorizontalOptions="Center">
-                        <Button Text="Retourner"
-                                WidthRequest="150"
-                                HeightRequest="40"
-                                CornerRadius="10"
-                                Clicked="OnRetournerClicked" />
-                        <Button Text="Vider"
-                                BackgroundColor="Red"
-                                TextColor="White"
-                                WidthRequest="150"
-                                HeightRequest="40"
-                                CornerRadius="10"
-                                Clicked="OnViderClicked" />
                         <Button Text="Valider"
+                                BackgroundColor="Green"
+                                TextColor="White"
                                 WidthRequest="150"
                                 HeightRequest="40"
                                 CornerRadius="10"

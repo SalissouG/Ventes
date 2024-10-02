@@ -8,12 +8,11 @@
 
             <!-- Search and Add Product Button -->
             <!-- Search Bar with Search Command -->
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+            <HorizontalStackLayout Spacing="20">
+                <!-- Add Product Button -->
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Ajouter un produit" Clicked="OnAddProductClicked" />
             </HorizontalStackLayout>
-
-            <!-- Add Product Button -->
-            <Button Text="Ajouter" HorizontalOptions="End" Clicked="OnAddProductClicked" />
 
             <!-- Product List with Header -->
             <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
@@ -23,10 +22,10 @@
                     <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,*">
                         <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
                         <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Prix" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Quantité" FontAttributes="Bold" Grid.Column="5" />
+                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Prix" FontAttributes="Bold" Grid.Column="4" />
+                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="5" />
                         <Label Text="Actions" FontAttributes="Bold" Grid.Column="6" Grid.ColumnSpan="2" HorizontalOptions="Start" />
                     </Grid>
                 </ListView.Header>
@@ -40,21 +39,21 @@
                                 <!-- Product Data Columns -->
                                 <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
                                 <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Categorie}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding Taille}" Grid.Column="4" VerticalOptions="Center" />
+                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="4" VerticalOptions="Center" />
                                 <Label Text="{Binding Quantite}" Grid.Column="5" VerticalOptions="Center" />
 
                                 <!-- Action Buttons -->
                                 <!-- Action Buttons -->
-                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="6" HorizontalOptions="Center"/>
+                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="6" HorizontalOptions="Start"/>
                                   
                                 <Button Text="Supprimer"
                                         Grid.Column="8"
                                         WidthRequest="100"
                                         BackgroundColor="Red"
                                         TextColor="White"
-                                        HorizontalOptions="Center"
+                                        HorizontalOptions="Start"
                                         Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                         CommandParameter="{Binding .}" />               
                             </Grid>

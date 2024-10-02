@@ -47,11 +47,11 @@
 
             <!-- Quantité Entry -->
             <Label
-                Text="Quantité"
+                Text="Stock"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Quantité"
+                Placeholder="Stock"
                 x:Name="QuantiteEntry"
                 WidthRequest="300"
                 Keyboard="Numeric"
