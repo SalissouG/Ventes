@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.InventoryPage">
 
-
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
 
-            <!-- Search and Add Product Button -->
+            <!-- Search Bar -->
             <HorizontalStackLayout>
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
             </HorizontalStackLayout>
@@ -42,6 +41,21 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <!-- Pagination Controls -->
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <!-- Previous Page Button -->
+                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
+             IsEnabled="{Binding CurrentPage }" />
+
+                <!-- Page Info -->
+                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
+             VerticalOptions="Center" />
+
+                <!-- Next Page Button -->
+                <Button Text="Suivant" Command="{Binding NextPageCommand}"
+             IsEnabled="{Binding CurrentPage}" />
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

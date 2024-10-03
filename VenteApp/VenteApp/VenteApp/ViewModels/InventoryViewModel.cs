@@ -5,58 +5,122 @@ namespace VenteApp
 {
     public class InventoryViewModel : BindableObject
     {
+        private const int PageSize = 2; // Number of products per page
+        private int _currentPage = 1; // Current page number
+        private int _totalPages; // Total number of pages
+
         public ObservableCollection<Product> Products { get; set; }
-        public ObservableCollection<Product> AllProducts { get; set; } // Used for keeping all products for search functionality
+        public ObservableCollection<Product> AllProducts { get; set; } // Used for search functionality
 
         public ICommand SearchCommand { get; }
+        public ICommand NextPageCommand { get; }
+        public ICommand PreviousPageCommand { get; }
+
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int TotalPages
+        {
+            get => _totalPages;
+            set
+            {
+                _totalPages = value;
+                OnPropertyChanged();
+            }
+        }
 
         public InventoryViewModel()
         {
-            LoadProducts();
+            Products = new ObservableCollection<Product>();
 
-            // Initialize the search command
             SearchCommand = new Command<string>(OnSearchProducts);
+            NextPageCommand = new Command(OnNextPage);
+            PreviousPageCommand = new Command(OnPreviousPage);
+
+            LoadProducts(); // Load the first page
         }
 
-        // Load all products from the database
+        // Load products from the database with pagination
         private void LoadProducts()
         {
             using (var db = new AppDbContext())
             {
-                var productList = db.Products.ToList();
-                Products = new ObservableCollection<Product>(productList);
-                AllProducts = new ObservableCollection<Product>(productList); // Keep a copy for searching
+                var totalProducts = db.Products.Count();
+                TotalPages = (int)Math.Ceiling(totalProducts / (double)PageSize);
+
+                LoadPage(CurrentPage); // Load the current page
             }
         }
 
-        // Handle product search
-        private void OnSearchProducts(string query)
+        // Load products for the current page
+        private void LoadPage(int pageNumber)
         {
-            if (string.IsNullOrWhiteSpace(query))
+            using (var db = new AppDbContext())
             {
-                // If the search query is empty, show all products
+                int skip = (pageNumber - 1) * PageSize;
+                var pagedProducts = db.Products
+                                      .OrderBy(p => p.Nom)
+                                      .Skip(skip)
+                                      .Take(PageSize)
+                                      .ToList();
+
                 Products.Clear();
-                foreach (var product in AllProducts)
+                foreach (var product in pagedProducts)
                 {
                     Products.Add(product);
                 }
             }
-            else
+        }
+
+        // Handle the next page navigation
+        private void OnNextPage()
+        {
+            if (CurrentPage < TotalPages)
             {
-                using (var db = new AppDbContext())
-                {
-                    var filteredProducts = db.Products
-                                             .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
+                CurrentPage++;
+                LoadPage(CurrentPage); // Load the next page
+            }
+        }
+
+        // Handle the previous page navigation
+        private void OnPreviousPage()
+        {
+            if (CurrentPage > 1)
+            {
+                CurrentPage--;
+                LoadPage(CurrentPage); // Load the previous page
+            }
+        }
+
+        // Handle product search with pagination
+        private void OnSearchProducts(string query)
+        {
+            using (var db = new AppDbContext())
+            {
+                var filteredProducts = db.Products
+                                         .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
                                                      p.Description.ToLower().Contains(query.ToLower()) ||
                                                      p.Categorie.ToLower().Contains(query.ToLower()))
-                                             .ToList();
+                                         .ToList();
 
-                    // Update the ObservableCollection
-                    Products.Clear();
-                    foreach (var product in filteredProducts)
-                    {
-                        Products.Add(product);
-                    }
+                // Update the pagination info
+                TotalPages = (int)Math.Ceiling(filteredProducts.Count / (double)PageSize);
+                CurrentPage = 1; // Reset to the first page of the search result
+
+                // Load the first page of the filtered products
+                var pagedProducts = filteredProducts.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+
+                Products.Clear();
+                foreach (var product in pagedProducts)
+                {
+                    Products.Add(product);
                 }
             }
         }

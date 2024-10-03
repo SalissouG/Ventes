@@ -75,7 +75,7 @@
 
                     <!-- Footer Button: Retour -->
                     <HorizontalStackLayout HorizontalOptions="Center">
-                        <Button Text="Valider"
+                        <Button Text="Valider le panier"
                                 BackgroundColor="Green"
                                 TextColor="White"
                                 WidthRequest="150"

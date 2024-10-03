@@ -8,7 +8,15 @@ public partial class ProductsPage : ContentPage
 
 		this.Title = "Produits";
 
-        this.BindingContext = new ProductViewModel();
+        try
+        {
+            this.BindingContext = new ProductViewModel();
+        }
+        catch (Exception ex)
+        {
+            // Log the inner exception to see what exactly is causing the issue
+            Console.WriteLine($"Error: {ex.Message}, Inner Exception: {ex.InnerException?.Message}");
+        }
     }
 
     private async void OnAddProductClicked(object sender, EventArgs e)
