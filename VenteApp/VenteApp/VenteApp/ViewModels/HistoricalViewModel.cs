@@ -7,7 +7,7 @@ namespace VenteApp
 {
     public class HistoricalViewModel : BindableObject
     {
-        private const int PageSize = 5; // Number of sales per page
+        private const int PageSize = 10; // Number of sales per page
         private int _currentPage = 1; // Current page number
         private int _totalPages; // Total number of pages
 

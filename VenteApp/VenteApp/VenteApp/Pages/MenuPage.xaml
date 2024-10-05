@@ -32,6 +32,11 @@
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
 
+                <Button x:Name="LicenseButton" Text="Licence" Clicked="OnLicenselicked">
+                    <!-- Add VisualStateManager for DashboardButton -->
+                </Button>
+                
+
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>
