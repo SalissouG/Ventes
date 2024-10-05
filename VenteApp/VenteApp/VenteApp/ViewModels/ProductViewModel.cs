@@ -5,16 +5,17 @@ namespace VenteApp
 {
     public class ProductViewModel : BindableObject
     {
-        private const int PageSize = 1; // Number of products per page
+        private const int PageSize = 5; // Number of products per page
         private int _currentPage = 1; // Current page number
         private int _totalPages; // Total number of pages
 
         public ObservableCollection<Product> Products { get; set; } // Only products for the current page
-
         public ICommand DeleteCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
+
+        private readonly Func<Product, Task<bool>> _confirmDelete;
 
         public int CurrentPage
         {
@@ -36,9 +37,10 @@ namespace VenteApp
             }
         }
 
-        public ProductViewModel()
+        public ProductViewModel(Func<Product, Task<bool>> confirmDelete)
         {
             Products = new ObservableCollection<Product>();
+            _confirmDelete = confirmDelete;
 
             DeleteCommand = new Command<Product>(OnDeleteProduct);
             SearchCommand = new Command<string>(OnSearchProducts);
@@ -109,18 +111,35 @@ namespace VenteApp
         }
 
         // Handle deleting a product from the database and UI
-        private void OnDeleteProduct(Product product)
+        private async void OnDeleteProduct(Product product)
         {
             if (product == null)
                 return;
 
+            // Ask for confirmation before deleting
+            bool confirm = await _confirmDelete(product);
+            if (!confirm)
+                return;
+
             using (var db = new AppDbContext())
             {
-                // Remove product from the database
+                // Find the product to delete
                 var productToDelete = db.Products.Find(product.Id);
                 if (productToDelete != null)
                 {
+                    // Find and delete all associated sale transactions
+                    var saleTransactionsToDelete = db.SaleTransactions
+                                                     .Where(st => st.ProductId == product.Id)
+                                                     .ToList();
+                    foreach (var saleTransaction in saleTransactionsToDelete)
+                    {
+                        db.SaleTransactions.Remove(saleTransaction);
+                    }
+
+                    // Remove the product
                     db.Products.Remove(productToDelete);
+
+                    // Save changes
                     db.SaveChanges();
                 }
             }
@@ -128,6 +147,7 @@ namespace VenteApp
             // Reload current page after deletion
             LoadPage(CurrentPage);
         }
+
 
         // Handle searching products directly from the database
         private void OnSearchProducts(string query)

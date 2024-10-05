@@ -23,7 +23,15 @@
                 <Button x:Name="HistoricalButton" Text="Historiques" Clicked="OnHistoricalClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
-                
+
+                <Button x:Name="SalesSummaryButton" Text="Total des ventes" Clicked="OnSalesSummaryClicked">
+                    <!-- Add VisualStateManager for HistoricalButton -->
+                </Button>
+
+                <Button x:Name="DashboardButton" Text="Tableau de bord" Clicked="OnDashboardClicked">
+                    <!-- Add VisualStateManager for DashboardButton -->
+                </Button>
+
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

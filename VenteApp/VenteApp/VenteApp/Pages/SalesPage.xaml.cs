@@ -16,11 +16,30 @@ namespace VenteApp
             var button = (Button)sender;
             var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
 
-            // Increment the quantity
-            sale.Quantite += 1;
+            using (var db = new AppDbContext())
+            {
+                // Fetch the product to check stock
+                var product = db.Products.FirstOrDefault(p => p.Id == sale.ProductId);
+                if (product == null)
+                {
+                    DisplayAlert("Erreur", "Le produit n'existe pas.", "OK");
+                    return;
+                }
 
-            // Add to cart automatically
-            CartService.Instance.AddToCart(sale);
+                // Check if stock is available
+                if (sale.Quantite < product.Quantite)
+                {
+                    // Increment the quantity
+                    sale.Quantite += 1;
+
+                    // Add to cart automatically
+                    CartService.Instance.AddToCart(sale);
+                }
+                else
+                {
+                    DisplayAlert("Stock insuffisant", $"Stock insuffisant pour le produit {product.Nom}.", "OK");
+                }
+            }
         }
 
         // Event handler for decrementing the quantity
@@ -43,6 +62,7 @@ namespace VenteApp
                 CartService.Instance.RemoveFromCart(sale);
             }
         }
+
 
         private async void OnShowBasketClicked(object sender, EventArgs e)
         {

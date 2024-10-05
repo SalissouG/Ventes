@@ -58,6 +58,30 @@ namespace VenteApp
             BasketButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             BasketButton.TextColor = Colors.White;
         }
+        
+        private async void OnSalesSummaryClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new SalesSummaryPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            SalesSummaryButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            SalesSummaryButton.TextColor = Colors.White;
+        }
+
+        private async void OnDashboardClicked(object sender, EventArgs e)
+        {
+            try {
+
+                Detail = new NavigationPage(new DashboardPage());
+            }
+            catch (Exception ex){ }
+
+            Detail = new NavigationPage(new DashboardPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            DashboardButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            DashboardButton.TextColor = Colors.White;
+        }
+
+        
 
         // Reset all buttons to default style
         private void ResetButtonStyles()
@@ -68,6 +92,8 @@ namespace VenteApp
             SalesButton.BackgroundColor = Colors.Transparent;
             HistoricalButton.BackgroundColor = Colors.Transparent;
             BasketButton.BackgroundColor = Colors.Transparent;
+            SalesSummaryButton.BackgroundColor = Colors.Transparent;
+            DashboardButton.BackgroundColor = Colors.Transparent;
 
             // Reset text color to black (default)
             ProductsButton.TextColor = Colors.Black;
@@ -75,6 +101,8 @@ namespace VenteApp
             SalesButton.TextColor = Colors.Black;
             HistoricalButton.TextColor = Colors.Black;
             BasketButton.TextColor = Colors.Black;
+            SalesSummaryButton.TextColor = Colors.Black;
+            DashboardButton.TextColor = Colors.Black;
         }
     }
 }

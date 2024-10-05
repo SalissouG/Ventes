@@ -4,7 +4,6 @@ namespace VenteApp
     {
         private Product _productToEdit;  // Product being edited
 
-        // Constructor for creating a new product or editing an existing one
         public CreateProductPage(Product product = null)
         {
             InitializeComponent();
@@ -29,9 +28,128 @@ namespace VenteApp
             TailleEntry.Text = product.Taille;
         }
 
+        // Real-time validation for Nom field
+        private void OnNomTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateNom();
+        }
+
+        // Real-time validation for Description field
+        private void OnDescriptionTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateDescription();
+        }
+
+        // Real-time validation for Prix field
+        private void OnPrixTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidatePrix();
+        }
+
+        // Real-time validation for Quantite field
+        private void OnQuantiteTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidateQuantite();
+        }
+
+        // Validate all fields before saving
+        private bool ValidateInputs()
+        {
+            bool isValid = true;
+
+            // Validate each field
+            isValid = ValidateNom() && isValid;
+            isValid = ValidateDescription() && isValid;
+            isValid = ValidatePrix() && isValid;
+            isValid = ValidateQuantite() && isValid;
+
+            return isValid;
+        }
+
+        // Validate Nom
+        private bool ValidateNom()
+        {
+            if (string.IsNullOrWhiteSpace(NomEntry.Text))
+            {
+                NomError.Text = "Le nom est obligatoire.";
+                NomError.IsVisible = true;
+                return false;
+            }
+            else
+            {
+                NomError.IsVisible = false;
+                return true;
+            }
+        }
+
+        // Validate Description
+        private bool ValidateDescription()
+        {
+            if (string.IsNullOrWhiteSpace(DescriptionEntry.Text))
+            {
+                DescriptionError.Text = "La description est obligatoire.";
+                DescriptionError.IsVisible = true;
+                return false;
+            }
+            else
+            {
+                DescriptionError.IsVisible = false;
+                return true;
+            }
+        }
+
+        // Validate Prix
+        private bool ValidatePrix()
+        {
+            if (string.IsNullOrWhiteSpace(PrixEntry.Text))
+            {
+                PrixError.Text = "Le prix est obligatoire.";
+                PrixError.IsVisible = true;
+                return false;
+            }
+            else if (!decimal.TryParse(PrixEntry.Text, out decimal _))
+            {
+                PrixError.Text = "Le prix doit être un nombre valide.";
+                PrixError.IsVisible = true;
+                return false;
+            }
+            else
+            {
+                PrixError.IsVisible = false;
+                return true;
+            }
+        }
+
+        // Validate Quantite
+        private bool ValidateQuantite()
+        {
+            if (string.IsNullOrWhiteSpace(QuantiteEntry.Text))
+            {
+                QuantiteError.Text = "La quantité est obligatoire.";
+                QuantiteError.IsVisible = true;
+                return false;
+            }
+            else if (!int.TryParse(QuantiteEntry.Text, out int _))
+            {
+                QuantiteError.Text = "La quantité doit être un nombre entier.";
+                QuantiteError.IsVisible = true;
+                return false;
+            }
+            else
+            {
+                QuantiteError.IsVisible = false;
+                return true;
+            }
+        }
+
         // Save the product (create or update)
         private async void OnSaveProductClicked(object sender, EventArgs e)
         {
+            bool isValid = ValidateInputs(); // Call the validation function
+
+            if (!isValid)
+                return; // Stop the method if the inputs are invalid
+
             try
             {
                 if (_productToEdit == null)
@@ -43,8 +161,8 @@ namespace VenteApp
                         Description = DescriptionEntry.Text,
                         Prix = decimal.Parse(PrixEntry.Text),
                         Quantite = int.Parse(QuantiteEntry.Text),
-                        Categorie = CategorieEntry.Text,
-                        Taille = TailleEntry.Text,
+                        Categorie = CategorieEntry.Text,  // Optional field
+                        Taille = TailleEntry.Text         // Optional field
                     };
 
                     using (var db = new AppDbContext())
@@ -65,8 +183,8 @@ namespace VenteApp
                         product.Description = DescriptionEntry.Text;
                         product.Prix = decimal.Parse(PrixEntry.Text);
                         product.Quantite = int.Parse(QuantiteEntry.Text);
-                        product.Categorie = CategorieEntry.Text;
-                        product.Taille = TailleEntry.Text;
+                        product.Categorie = CategorieEntry.Text;  // Optional field
+                        product.Taille = TailleEntry.Text;        // Optional field
 
                         await db.SaveChangesAsync();  // Update the product in the database
                     }

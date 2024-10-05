@@ -5,7 +5,7 @@ public partial class HistoricalPage : ContentPage
     public HistoricalPage()
     {
         InitializeComponent();
-        this.Title = "Total des ventes";
+        this.Title = "Historiques";
         BindingContext = new HistoricalViewModel();
     }
 

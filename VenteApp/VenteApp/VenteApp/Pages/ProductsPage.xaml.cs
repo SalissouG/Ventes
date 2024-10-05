@@ -2,21 +2,27 @@ namespace VenteApp;
 
 public partial class ProductsPage : ContentPage
 {
-	public ProductsPage()
-	{
-		InitializeComponent();
+    public ProductsPage()
+    {
+        InitializeComponent();
 
-		this.Title = "Produits";
+        this.Title = "Produits";
 
         try
         {
-            this.BindingContext = new ProductViewModel();
+            // Pass the confirmation function to the ViewModel
+            this.BindingContext = new ProductViewModel(ConfirmDeleteProduct);
         }
         catch (Exception ex)
         {
             // Log the inner exception to see what exactly is causing the issue
             Console.WriteLine($"Error: {ex.Message}, Inner Exception: {ex.InnerException?.Message}");
         }
+    }
+
+    private async Task<bool> ConfirmDeleteProduct(Product product)
+    {
+        return await DisplayAlert("Confirmation", $"Voulez-vous vraiment supprimer {product.Nom} ?", "Oui", "Non");
     }
 
     private async void OnAddProductClicked(object sender, EventArgs e)
@@ -41,6 +47,4 @@ public partial class ProductsPage : ContentPage
             viewModel.SearchCommand.Execute(e.NewTextValue);
         }
     }
-
-
 }

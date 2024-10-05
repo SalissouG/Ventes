@@ -12,81 +12,40 @@
             HorizontalOptions="Start">
 
             <!-- Nom Entry -->
-            <Label
-                Text="Nom"
-                FontSize="14"
-                HorizontalOptions="Start" />
-                    <Entry
-                Placeholder="Nom"
-                x:Name="NomEntry"
-                WidthRequest="300"
-                HorizontalOptions="Start" />    
+            <Label Text="Nom" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start" 
+                   TextChanged="OnNomTextChanged" />
+            <Label x:Name="NomError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Description Entry -->
-            <Label
-                Text="Description"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Description"
-                x:Name="DescriptionEntry"
-                WidthRequest="300"
-                HorizontalOptions="Start" />
+            <Label Text="Description" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Description" x:Name="DescriptionEntry" WidthRequest="300" HorizontalOptions="Start" 
+                   TextChanged="OnDescriptionTextChanged" />
+            <Label x:Name="DescriptionError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Prix Entry -->
-            <Label
-                Text="Prix"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Prix"
-                x:Name="PrixEntry"
-                WidthRequest="300"
-                Keyboard="Numeric"
-                HorizontalOptions="Start" />
+            <Label Text="Prix" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Prix" x:Name="PrixEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" 
+                   TextChanged="OnPrixTextChanged" />
+            <Label x:Name="PrixError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Quantité Entry -->
-            <Label
-                Text="Stock"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Stock"
-                x:Name="QuantiteEntry"
-                WidthRequest="300"
-                Keyboard="Numeric"
-                HorizontalOptions="Start" />
+            <Label Text="Stock" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Stock" x:Name="QuantiteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" 
+                   TextChanged="OnQuantiteTextChanged" />
+            <Label x:Name="QuantiteError" TextColor="Red" FontSize="12" IsVisible="False" />
 
-            <!-- Catégorie Entry -->
-            <Label
-                Text="Catégorie"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Catégorie"
-                x:Name="CategorieEntry"
-                WidthRequest="300"
-                HorizontalOptions="Start" />
+            <!-- Catégorie Entry (optional) -->
+            <Label Text="Catégorie" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Catégorie" x:Name="CategorieEntry" WidthRequest="300" HorizontalOptions="Start" />
 
-            <!-- Taille Entry -->
-            <Label
-                Text="Taille"
-                FontSize="14"
-                HorizontalOptions="Start" />
-            <Entry
-                Placeholder="Taille"
-                x:Name="TailleEntry"
-                WidthRequest="300"
-                HorizontalOptions="Start" />
-                
+            <!-- Taille Entry (optional) -->
+            <Label Text="Taille" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Taille" x:Name="TailleEntry" WidthRequest="300" HorizontalOptions="Start" />
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-                <Button Text="Enregistrer"
-                        Clicked="OnSaveProductClicked"
-                        WidthRequest="150"/>
-                <Button Text="Annuler"
-                        Clicked="OnCancelClicked"
-                        WidthRequest="150"/>
+                <Button Text="Enregistrer" Clicked="OnSaveProductClicked" WidthRequest="150"/>
+                <Button Text="Annuler" Clicked="OnCancelClicked" WidthRequest="150"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

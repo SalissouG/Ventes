@@ -43,10 +43,17 @@ namespace VenteApp
             this.Title = "Panier";
         }
 
-        // Method to remove item from the cart
-        private void OnRemoveItem(Sale sale)
+        // Method to remove item from the cart with confirmation
+        private async void OnRemoveItem(Sale sale)
         {
+            // Ask for confirmation before removing
+            bool confirm = await DisplayAlert("Confirmation", $"Voulez-vous vraiment retirer {sale.Nom} du panier ?", "Oui", "Non");
+            if (!confirm)
+                return;
+
+            // Remove the item from the cart
             CartService.Instance.RemoveFromCart(sale);
+
             // Update UI
             TotalPrice = CartService.Instance.GetTotalPrice();
         }
@@ -58,17 +65,36 @@ namespace VenteApp
             TotalPrice = CartService.Instance.GetTotalPrice();
         }
 
-        // Event handler for incrementing the quantity
+        // Event handler for incrementing the quantity 
         private void OnIncrementClicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var sale = (Sale)((Grid)button.Parent.Parent).BindingContext;
 
-            sale.Quantite += 1;
-            CartService.Instance.AddToCart(sale);
+            using (var db = new AppDbContext())
+            {
+                // Fetch the product to check stock
+                var product = db.Products.FirstOrDefault(p => p.Id == sale.ProductId);
+                if (product == null)
+                {
+                    DisplayAlert("Erreur", "Le produit n'existe pas.", "OK");
+                    return;
+                }
 
-            // Update TotalPrice
-            TotalPrice = CartService.Instance.GetTotalPrice();
+                // Check if stock is available
+                if (sale.Quantite < product.Quantite)
+                {
+                    sale.Quantite += 1;
+                    CartService.Instance.AddToCart(sale);
+
+                    // Update TotalPrice
+                    TotalPrice = CartService.Instance.GetTotalPrice();
+                }
+                else
+                {
+                    DisplayAlert("Stock insuffisant", $"Stock insuffisant pour le produit {product.Nom}.", "OK");
+                }
+            }
         }
 
         // Event handler for decrementing the quantity
@@ -81,12 +107,13 @@ namespace VenteApp
             {
                 sale.Quantite -= 1;
                 CartService.Instance.AddToCart(sale);
-            }
 
-            // Update TotalPrice
-            TotalPrice = CartService.Instance.GetTotalPrice();
+                // Update TotalPrice
+                TotalPrice = CartService.Instance.GetTotalPrice();
+            }
         }
 
+        // Handle finalizing the sale and updating the product stock
         private void OnValiderClicked(object sender, EventArgs e)
         {
             try
@@ -103,20 +130,30 @@ namespace VenteApp
                             return;
                         }
 
+                        // Check if there is enough stock
+                        if (product.Quantite < sale.Quantite)
+                        {
+                            DisplayAlert("Erreur", $"Stock insuffisant pour le produit {product.Nom}.", "OK");
+                            return;
+                        }
+
+                        // Create a sale transaction
                         var saleTransaction = new SaleTransaction
                         {
                             ProductId = sale.ProductId, // Foreign key to Product
                             Quantite = sale.Quantite,
                             DateDeVente = DateTime.Now
                         };
+                        db.SaleTransactions.Add(saleTransaction);
 
-                        db.SaleTransactions.Add(saleTransaction); // Add the sale transaction
+                        // Update the product stock
+                        product.Quantite -= sale.Quantite;
                     }
 
                     int changes = db.SaveChanges(); // Save changes to the database
                     if (changes > 0)
                     {
-                        DisplayAlert("Succès", $"{changes} transaction(s) ajoutée(s) avec succès.", "OK");
+                        DisplayAlert("Succès", $"{changes} transaction(s) ajoutée(s) avec succès, stock mis à jour.", "OK");
                     }
                     else
                     {
@@ -137,8 +174,6 @@ namespace VenteApp
                 DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
