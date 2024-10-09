@@ -1,0 +1,37 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.ProviderProductsPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="20">
+
+            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.Header>
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*">
+                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Prix" FontAttributes="Bold" Grid.Column="4" />
+                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="5" />
+                    </Grid>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*">
+                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
+                                <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
+                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="4" VerticalOptions="Center" />
+                                <Label Text="{Binding Quantite}" Grid.Column="5" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

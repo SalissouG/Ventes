@@ -41,5 +41,15 @@ namespace VenteApp
                 viewModel.SearchCommand.Execute(e.NewTextValue);
             }
         }
+
+        // New Method to Show Provider's Products
+        private async void OnShowProviderProductsClicked(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            var provider = (Provider)((ViewCell)button.Parent.Parent).BindingContext;
+
+            // Navigate to the page showing the provider's products
+            await Navigation.PushAsync(new ProviderProductsPage(provider));
+        }
     }
 }

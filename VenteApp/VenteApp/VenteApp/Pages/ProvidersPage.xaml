@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ProvidersPage">
@@ -23,7 +22,7 @@
                         <Label Text="Numéro" FontAttributes="Bold" Grid.Column="2" />
                         <Label Text="Adresse" FontAttributes="Bold" Grid.Column="3" />
                         <Label Text="Email" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" />
+                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="3" HorizontalOptions="Start" />
                     </Grid>
                 </ListView.Header>
 
@@ -38,10 +37,12 @@
                                 <Label Text="{Binding Adresse}" Grid.Column="3" VerticalOptions="Center" />
                                 <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center" />
 
-                                <Button Text="Modifier" Clicked="OnEditProviderClicked" Grid.Column="5"  />
+                                <Button Text="Modifier" Clicked="OnEditProviderClicked" Grid.Column="5" />
                                 <Button Text="Supprimer" Grid.Column="6" BackgroundColor="Red" TextColor="White"
                                         Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}"  />
+                                        CommandParameter="{Binding .}" />
+                                <!-- New Button to Show Provider's Products -->
+                                <Button Text="Afficher Produits" Clicked="OnShowProviderProductsClicked" Grid.Column="7"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -50,17 +51,10 @@
 
             <!-- Pagination Controls -->
             <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
-  />
-
-                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
-  VerticalOptions="Center" />
-
-                <Button Text="Suivant" Command="{Binding NextPageCommand}"
-  />
+                <Button Text="Précédent" Command="{Binding PreviousPageCommand}" />
+                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}" VerticalOptions="Center" />
+                <Button Text="Suivant" Command="{Binding NextPageCommand}" />
             </HorizontalStackLayout>
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
