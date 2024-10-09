@@ -166,12 +166,36 @@ namespace VenteApp
         }
 
 
-        private async void OnLicenselicked(object sender, EventArgs e)
+        private async void OnLicenseClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new LicenseMenuPage());
             ResetButtonStyles();  // Reset styles for all buttons
             LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
             LicenseButton.TextColor = Colors.White;
+        }
+
+        private async void OnProvidersClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new ProvidersPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            ProvidersButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            ProvidersButton.TextColor = Colors.White;
+        }
+
+        private async void OnClientsClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new ClientsPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            ClientsButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            ClientsButton.TextColor = Colors.White;
+        }
+
+        private async void OnUsersClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new UsersPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            UsersButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            UsersButton.TextColor = Colors.White;
         }
 
 
@@ -187,6 +211,9 @@ namespace VenteApp
             SalesSummaryButton.BackgroundColor = Colors.Transparent;
             DashboardButton.BackgroundColor = Colors.Transparent;
             LicenseButton.BackgroundColor = Colors.Transparent;
+            ProvidersButton.BackgroundColor = Colors.Transparent;
+            ClientsButton.BackgroundColor = Colors.Transparent;
+            UsersButton.BackgroundColor = Colors.Transparent;
 
             // Reset text color to black (default)
             ProductsButton.TextColor = Colors.Black;
@@ -197,6 +224,9 @@ namespace VenteApp
             SalesSummaryButton.TextColor = Colors.Black;
             DashboardButton.TextColor = Colors.Black;
             LicenseButton.TextColor = Colors.Black;
+            ProvidersButton.TextColor = Colors.Black;
+            ClientsButton.TextColor = Colors.Black;
+            UsersButton.TextColor = Colors.Black;
         }
     }
 }

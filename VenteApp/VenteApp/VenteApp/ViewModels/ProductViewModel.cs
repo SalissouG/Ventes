@@ -142,6 +142,20 @@ namespace VenteApp
                     // Save changes
                     db.SaveChanges();
                 }
+
+                int totalProducts = db.Products.Count();
+                TotalPages = (int)Math.Ceiling(totalProducts / (double)PageSize);
+
+                // Ensure that the current page does not exceed the total pages
+                if (TotalPages == 0)
+                {
+                    TotalPages = 1;
+                    CurrentPage = 1;
+                }
+                else if (CurrentPage > TotalPages)
+                {
+                    CurrentPage = TotalPages; // Go back to the last available page
+                }
             }
 
             // Reload current page after deletion

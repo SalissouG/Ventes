@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.CreateProviderPage"
+             Title="Fournisseur">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="15"
+            Padding="20,20"
+            VerticalOptions="Start"
+            HorizontalOptions="Start">
+
+            <!-- Page Title -->
+            <Label Text="Créer un fournisseur"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold"
+                    TextColor="Black" />        
+
+            <!-- Nom Entry -->
+            <Label Text="Nom" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start" 
+                   TextChanged="OnNomTextChanged" />
+            <Label x:Name="NomError" TextColor="Red" FontSize="12" IsVisible="False" />
+
+            <!-- Prénom Entry -->
+            <Label Text="Prénom" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Prénom" x:Name="PrenomEntry" WidthRequest="300" HorizontalOptions="Start" 
+                   TextChanged="OnPrenomTextChanged" />
+            <Label x:Name="PrenomError" TextColor="Red" FontSize="12" IsVisible="False" />
+
+            <!-- Numéro de téléphone Entry -->
+            <Label Text="Numéro de téléphone" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Numéro de téléphone" x:Name="NumeroEntry" WidthRequest="300" Keyboard="Telephone" HorizontalOptions="Start" 
+                   TextChanged="OnNumeroTextChanged" />
+            <Label x:Name="NumeroError" TextColor="Red" FontSize="12" IsVisible="False" />
+
+            <!-- Adresse Entry -->
+            <Label Text="Adresse" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Adresse" x:Name="AdresseEntry" WidthRequest="300" HorizontalOptions="Start" />
+
+            <!-- Email Entry -->
+            <Label Text="Email" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Email" x:Name="EmailEntry" WidthRequest="300" Keyboard="Email" HorizontalOptions="Start" 
+                   TextChanged="OnEmailTextChanged" />
+            <Label x:Name="EmailError" TextColor="Red" FontSize="12" IsVisible="False" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <Button Text="Enregistrer" Clicked="OnSaveProviderClicked" WidthRequest="150"/>
+                <Button Text="Annuler" Clicked="OnCancelClicked" WidthRequest="150"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Microcharts;
+﻿using Microcharts;
 using SkiaSharp;
 
 namespace VenteApp
@@ -57,20 +54,20 @@ namespace VenteApp
 
         public DashboardViewModel()
         {
-            // Définir la plage de dates par défaut (le mois dernier jusqu'à aujourd'hui)
+            // Set default date range (last month to today)
             DateDebut = DateTime.Now.AddMonths(-1);
             DateFin = DateTime.Now;
 
-            // Charger les données initiales
+            // Load initial data
             LoadSalesData();
         }
 
-        // Charger les données de vente et mettre à jour les graphiques
+        // Load sales data and update the charts
         private void LoadSalesData()
         {
             using (var db = new AppDbContext())
             {
-                // Récupérer les ventes entre DateDebut et DateFin
+                // Fetch sales between DateDebut and DateFin
                 var sales = db.SaleTransactions
                     .Where(st => st.DateDeVente >= DateDebut && st.DateDeVente <= DateFin)
                     .GroupBy(st => st.ProductId)
@@ -82,19 +79,28 @@ namespace VenteApp
                     })
                     .ToList();
 
-                // Top 10 produits les plus vendus
+                // Check if there are any sales
+                if (!sales.Any())
+                {
+                    // No sales data, display empty charts or placeholder
+                    MostSoldChart = CreateEmptyChart("No data available");
+                    LeastSoldChart = CreateEmptyChart("No data available");
+                    return;
+                }
+
+                // Top 10 most sold products
                 var mostSoldProducts = sales
                     .OrderByDescending(s => s.TotalQuantitySold)
                     .Take(10)
                     .ToList();
 
-                // Top 10 produits les moins vendus
+                // Top 10 least sold products
                 var leastSoldProducts = sales
                     .OrderBy(s => s.TotalQuantitySold)
                     .Take(10)
                     .ToList();
 
-                // Générer le graphique pour les produits les plus vendus
+                // Generate the chart for the most sold products
                 MostSoldChart = new BarChart
                 {
                     Entries = mostSoldProducts.Select(s => new ChartEntry(s.TotalQuantitySold)
@@ -104,11 +110,11 @@ namespace VenteApp
                         Color = SKColor.Parse("#2c3e50")
                     }).ToList(),
                     LabelTextSize = 35,
-                    ValueLabelOrientation = Orientation.Horizontal,  // Orienter les labels horizontalement
-                    LabelOrientation = Orientation.Horizontal  // Textes à l'endroit
+                    ValueLabelOrientation = Orientation.Horizontal,  // Orient the labels horizontally
+                    LabelOrientation = Orientation.Horizontal  // Labels at the bottom
                 };
 
-                // Générer le graphique pour les produits les moins vendus
+                // Generate the chart for the least sold products
                 LeastSoldChart = new BarChart
                 {
                     Entries = leastSoldProducts.Select(s => new ChartEntry(s.TotalQuantitySold)
@@ -118,10 +124,30 @@ namespace VenteApp
                         Color = SKColor.Parse("#e74c3c")
                     }).ToList(),
                     LabelTextSize = 35,
-                    ValueLabelOrientation = Orientation.Horizontal,  // Orienter les labels horizontalement
-                    LabelOrientation = Orientation.Horizontal  // Textes à l'endroit
+                    ValueLabelOrientation = Orientation.Horizontal,  // Orient the labels horizontally
+                    LabelOrientation = Orientation.Horizontal  // Labels at the bottom
                 };
             }
+        }
+
+        // Create an empty chart to show when no data is available
+        private Chart CreateEmptyChart(string message)
+        {
+            return new BarChart
+            {
+                Entries = new List<ChartEntry>
+                {
+                    new ChartEntry(0)
+                    {
+                        Label = message,
+                        ValueLabel = "",
+                        Color = SKColor.Parse("#bdc3c7")  // Gray color for placeholder
+                    }
+                },
+                LabelTextSize = 35,
+                ValueLabelOrientation = Orientation.Horizontal,
+                LabelOrientation = Orientation.Horizontal
+            };
         }
     }
 

@@ -10,33 +10,37 @@
                 <Button x:Name="ProductsButton" Text="Produits" Clicked="OnProductsClicked">
                     <!-- Add VisualStateManager for ProductsButton -->
                 </Button>
+                <Button x:Name="ProvidersButton" Text="Fournisseurs" Clicked="OnProvidersClicked">
+                    <!-- Add VisualStateManager for ProvidersButton -->
+                </Button>
                 <Button x:Name="SalesButton" Text="Ventes" Clicked="OnSalesClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
                 <Button x:Name="BasketButton" Text="Panier" Clicked="OnBasketClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
+                
                 <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
                     <!-- Add VisualStateManager for InventoryButton -->
                 </Button>
-
                 <Button x:Name="HistoricalButton" Text="Historiques" Clicked="OnHistoricalClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
-
                 <Button x:Name="SalesSummaryButton" Text="Total des ventes" Clicked="OnSalesSummaryClicked">
                     <!-- Add VisualStateManager for HistoricalButton -->
                 </Button>
-
                 <Button x:Name="DashboardButton" Text="Tableau de bord" Clicked="OnDashboardClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
-
-                <Button x:Name="LicenseButton" Text="Licence" Clicked="OnLicenselicked">
-                    <!-- Add VisualStateManager for DashboardButton -->
+                <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">
+                    <!-- Add VisualStateManager for ClientsButton -->
                 </Button>
-                
-
+                <Button x:Name="UsersButton" Text="Utilisateurs" Clicked="OnUsersClicked">
+                    <!-- Add VisualStateManager for UsersButton -->
+                </Button>
+                <Button x:Name="LicenseButton" Text="Licence" Clicked="OnLicenseClicked">
+                    <!-- Add VisualStateManager for LicenseButton -->
+                </Button>
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutPage.Flyout>

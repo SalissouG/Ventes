@@ -56,16 +56,16 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Pagination Controls (if needed) -->
+            <!-- Pagination Controls -->
             <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <!-- Previous Page Button -->
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}" IsEnabled="{Binding CurrentPage}" />
+                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
+             IsEnabled="{Binding CanGoPreviousPage}" />
 
-                <!-- Page Info -->
-                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}" VerticalOptions="Center" />
+                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
+            VerticalOptions="Center" />
 
-                <!-- Next Page Button -->
-                <Button Text="Suivant" Command="{Binding NextPageCommand}" IsEnabled="{Binding CurrentPage}" />
+                <Button Text="Suivant" Command="{Binding NextPageCommand}"
+             IsEnabled="{Binding CanGoNextPage}" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
