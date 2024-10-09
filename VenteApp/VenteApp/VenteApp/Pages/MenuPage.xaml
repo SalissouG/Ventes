@@ -19,12 +19,14 @@
                 <Button x:Name="BasketButton" Text="Panier" Clicked="OnBasketClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
-                
-                <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
-                    <!-- Add VisualStateManager for InventoryButton -->
+                <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">
+                    <!-- Add VisualStateManager for ClientsButton -->
                 </Button>
                 <Button x:Name="HistoricalButton" Text="Historiques" Clicked="OnHistoricalClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
+                </Button>
+                <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
+                    <!-- Add VisualStateManager for InventoryButton -->
                 </Button>
                 <Button x:Name="SalesSummaryButton" Text="Total des ventes" Clicked="OnSalesSummaryClicked">
                     <!-- Add VisualStateManager for HistoricalButton -->
@@ -32,9 +34,7 @@
                 <Button x:Name="DashboardButton" Text="Tableau de bord" Clicked="OnDashboardClicked">
                     <!-- Add VisualStateManager for DashboardButton -->
                 </Button>
-                <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">
-                    <!-- Add VisualStateManager for ClientsButton -->
-                </Button>
+                
                 <Button x:Name="UsersButton" Text="Utilisateurs" Clicked="OnUsersClicked">
                     <!-- Add VisualStateManager for UsersButton -->
                 </Button>

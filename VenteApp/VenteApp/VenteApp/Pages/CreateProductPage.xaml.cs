@@ -1,8 +1,11 @@
+using System.Collections.ObjectModel;
+
 namespace VenteApp
 {
     public partial class CreateProductPage : ContentPage
     {
         private Product _productToEdit;  // Product being edited
+        private ObservableCollection<Provider> _providers;
 
         public CreateProductPage(Product product = null)
         {
@@ -10,12 +13,27 @@ namespace VenteApp
 
             this.Title = product == null ? "Créer un produit" : "Modifier le produit";
 
+            // Load providers and set the picker
+            LoadProviders();
+
             if (product != null)
             {
                 _productToEdit = product; // If editing, load product data
                 LoadProductDetails(_productToEdit);
             }
         }
+
+        // Load available providers from the database
+        private void LoadProviders()
+        {
+            using (var db = new AppDbContext())
+            {
+                var providersFromDb = db.Providers.ToList();
+                _providers = new ObservableCollection<Provider>(providersFromDb);
+                ProviderPicker.ItemsSource = _providers;
+            }
+        }
+
 
         // Load product details into the form for editing
         private void LoadProductDetails(Product product)
@@ -26,6 +44,9 @@ namespace VenteApp
             QuantiteEntry.Text = product.Quantite.ToString();
             CategorieEntry.Text = product.Categorie;
             TailleEntry.Text = product.Taille;
+
+            // Set selected provider if one exists
+            ProviderPicker.SelectedItem = _providers.FirstOrDefault(p => p.Id == product.ProviderId);
         }
 
         // Real-time validation for Nom field
@@ -145,55 +166,58 @@ namespace VenteApp
         // Save the product (create or update)
         private async void OnSaveProductClicked(object sender, EventArgs e)
         {
-            bool isValid = ValidateInputs(); // Call the validation function
+            bool isValid = ValidateInputs();
 
             if (!isValid)
-                return; // Stop the method if the inputs are invalid
+                return;
+
+            var selectedProvider = (Provider)ProviderPicker.SelectedItem;
+            //if (selectedProvider == null)
+            //{
+            //    ProviderError.Text = "Le fournisseur est obligatoire.";
+            //    ProviderError.IsVisible = true;
+            //    return;
+            //}
+            //ProviderError.IsVisible = false;
 
             try
             {
-                if (_productToEdit == null)
+                using (var db = new AppDbContext())
                 {
-                    // Creating a new product
-                    var newProduct = new Product
+                    if (_productToEdit == null)
                     {
-                        Nom = NomEntry.Text,
-                        Description = DescriptionEntry.Text,
-                        Prix = decimal.Parse(PrixEntry.Text),
-                        Quantite = int.Parse(QuantiteEntry.Text),
-                        Categorie = CategorieEntry.Text,  // Optional field
-                        Taille = TailleEntry.Text         // Optional field
-                    };
+                        var newProduct = new Product
+                        {
+                            Nom = NomEntry.Text,
+                            Description = DescriptionEntry.Text,
+                            Prix = decimal.Parse(PrixEntry.Text),
+                            Quantite = int.Parse(QuantiteEntry.Text),
+                            Categorie = CategorieEntry.Text,
+                            Taille = TailleEntry.Text,
+                            ProviderId = selectedProvider == null ? null : selectedProvider.Id // Associate the provider
+                        };
 
-                    using (var db = new AppDbContext())
-                    {
                         db.Products.Add(newProduct);
-                        await db.SaveChangesAsync(); // Save new product to the database
+                        await db.SaveChangesAsync();
+                        await DisplayAlert("Produit Créé", $"Produit {newProduct.Nom} ajouté avec succès.", "OK");
                     }
-
-                    await DisplayAlert("Produit Créé", $"Produit {newProduct.Nom} ajouté avec succès.", "OK");
-                }
-                else
-                {
-                    // Updating an existing product
-                    using (var db = new AppDbContext())
+                    else
                     {
                         var product = db.Products.Find(_productToEdit.Id);
                         product.Nom = NomEntry.Text;
                         product.Description = DescriptionEntry.Text;
                         product.Prix = decimal.Parse(PrixEntry.Text);
                         product.Quantite = int.Parse(QuantiteEntry.Text);
-                        product.Categorie = CategorieEntry.Text;  // Optional field
-                        product.Taille = TailleEntry.Text;        // Optional field
+                        product.Categorie = CategorieEntry.Text;
+                        product.Taille = TailleEntry.Text;
+                        product.ProviderId = selectedProvider == null ? null : selectedProvider.Id; // Update the provider
 
-                        await db.SaveChangesAsync();  // Update the product in the database
+                        await db.SaveChangesAsync();
+                        await DisplayAlert("Produit Modifié", $"Produit {product.Nom} modifié avec succès.", "OK");
                     }
-
-                    await DisplayAlert("Produit Modifié", $"Produit {_productToEdit.Nom} modifié avec succès.", "OK");
                 }
 
-                // Navigate back to the product list page
-                await Navigation.PushAsync(new ProductsPage());
+                await Navigation.PushAsync(new ProductsPage()); // Navigate back
             }
             catch (Exception ex)
             {

@@ -47,4 +47,14 @@ public partial class ProductsPage : ContentPage
             viewModel.SearchCommand.Execute(e.NewTextValue);
         }
     }
+
+    private async void OnShowProductClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var product = (Product)((ViewCell)button.Parent.Parent).BindingContext;
+
+        // Navigate to a new page or show modal to display product details
+        await Navigation.PushAsync(new ShowProductPage(product));
+    }
+
 }

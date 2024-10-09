@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.ShowProductPage"
+             Title="Détails du produit">
+
+    <!-- Product Tab -->
+    <ContentPage Title="Détails du produit">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <!-- Product Details -->
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Nom:" FontAttributes="Bold" />
+                    <Label Text="{Binding Nom}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Description:" FontAttributes="Bold" />
+                    <Label Text="{Binding Description}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Catégorie:" FontAttributes="Bold" />
+                    <Label Text="{Binding Categorie}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Taille:" FontAttributes="Bold" />
+                    <Label Text="{Binding Taille}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Prix:" FontAttributes="Bold" />
+                    <Label Text="{Binding Prix, StringFormat='{0:C}'}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Quantité:" FontAttributes="Bold" />
+                    <Label Text="{Binding Quantite}" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <!-- Provider Tab -->
+    <ContentPage Title="Détails du fournisseur">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <!-- Provider Details (only shown if Provider exists) -->
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="Nom du fournisseur:" FontAttributes="Bold" />
+                        <Label Text="{Binding Provider.Nom}" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="Prénom du fournisseur:" FontAttributes="Bold" />
+                        <Label Text="{Binding Provider.Prenom}" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="Numéro de téléphone:" FontAttributes="Bold" />
+                        <Label Text="{Binding Provider.Numero}" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="Adresse:" FontAttributes="Bold" />
+                        <Label Text="{Binding Provider.Adresse}" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Label Text="Email:" FontAttributes="Bold" />
+                        <Label Text="{Binding Provider.Email}" />
+                    </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
+
+</TabbedPage>

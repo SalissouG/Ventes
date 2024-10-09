@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace VenteApp
@@ -76,6 +77,7 @@ namespace VenteApp
 
                 // Fetch the products for the current page
                 var pagedProducts = db.Products
+                                      .Include(p => p.Provider)
                                       .OrderBy(p => p.Nom) // Optional: Order by name
                                       .Skip(skip)
                                       .Take(PageSize)
