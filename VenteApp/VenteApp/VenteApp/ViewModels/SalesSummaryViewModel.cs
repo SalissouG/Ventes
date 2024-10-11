@@ -106,7 +106,7 @@ namespace VenteApp
                                        ProductId = group.Key,
                                        Nom = group.First().Product.Nom,
                                        TotalQuantitySold = group.Sum(st => st.Quantite),
-                                       TotalSalesPrice = group.Sum(st => st.Quantite * st.Product.Prix) // Sum in-memory
+                                       TotalSalesPrice = group.Sum(st => st.Quantite * st.Product.PrixVente) // Sum in-memory
                                    })
                                    .ToList();
 

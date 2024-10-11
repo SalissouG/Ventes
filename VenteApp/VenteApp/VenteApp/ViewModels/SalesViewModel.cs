@@ -146,7 +146,7 @@ namespace VenteApp
                 ProductId = product.Id,
                 Nom = product.Nom,
                 Description = product.Description,
-                Prix = product.Prix,
+                Prix = product.PrixVente,
                 Quantite = 0,  // Initialize sales quantity as 0
                 Categorie = product.Categorie,
                 Taille = product.Taille,

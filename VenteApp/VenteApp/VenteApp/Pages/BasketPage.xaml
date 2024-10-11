@@ -20,12 +20,18 @@
                         <Label Text="Panier"
                                FontSize="20"
                                VerticalOptions="Center" />
-
                         <Label Text="{Binding TotalPrice, StringFormat='Total: {0:C}'}"
                                FontSize="20"
                                VerticalOptions="Center"
                                Grid.Column="1" />
                     </Grid>
+
+                    <!-- Client Picker -->
+                    <Picker Title="Sélectionner un client"
+                            WidthRequest="300"
+                            ItemsSource="{Binding Clients}"
+                            ItemDisplayBinding="{Binding Nom}"
+                            SelectedItem="{Binding SelectedClient}" />
 
                     <!-- ListView with Header for column titles -->
                     <ListView ItemsSource="{Binding CartItems}" HasUnevenRows="True" SeparatorVisibility="None">
@@ -36,7 +42,6 @@
                                 <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
                                 <Label Text="Prix" FontAttributes="Bold" Grid.Column="1" />
                                 <Label Text="Quantité" FontAttributes="Bold" Grid.Column="2" />
-                                <!-- Update to Total Price -->
                                 <Label Text="" FontAttributes="Bold" Grid.Column="3" />
                             </Grid>
                         </ListView.Header>
@@ -46,18 +51,16 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <Grid Padding="5" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
-
                                         <!-- Basket Item Data -->
                                         <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                       
                                         <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center" />
+
                                         <!-- Increment/Decrement Buttons and Quantity Display -->
                                         <HorizontalStackLayout Grid.Column="2" HorizontalOptions="Start">
                                             <Button Text="-" Clicked="OnDecrementClicked" />
                                             <Entry Text="{Binding Quantite}" HorizontalOptions="Center" VerticalOptions="Center" />
                                             <Button Text="+" Clicked="OnIncrementClicked" />
                                         </HorizontalStackLayout>
-                                        <!-- Show Total Price -->
 
                                         <!-- Remove Button -->
                                         <Button Text="Supprimer"
@@ -73,7 +76,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <!-- Footer Button: Retour -->
+                    <!-- Footer Button: Validate Basket -->
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Button Text="Valider le panier"
                                 BackgroundColor="Green"
@@ -81,9 +84,8 @@
                                 WidthRequest="150"
                                 HeightRequest="40"
                                 CornerRadius="10"
-                                Clicked="OnValiderClicked" />        
+                                Clicked="OnValiderClicked" />
                     </HorizontalStackLayout>
-                   
 
                 </VerticalStackLayout>
             </Frame>

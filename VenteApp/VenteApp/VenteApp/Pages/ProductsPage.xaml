@@ -18,14 +18,16 @@
 
                 <!-- ListView Header -->
                 <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,*,*">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Prix" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="5" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="6" Grid.ColumnSpan="3" HorizontalOptions="Start" />
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
+                        <Label Text="Code" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="Description" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" />
+                        <Label Text="Prix d'achat" FontAttributes="Bold" Grid.Column="5" />
+                        <Label Text="Prix de vente" FontAttributes="Bold" Grid.Column="6" />
+                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="7" />
+                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="8" Grid.ColumnSpan="3" HorizontalOptions="Start" />
                     </Grid>
                 </ListView.Header>
 
@@ -33,24 +35,26 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
                                 <!-- Product Data Columns -->
-                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding Prix, StringFormat='{0:C}'}" Grid.Column="4" VerticalOptions="Center" />
-                                <Label Text="{Binding Quantite}" Grid.Column="5" VerticalOptions="Center" />
+                                <Label Text="{Binding Code}" Grid.Column="0" VerticalOptions="Center" />
+                                <Label Text="{Binding Nom}" Grid.Column="1" VerticalOptions="Center" />
+                                <Label Text="{Binding Description}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding Categorie}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding Taille}" Grid.Column="4" VerticalOptions="Center" />
+                                <Label Text="{Binding PrixAchat, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center" />
+                                <Label Text="{Binding PrixVente, StringFormat='{0:C}'}" Grid.Column="6" VerticalOptions="Center" />
+                                <Label Text="{Binding Quantite}" Grid.Column="7" VerticalOptions="Center" />
 
                                 <!-- Action Buttons -->
-                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="6"/>
+                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="8"/>
                                 <Button Text="Supprimer"
-                                        Grid.Column="7"
+                                        Grid.Column="9"
                                         BackgroundColor="Red"
                                         TextColor="White"
                                         Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                         CommandParameter="{Binding .}" />
-                                <Button Text="Afficher" Clicked="OnShowProductClicked" Grid.Column="8"/>
+                                <Button Text="Afficher" Clicked="OnShowProductClicked" Grid.Column="10"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

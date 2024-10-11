@@ -174,7 +174,8 @@ namespace VenteApp
                 var filteredProducts = db.Products
                                          .Where(p => p.Nom.ToLower().Contains(query.ToLower()) ||
                                                      p.Description.ToLower().Contains(query.ToLower()) ||
-                                                     p.Categorie.ToLower().Contains(query.ToLower()))
+                                                     p.Categorie.ToLower().Contains(query.ToLower()) ||
+                                                     p.Code.ToLower().Contains(query.ToLower())) 
                                          .OrderBy(p => p.Nom) // Optional: Order by name
                                          .Skip((CurrentPage - 1) * PageSize)
                                          .Take(PageSize)

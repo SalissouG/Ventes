@@ -40,7 +40,8 @@ namespace VenteApp
         {
             NomEntry.Text = product.Nom;
             DescriptionEntry.Text = product.Description;
-            PrixEntry.Text = product.Prix.ToString();
+            PrixAchatEntry.Text = product.PrixAchat.ToString();
+            PrixVenteEntry.Text = product.PrixVente.ToString();
             QuantiteEntry.Text = product.Quantite.ToString();
             CategorieEntry.Text = product.Categorie;
             TailleEntry.Text = product.Taille;
@@ -62,9 +63,14 @@ namespace VenteApp
         }
 
         // Real-time validation for Prix field
-        private void OnPrixTextChanged(object sender, TextChangedEventArgs e)
+        private void OnPrixVenteTextChanged(object sender, TextChangedEventArgs e)
         {
-            ValidatePrix();
+            ValidatePrixVente();
+        }
+
+        private void OnPrixAchatTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidatePrixAchat();
         }
 
         // Real-time validation for Quantite field
@@ -81,7 +87,8 @@ namespace VenteApp
             // Validate each field
             isValid = ValidateNom() && isValid;
             isValid = ValidateDescription() && isValid;
-            isValid = ValidatePrix() && isValid;
+            isValid = ValidatePrixAchat() && isValid;
+            isValid = ValidatePrixVente() && isValid;
             isValid = ValidateQuantite() && isValid;
 
             return isValid;
@@ -120,23 +127,44 @@ namespace VenteApp
         }
 
         // Validate Prix
-        private bool ValidatePrix()
+        private bool ValidatePrixAchat()
         {
-            if (string.IsNullOrWhiteSpace(PrixEntry.Text))
+            if (string.IsNullOrWhiteSpace(PrixAchatEntry.Text))
             {
-                PrixError.Text = "Le prix est obligatoire.";
-                PrixError.IsVisible = true;
+                PrixAchatError.Text = "Le prix est obligatoire.";
+                PrixAchatError.IsVisible = true;
                 return false;
             }
-            else if (!decimal.TryParse(PrixEntry.Text, out decimal _))
+            else if (!decimal.TryParse(PrixAchatEntry.Text, out decimal _))
             {
-                PrixError.Text = "Le prix doit être un nombre valide.";
-                PrixError.IsVisible = true;
+                PrixAchatError.Text = "Le prix doit être un nombre valide.";
+                PrixAchatError.IsVisible = true;
                 return false;
             }
             else
             {
-                PrixError.IsVisible = false;
+                PrixAchatError.IsVisible = false;
+                return true;
+            }
+        }
+
+        private bool ValidatePrixVente()
+        {
+            if (string.IsNullOrWhiteSpace(PrixVenteEntry.Text))
+            {
+                PrixVenteError.Text = "Le prix est obligatoire.";
+                PrixVenteError.IsVisible = true;
+                return false;
+            }
+            else if (!decimal.TryParse(PrixVenteEntry.Text, out decimal _))
+            {
+                PrixVenteError.Text = "Le prix doit être un nombre valide.";
+                PrixVenteError.IsVisible = true;
+                return false;
+            }
+            else
+            {
+                PrixVenteError.IsVisible = false;
                 return true;
             }
         }
@@ -186,11 +214,20 @@ namespace VenteApp
                 {
                     if (_productToEdit == null)
                     {
+
+                        // Get the count of products for generating the code
+                        int productCount = db.Products.Count();
+
+                        // Generate the product code
+                        string productCode = GenerateProductCode(NomEntry.Text, productCount + 1);
+
                         var newProduct = new Product
                         {
+                            Code = productCode,
                             Nom = NomEntry.Text,
                             Description = DescriptionEntry.Text,
-                            Prix = decimal.Parse(PrixEntry.Text),
+                            PrixAchat = decimal.Parse(PrixAchatEntry.Text),
+                            PrixVente = decimal.Parse(PrixVenteEntry.Text),
                             Quantite = int.Parse(QuantiteEntry.Text),
                             Categorie = CategorieEntry.Text,
                             Taille = TailleEntry.Text,
@@ -206,7 +243,8 @@ namespace VenteApp
                         var product = db.Products.Find(_productToEdit.Id);
                         product.Nom = NomEntry.Text;
                         product.Description = DescriptionEntry.Text;
-                        product.Prix = decimal.Parse(PrixEntry.Text);
+                        product.PrixAchat = decimal.Parse(PrixAchatEntry.Text);
+                        product.PrixVente = decimal.Parse(PrixVenteEntry.Text);
                         product.Quantite = int.Parse(QuantiteEntry.Text);
                         product.Categorie = CategorieEntry.Text;
                         product.Taille = TailleEntry.Text;
@@ -230,5 +268,17 @@ namespace VenteApp
         {
             await Navigation.PopAsync(); // Return to the previous page
         }
+
+        private string GenerateProductCode(string productName, int productNumber)
+        {
+            // Get the first two uppercase letters of the product name
+            string prefix = new string(productName.ToUpper().Take(2).ToArray());
+
+            // Generate the code with 4 digits, padded with zeros
+            string productCode = $"{prefix}_{productNumber:D4}";
+
+            return productCode;
+        }
+
     }
 }

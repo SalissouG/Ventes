@@ -16,7 +16,7 @@ namespace VenteApp
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
             // Combine the folder path with the database file name
-            var databasePath = Path.Combine(folderPath, "VenteApp4.db");
+            var databasePath = Path.Combine(folderPath, "VenteApp5.db");
 
             // Log the database path (for debugging purposes)
             Console.WriteLine($"Database path: {databasePath}");
@@ -45,7 +45,5 @@ namespace VenteApp
                 .WithMany(pr => pr.ProductsSupplied)
                 .HasForeignKey(p => p.ProviderId);
         }
-
-
     }
 }

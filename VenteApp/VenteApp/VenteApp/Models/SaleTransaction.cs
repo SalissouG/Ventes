@@ -11,10 +11,9 @@ namespace VenteApp
         public Product Product { get; set; } // Navigation property to Product
 
         public Guid? ClientId { get; set; } // Foreign key to Client
-        public Client? Client { get; set; } // Navigation property for the client associated with this transaction
+        public Client Client { get; set; } // Navigation property for the client associated with this transaction
 
-      
+        public Guid OrderId { get; set; } 
+
     }
-
-
 }

@@ -24,9 +24,14 @@
             <Label x:Name="DescriptionError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Prix Entry -->
-            <Label Text="Prix" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Prix" x:Name="PrixEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixTextChanged" />
-            <Label x:Name="PrixError" TextColor="Red" FontSize="12" IsVisible="False" />
+            <Label Text="Prix d'achat" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Prix d'achat" x:Name="PrixAchatEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixAchatTextChanged" />
+            <Label x:Name="PrixAchatError" TextColor="Red" FontSize="12" IsVisible="False" />
+
+            <!-- Prix Entry -->
+            <Label Text="Prix de vente" FontSize="14" HorizontalOptions="Start" />
+            <Entry Placeholder="Prix de vente" x:Name="PrixVenteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixVenteTextChanged" />
+            <Label x:Name="PrixVenteError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Quantité Entry -->
             <Label Text="Stock" FontSize="14" HorizontalOptions="Start" />

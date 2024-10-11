@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VenteApp.BillingPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="40" Spacing="20">
+
+            <!-- Search and Pagination Controls -->
+            <HorizontalStackLayout Spacing="20">
+                <!-- Search Bar -->
+                <Entry Placeholder="Recherche par client ou total" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+            </HorizontalStackLayout>
+
+            <!-- Billing List with Header -->
+            <ListView ItemsSource="{Binding BillingList}" HasUnevenRows="True" SeparatorVisibility="None">
+                <!-- ListView Header -->
+                <ListView.Header>
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*">
+                        <Label Text="Client" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="Total" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="Produits" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="Date de vente" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="4" />
+                    </Grid>
+                </ListView.Header>
+
+                <!-- Billing List Content -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*">
+                                <!-- Billing Data Columns -->
+                                <Label Text="{Binding ClientName}" Grid.Column="0" VerticalOptions="Center" />
+                                <Label Text="{Binding TotalAmount, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center" />
+                                <Label Text="{Binding NumberOfProducts}" Grid.Column="2" VerticalOptions="Center" />
+                                <Label Text="{Binding SaleDate, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="3" VerticalOptions="Center" />
+
+                                <!-- Action Button -->
+                                <HorizontalStackLayout Grid.Column="4" HorizontalOptions="End">
+                                    <Button Text="Voir" Clicked="OnViewBillClicked" CommandParameter="{Binding OrderId}" />
+                                    <!--<Button Text="Télécharger PDF" Clicked="OnDownloadPdfClicked" CommandParameter="{Binding OrderId}" /> -->
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Pagination Controls -->
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Button Text="Précédent" Command="{Binding PreviousPageCommand}" />
+                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}" VerticalOptions="Center" />
+                <Button Text="Suivant" Command="{Binding NextPageCommand}" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

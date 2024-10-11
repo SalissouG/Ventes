@@ -176,6 +176,7 @@ namespace VenteApp
 
         private async void OnProvidersClicked(object sender, EventArgs e)
         {
+
             Detail = new NavigationPage(new ProvidersPage());
             ResetButtonStyles();  // Reset styles for all buttons
             ProvidersButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
@@ -198,6 +199,13 @@ namespace VenteApp
             UsersButton.TextColor = Colors.White;
         }
 
+        private async void OnBillingClicked(object sender, EventArgs e)
+        {
+            Detail = new NavigationPage(new BillingPage());
+            ResetButtonStyles();  // Reset styles for all buttons
+            BillingButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
+            BillingButton.TextColor = Colors.White;
+        }
 
         // Reset all buttons to default style
         private void ResetButtonStyles()
@@ -214,6 +222,7 @@ namespace VenteApp
             ProvidersButton.BackgroundColor = Colors.Transparent;
             ClientsButton.BackgroundColor = Colors.Transparent;
             UsersButton.BackgroundColor = Colors.Transparent;
+            BillingButton.BackgroundColor = Colors.Transparent;
 
             // Reset text color to black (default)
             ProductsButton.TextColor = Colors.Black;
@@ -227,6 +236,7 @@ namespace VenteApp
             ProvidersButton.TextColor = Colors.Black;
             ClientsButton.TextColor = Colors.Black;
             UsersButton.TextColor = Colors.Black;
+            BillingButton.TextColor = Colors.Black;
         }
     }
 }

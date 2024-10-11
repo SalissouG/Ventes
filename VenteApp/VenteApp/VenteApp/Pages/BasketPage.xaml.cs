@@ -8,6 +8,8 @@ namespace VenteApp
     public partial class BasketPage : ContentPage, INotifyPropertyChanged
     {
         public ObservableCollection<Sale> CartItems { get; set; }
+        public ObservableCollection<Client> Clients { get; set; } // List of clients
+        public Client SelectedClient { get; set; } // Selected client from the Picker
 
         private decimal totalPrice;
         public decimal TotalPrice
@@ -35,6 +37,10 @@ namespace VenteApp
             // Bind cart items to the ObservableCollection in CartService
             CartItems = CartService.Instance.CartItems;
 
+            // Load clients for the Picker
+            Clients = new ObservableCollection<Client>();
+            LoadClients();
+
             // Set the initial total price
             TotalPrice = CartService.Instance.GetTotalPrice();
 
@@ -43,18 +49,27 @@ namespace VenteApp
             this.Title = "Panier";
         }
 
+        // Load clients from the database
+        private void LoadClients()
+        {
+            using (var db = new AppDbContext())
+            {
+                var clientsFromDb = db.Clients.ToList();
+                foreach (var client in clientsFromDb)
+                {
+                    Clients.Add(client);
+                }
+            }
+        }
+
         // Method to remove item from the cart with confirmation
         private async void OnRemoveItem(Sale sale)
         {
-            // Ask for confirmation before removing
             bool confirm = await DisplayAlert("Confirmation", $"Voulez-vous vraiment retirer {sale.Nom} du panier ?", "Oui", "Non");
             if (!confirm)
                 return;
 
-            // Remove the item from the cart
             CartService.Instance.RemoveFromCart(sale);
-
-            // Update UI
             TotalPrice = CartService.Instance.GetTotalPrice();
         }
 
@@ -73,7 +88,6 @@ namespace VenteApp
 
             using (var db = new AppDbContext())
             {
-                // Fetch the product to check stock
                 var product = db.Products.FirstOrDefault(p => p.Id == sale.ProductId);
                 if (product == null)
                 {
@@ -81,13 +95,10 @@ namespace VenteApp
                     return;
                 }
 
-                // Check if stock is available
                 if (sale.Quantite < product.Quantite)
                 {
                     sale.Quantite += 1;
                     CartService.Instance.AddToCart(sale);
-
-                    // Update TotalPrice
                     TotalPrice = CartService.Instance.GetTotalPrice();
                 }
                 else
@@ -107,8 +118,6 @@ namespace VenteApp
             {
                 sale.Quantite -= 1;
                 CartService.Instance.AddToCart(sale);
-
-                // Update TotalPrice
                 TotalPrice = CartService.Instance.GetTotalPrice();
             }
         }
@@ -120,9 +129,10 @@ namespace VenteApp
             {
                 using (var db = new AppDbContext())
                 {
+                    Guid orderId = Guid.NewGuid();
+
                     foreach (var sale in CartItems)
                     {
-                        // Verify that the product exists in the database
                         var product = db.Products.FirstOrDefault(p => p.Id == sale.ProductId);
                         if (product == null)
                         {
@@ -130,19 +140,20 @@ namespace VenteApp
                             return;
                         }
 
-                        // Check if there is enough stock
                         if (product.Quantite < sale.Quantite)
                         {
                             DisplayAlert("Erreur", $"Stock insuffisant pour le produit {product.Nom}.", "OK");
                             return;
                         }
 
-                        // Create a sale transaction
+                        // Create a sale transaction and associate the selected client
                         var saleTransaction = new SaleTransaction
                         {
-                            ProductId = sale.ProductId, // Foreign key to Product
+                            ProductId = sale.ProductId,
                             Quantite = sale.Quantite,
-                            DateDeVente = DateTime.Now
+                            DateDeVente = DateTime.Now,
+                            OrderId = orderId,
+                            ClientId = SelectedClient == null ? null : SelectedClient.Id // Associate the selected client
                         };
                         db.SaleTransactions.Add(saleTransaction);
 
@@ -150,7 +161,7 @@ namespace VenteApp
                         product.Quantite -= sale.Quantite;
                     }
 
-                    int changes = db.SaveChanges(); // Save changes to the database
+                    int changes = db.SaveChanges();
                     if (changes > 0)
                     {
                         DisplayAlert("Succès", $"{changes} transaction(s) ajoutée(s) avec succès, stock mis à jour.", "OK");

@@ -52,6 +52,7 @@
 	  <PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="PDFsharp-MigraDoc-GDI" Version="6.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,6 +69,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\BasketPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\BillDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\BillingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ClientsPage.xaml">
