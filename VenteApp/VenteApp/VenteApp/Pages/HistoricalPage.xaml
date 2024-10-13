@@ -23,6 +23,9 @@
                        WidthRequest="300" 
                        x:Name="SearchEntry" 
                        TextChanged="OnSearchTextChanged" />
+
+                <Button Text="Télécharger PDF" Clicked="OnDownloadHistoricalPdfClicked" />
+
             </HorizontalStackLayout>
 
             <!-- ListView with Header for Sales -->

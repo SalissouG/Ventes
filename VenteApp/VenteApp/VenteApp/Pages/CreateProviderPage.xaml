@@ -12,7 +12,7 @@
             HorizontalOptions="Start">
 
             <!-- Page Title -->
-            <Label Text="Créer un fournisseur"
+            <Label Text="Fournisseur"
                     FontSize="24"
                     HorizontalOptions="Start"
                     FontAttributes="Bold"

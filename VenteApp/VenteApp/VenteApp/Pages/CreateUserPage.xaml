@@ -12,7 +12,7 @@
             HorizontalOptions="Start">
 
             <!-- Page Title -->
-            <Label Text="Créer un utilisateur"
+            <Label Text="Utilisateur"
                     FontSize="24"
                     HorizontalOptions="Start"
                     FontAttributes="Bold"

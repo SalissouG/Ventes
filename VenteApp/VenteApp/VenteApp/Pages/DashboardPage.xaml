@@ -25,6 +25,8 @@
             <Label Text="Top 10 Produits les moins vendus" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
             <microcharts:ChartView Chart="{Binding LeastSoldChart}" HeightRequest="300" />
 
+            <Button Text="Télécharger le PDF des graphiques" Clicked="OnDownloadChartsPdfClicked" HorizontalOptions="Center" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

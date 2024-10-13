@@ -196,5 +196,13 @@ namespace VenteApp
                 TotalPages = (int)Math.Ceiling(totalFilteredProducts / (double)PageSize);
             }
         }
+
+        public List<Product> GetAllProductsForPdf()
+        {
+            using (var db = new AppDbContext())
+            {
+                return db.Products.OrderBy(p => p.Nom).ToList();
+            }
+        }
     }
 }

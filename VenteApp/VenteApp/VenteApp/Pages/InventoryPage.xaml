@@ -9,6 +9,7 @@
             <!-- Search Bar -->
             <HorizontalStackLayout>
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Télécharger PDF" Clicked="OnDownloadInventoryPdfClicked" Margin="10,0,0,0" />
             </HorizontalStackLayout>
 
             <!-- Product List with Header -->

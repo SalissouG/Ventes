@@ -207,6 +207,18 @@ namespace VenteApp
                 TotalPages = (int)Math.Ceiling(filteredSales.Count / (double)PageSize);
             }
         }
+
+        public List<SaleTransaction> GetAllSalesForPdf()
+        {
+            using (var db = new AppDbContext())
+            {
+                return db.SaleTransactions
+                         .Include(sale => sale.Product)
+                         .Where(sale => sale.DateDeVente >= DateDebut && sale.DateDeVente <= DateFin)
+                         .OrderBy(sale => sale.DateDeVente)
+                         .ToList();
+            }
+        }
     }
 }
 

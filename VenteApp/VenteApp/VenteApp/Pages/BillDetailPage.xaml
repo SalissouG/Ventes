@@ -11,7 +11,7 @@
                 <VerticalStackLayout Spacing="20">
 
                     <!-- Invoice Title -->
-                    <Label Text="Commande" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="Facture" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
 
                     <!-- Client Information -->
                     <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto" Padding="5">
@@ -50,6 +50,9 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
+                    <Button Text="Télécharger PDF" Clicked="OnDownloadPdfClicked" HorizontalOptions="Center"/>
+
 
                 </VerticalStackLayout>
             </Frame>

@@ -23,6 +23,9 @@
             WidthRequest="300" 
             x:Name="SearchEntry" 
             TextChanged="OnSearchTextChanged" />
+
+                <Button Text="Télécharger PDF" Clicked="OnDownloadSalesSummaryPdfClicked" HorizontalOptions="Center"/>
+
             </HorizontalStackLayout>
 
             <!-- Product Sales Summary List -->

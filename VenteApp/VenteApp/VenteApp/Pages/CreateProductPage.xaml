@@ -11,7 +11,7 @@
             HorizontalOptions="Start">
 
             <!-- Page Title -->
-            <Label Text="Créer un produit" FontSize="24" HorizontalOptions="Start" FontAttributes="Bold" TextColor="Black" />
+            <Label Text="Produit" FontSize="24" HorizontalOptions="Start" FontAttributes="Bold" TextColor="Black" />
 
             <!-- Nom Entry -->
             <Label Text="Nom" FontSize="14" HorizontalOptions="Start" />

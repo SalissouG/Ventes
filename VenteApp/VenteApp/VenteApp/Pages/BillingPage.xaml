@@ -9,6 +9,7 @@
             <HorizontalStackLayout Spacing="20">
                 <!-- Search Bar -->
                 <Entry Placeholder="Recherche par client ou total" WidthRequest="400" TextChanged="OnSearchTextChanged" />
+                <Button Text="Télécharger PDF" Clicked="OnDownloadAllBillingsPdfClicked" />
             </HorizontalStackLayout>
 
             <!-- Billing List with Header -->

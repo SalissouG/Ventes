@@ -11,6 +11,8 @@
             <HorizontalStackLayout Spacing="20">
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
                 <Button Text="Ajouter un client" Clicked="OnAddClientClicked" />
+                <Button Text="Télécharger PDF" 
+                    Clicked="OnDownloadClientsPdfClicked"/>
             </HorizontalStackLayout>
 
             <!-- Client List with Header -->

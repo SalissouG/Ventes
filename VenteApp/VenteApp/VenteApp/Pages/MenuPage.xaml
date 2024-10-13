@@ -19,7 +19,7 @@
                 <Button x:Name="BasketButton" Text="Panier" Clicked="OnBasketClicked">
                     <!-- Add VisualStateManager for SalesButton -->
                 </Button>
-                <Button x:Name="BillingButton" Text="Commandes" Clicked="OnBillingClicked">
+                <Button x:Name="BillingButton" Text="Factures" Clicked="OnBillingClicked">
                     <!-- Add VisualStateManager for BillingButton -->
                 </Button>
                 <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">

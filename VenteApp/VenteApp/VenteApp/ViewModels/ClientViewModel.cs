@@ -5,7 +5,7 @@ namespace VenteApp
 {
     public class ClientViewModel : BindableObject
     {
-        private const int PageSize = 1;  // Number of clients per page
+        private const int PageSize = 5;  // Number of clients per page
         private int _currentPage = 1;     // Current page number
         private int _totalPages;          // Total number of pages
 
@@ -170,6 +170,14 @@ namespace VenteApp
                                                          c.Prenom.ToLower().Contains(query.ToLower()) ||
                                                          c.Email.ToLower().Contains(query.ToLower()));
                 TotalPages = (int)Math.Ceiling(totalFilteredClients / (double)PageSize);
+            }
+        }
+
+        public List<Client> GetAllClientsForPdf()
+        {
+            using (var db = new AppDbContext())
+            {
+                return db.Clients.OrderBy(c => c.Nom).ToList();
             }
         }
     }

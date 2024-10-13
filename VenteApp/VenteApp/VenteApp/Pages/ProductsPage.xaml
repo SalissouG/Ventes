@@ -11,6 +11,7 @@
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
                 <!-- Add Product Button -->
                 <Button Text="Ajouter un produit" Clicked="OnAddProductClicked" />
+                <Button Text="Télécharger PDF" Clicked="OnDownloadProductsPdfClicked" />
             </HorizontalStackLayout>
 
             <!-- Product List with Header -->
