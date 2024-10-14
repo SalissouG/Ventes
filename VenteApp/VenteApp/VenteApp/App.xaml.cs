@@ -15,7 +15,7 @@ public partial class App : Application
         // Vérifier si la licence est valide au démarrage
         if (LicenseValidator.IsLicenceValid())
         {
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MenuPage());
         }
         else
         {

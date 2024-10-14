@@ -2,6 +2,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
+using System.IO;
 
 namespace VenteApp
 {
@@ -185,6 +188,103 @@ namespace VenteApp
                 DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
+
+
+        private async void OnDownloadPdfClicked(object sender, EventArgs e)
+        {
+            // Create a new PDF document
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "Devis";
+
+            // Create an empty page
+            PdfPage page = document.AddPage();
+
+            // Get an XGraphics object for drawing
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+
+            // Define fonts
+            XFont titleFont = new XFont("Verdana", 20, XFontStyle.Bold);
+            XFont labelFont = new XFont("Verdana", 12, XFontStyle.Regular);
+
+            // Draw title
+            gfx.DrawString("Devis", titleFont, XBrushes.Black, new XRect(0, 0, page.Width, 50), XStringFormats.TopCenter);
+
+            // Draw client information if a client is selected
+            int yOffset = 80;
+            if (SelectedClient != null)
+            {
+                gfx.DrawString($"Client: {SelectedClient.Nom}", labelFont, XBrushes.Black, new XRect(40, yOffset, page.Width - 80, 0), XStringFormats.Default);
+                yOffset += 20;
+            }
+
+            // Draw table headers
+            gfx.DrawString("Produit", labelFont, XBrushes.Black, new XRect(40, yOffset, 0, 0), XStringFormats.Default);
+            gfx.DrawString("Prix Unitaire", labelFont, XBrushes.Black, new XRect(240, yOffset, 0, 0), XStringFormats.Default);
+            gfx.DrawString("Quantité", labelFont, XBrushes.Black, new XRect(340, yOffset, 0, 0), XStringFormats.Default);
+            gfx.DrawString("Total", labelFont, XBrushes.Black, new XRect(440, yOffset, 0, 0), XStringFormats.Default);
+
+            yOffset += 20;
+
+            // Draw a line below the headers
+            gfx.DrawLine(XPens.Black, 40, yOffset, page.Width - 40, yOffset);
+            yOffset += 10;
+
+            // Add each product in the basket to the PDF
+            foreach (var item in CartItems)
+            {
+                // Check if there's space for more content, otherwise add a new page
+                if (yOffset + 20 > page.Height - 40)
+                {
+                    page = document.AddPage();
+                    gfx = XGraphics.FromPdfPage(page);
+                    yOffset = 40;
+                }
+
+                // Draw product details
+                gfx.DrawString(item.Nom, labelFont, XBrushes.Black, new XRect(40, yOffset, 0, 0), XStringFormats.Default);
+                gfx.DrawString(item.Prix.ToString("C"), labelFont, XBrushes.Black, new XRect(240, yOffset, 0, 0), XStringFormats.Default);
+                gfx.DrawString(item.Quantite.ToString(), labelFont, XBrushes.Black, new XRect(340, yOffset, 0, 0), XStringFormats.Default);
+                gfx.DrawString((item.Prix * item.Quantite).ToString("C"), labelFont, XBrushes.Black, new XRect(440, yOffset, 0, 0), XStringFormats.Default);
+
+                yOffset += 20;
+            }
+
+            // Draw total price
+            gfx.DrawString($"Total: {TotalPrice:C}", titleFont, XBrushes.Black, new XRect(40, yOffset + 20, page.Width - 80, 0), XStringFormats.Default);
+
+            try
+            {
+                // Define the path for the download folder
+                string downloadFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Download");
+
+                // Check if the folder exists, if not, create it
+                if (!Directory.Exists(downloadFolder))
+                {
+                    Directory.CreateDirectory(downloadFolder);
+                }
+
+                // Get the current date formatted as yyyyMMdd_HHmm
+                string currentDate = DateTime.Now.ToString("yyyyMMdd_HHmm");
+
+                // Define the file name with the current date included
+                string fileName = Path.Combine(downloadFolder, $"Panier_{currentDate}.pdf");
+
+                // Save the PDF file
+                using (var stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                {
+                    document.Save(stream);
+                }
+
+                // Notify the user about the successful save
+                await DisplayAlert("Téléchargement", "Le fichier PDF a été enregistré dans le dossier Téléchargements.", "OK");
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (log it or display an error message)
+                await DisplayAlert("Erreur", $"Une erreur s'est produite lors de la création du fichier PDF : {ex.Message}", "OK");
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)

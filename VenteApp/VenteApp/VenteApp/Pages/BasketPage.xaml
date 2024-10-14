@@ -85,6 +85,12 @@
                                 HeightRequest="40"
                                 CornerRadius="10"
                                 Clicked="OnValiderClicked" />
+
+                        <Button Text="Télécharger PDF"
+                                WidthRequest="150"
+                                HeightRequest="40"
+                                CornerRadius="10"
+                                Clicked="OnDownloadPdfClicked" />       
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
