@@ -32,6 +32,7 @@ namespace VenteApp
                     {
                         ClientName = firstTransaction.Client != null ? $"{firstTransaction.Client.Nom} {firstTransaction.Client.Prenom}" : "Client inconnu",
                         TotalAmount = transactions.Sum(t => t.Product.PrixVente * t.Quantite),
+                        SaleDate = firstTransaction.DateDeVente,
                         Products = transactions.Select(t => new ProductDetailViewModel
                         {
                             ProductName = t.Product.Nom,
@@ -129,6 +130,9 @@ namespace VenteApp
     {
         public string ClientName { get; set; }
         public decimal TotalAmount { get; set; }
+
+        public DateTime SaleDate { get; set; }
+
         public List<ProductDetailViewModel> Products { get; set; }
     }
 

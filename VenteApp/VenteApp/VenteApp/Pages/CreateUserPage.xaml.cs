@@ -10,6 +10,9 @@ namespace VenteApp
 
             this.Title = user == null ? "Créer un utilisateur" : "Modifier l'utilisateur";
 
+            // Load roles in the RolePicker
+            RolePicker.ItemsSource = new List<string> { "Admin", "Normal" };
+
             if (user != null)
             {
                 _userToEdit = user; // If editing, load user data
@@ -26,7 +29,8 @@ namespace VenteApp
             AdresseEntry.Text = user.Adresse;
             EmailEntry.Text = user.Email;
             LoginEntry.Text = user.Login;
-            PasswordEntry.Text = user.Password; // Be careful with handling passwords!
+            PasswordEntry.Text = EncryptionService.Instance.Decrypt(user.Password); // Be careful with handling passwords!
+            RolePicker.SelectedItem = user.Role;
         }
 
         // Real-time validation for Nom field
@@ -222,6 +226,8 @@ namespace VenteApp
             if (!isValid)
                 return; // Stop the method if inputs are invalid
 
+            var selectedRole = RolePicker.SelectedItem as string;
+
             try
             {
                 if (_userToEdit == null)
@@ -235,7 +241,8 @@ namespace VenteApp
                         Adresse = AdresseEntry.Text,
                         Email = EmailEntry.Text,
                         Login = LoginEntry.Text,
-                        Password = PasswordEntry.Text
+                        Password = EncryptionService.Instance.Encrypt(PasswordEntry.Text),
+                        Role = selectedRole
                     };
 
                     using (var db = new AppDbContext())
@@ -259,6 +266,7 @@ namespace VenteApp
                         user.Email = EmailEntry.Text;
                         user.Login = LoginEntry.Text;
                         user.Password = PasswordEntry.Text;
+                        user.Role = selectedRole;
 
                         await db.SaveChangesAsync();  // Update the user in the database
                     }

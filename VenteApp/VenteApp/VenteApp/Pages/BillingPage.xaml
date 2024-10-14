@@ -34,7 +34,7 @@
                                 <Label Text="{Binding ClientName}" Grid.Column="0" VerticalOptions="Center" />
                                 <Label Text="{Binding TotalAmount, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center" />
                                 <Label Text="{Binding NumberOfProducts}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding SaleDate, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="3" VerticalOptions="Center" />
+                                <Label Text="{Binding SaleDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="3" VerticalOptions="Center" />
 
                                 <!-- Action Button -->
                                 <HorizontalStackLayout Grid.Column="4" HorizontalOptions="End">

@@ -18,15 +18,14 @@
                 VerticalOptions="Center"
                 FontAttributes="Bold" />
 
-            <!-- Phone Number/Email Entry -->
+            <!-- Login Entry -->
             <Label
-                Text="Numero de téléphone / Email"
+                Text="Login"
                 FontSize="14"
                 HorizontalOptions="Start" />
             <Entry
-                Placeholder="Enter your phone number or email"
-                x:Name="PhoneNumberEntry"
-                Keyboard="Email"
+                Placeholder="Enter your login"
+                x:Name="LoginEntry"
                 WidthRequest="300"
                 HorizontalOptions="Center" />
 

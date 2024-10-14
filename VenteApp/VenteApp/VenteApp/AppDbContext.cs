@@ -45,5 +45,32 @@ namespace VenteApp
                 .WithMany(pr => pr.ProductsSupplied)
                 .HasForeignKey(p => p.ProviderId);
         }
+
+        public void InitializeDatabase()
+        {
+            this.Database.Migrate(); // Apply any pending migrations
+
+            if (!Users.Any()) // Check if there are any users in the database
+            {
+                var defaultAdmin = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Nom = "Admin",
+                    Prenom = "Administrator",
+                    Numero = "0000000000",
+                    Adresse = "N/A",
+                    Email = "admin@venteapp.com",
+                    Login = "admin",
+                    Password = EncryptionService.Instance.Encrypt("Admin123"), // Encrypt the default password
+                    Role = "Admin",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                Users.Add(defaultAdmin);
+                SaveChanges(); // Save the new user to the database
+                Console.WriteLine("Default admin user added to the database.");
+            }
+        }
     }
 }

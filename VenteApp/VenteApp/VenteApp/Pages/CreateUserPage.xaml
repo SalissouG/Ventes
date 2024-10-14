@@ -58,6 +58,9 @@
                    TextChanged="OnPasswordTextChanged" />
             <Label x:Name="PasswordError" TextColor="Red" FontSize="12" IsVisible="False" />
 
+            <Label Text="Role" FontSize="14" HorizontalOptions="Start" />
+            <Picker x:Name="RolePicker" WidthRequest="300" HorizontalOptions="Start"/>
+
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                 <Button Text="Enregistrer" Clicked="OnSaveUserClicked" WidthRequest="150"/>
                 <Button Text="Annuler" Clicked="OnCancelClicked" WidthRequest="150"/>

@@ -9,7 +9,8 @@ namespace VenteApp
         {
             InitializeComponent();
 
-            // Set UsersPage as the default Detail page
+            // Check if the connected user is an admin and show/hide buttons accordingly
+            ConfigureMenuVisibility();
 
             // Vérifier si la licence est valide au démarrage
             if (LicenseValidator.IsLicenceValid())
@@ -207,6 +208,22 @@ namespace VenteApp
             BillingButton.TextColor = Colors.White;
         }
 
+        private async void OnDeconnexionClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+
+            ResetButtonStyles();  // Reset styles for all buttons
+        }
+
+        private void ConfigureMenuVisibility()
+        {
+            bool isAdmin = UserService.Instance.IsAdmin();
+
+            // Show or hide the Users and License buttons based on admin status
+            UsersButton.IsVisible = isAdmin;
+            LicenseButton.IsVisible = isAdmin;
+        }
+
         // Reset all buttons to default style
         private void ResetButtonStyles()
         {
@@ -223,6 +240,7 @@ namespace VenteApp
             ClientsButton.BackgroundColor = Colors.Transparent;
             UsersButton.BackgroundColor = Colors.Transparent;
             BillingButton.BackgroundColor = Colors.Transparent;
+            DeconnexionButton.BackgroundColor = Colors.Transparent;
 
             // Reset text color to black (default)
             ProductsButton.TextColor = Colors.Black;
@@ -237,6 +255,7 @@ namespace VenteApp
             ClientsButton.TextColor = Colors.Black;
             UsersButton.TextColor = Colors.Black;
             BillingButton.TextColor = Colors.Black;
+            DeconnexionButton.TextColor = Colors.Black;
         }
     }
 }

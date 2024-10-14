@@ -1,6 +1,4 @@
-﻿//using BCrypt.Net;
-
-namespace VenteApp;
+﻿namespace VenteApp;
 
 public class User
 {
@@ -20,14 +18,5 @@ public class User
 
     // Optionally, additional fields for user roles, permissions, etc.
     public string Role { get; set; } // Optional: Role of the user (e.g., "Admin", "User", etc.)
-
-    //public void SetPassword(string password)
-    //{
-    //    Password = BCrypt.Net.BCrypt.HashPassword(password);
-    //}
-
-    //public bool CheckPassword(string password)
-    //{
-    //    return BCrypt.Net.BCrypt.Verify(password, Password);
-    //}
+  
 }

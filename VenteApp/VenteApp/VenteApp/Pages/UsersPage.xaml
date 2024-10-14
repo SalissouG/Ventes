@@ -18,13 +18,13 @@
 
                 <!-- ListView Header -->
                 <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*">
+                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*">
                         <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
                         <Label Text="Prénom" FontAttributes="Bold" Grid.Column="1" />
                         <Label Text="Numéro" FontAttributes="Bold" Grid.Column="2" />
                         <Label Text="Adresse" FontAttributes="Bold" Grid.Column="3" />
                         <Label Text="Email" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" />
+                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2"/>
                     </Grid>
                 </ListView.Header>
 
@@ -32,7 +32,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*">
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*">
                                 <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
                                 <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center" />
                                 <Label Text="{Binding Numero}" Grid.Column="2" VerticalOptions="Center" />
@@ -40,13 +40,11 @@
                                 <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center" />
 
                                 <!-- Action Buttons -->
-                                <Button Text="Modifier" Clicked="OnEditUserClicked" Grid.Column="5" HorizontalOptions="Start"/>
+                                <Button Text="Modifier" Clicked="OnEditUserClicked" Grid.Column="5" />
                                 <Button Text="Supprimer"
                                         Grid.Column="6"
-                                        WidthRequest="100"
                                         BackgroundColor="Red"
                                         TextColor="White"
-                                        HorizontalOptions="Start"
                                         Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                         CommandParameter="{Binding .}" />
                             </Grid>
