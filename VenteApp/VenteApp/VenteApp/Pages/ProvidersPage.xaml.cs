@@ -129,9 +129,9 @@ public partial class ProvidersPage : ContentPage
                 string fileName = Path.Combine(downloadFolder, $"Liste_des_Fournisseurs_{currentDate}.pdf");
 
                 document.Save(fileName);
-            }
 
-            await DisplayAlert("Téléchargement", "Le fichier PDF de la liste des fournisseurs a été enregistré dans le dossier Téléchargements.", "OK");
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
+            }
         }
         catch (Exception ex)
         {

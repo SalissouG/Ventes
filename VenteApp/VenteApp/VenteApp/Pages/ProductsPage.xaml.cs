@@ -138,9 +138,10 @@ public partial class ProductsPage : ContentPage
                 string fileName = Path.Combine(downloadFolder, $"Liste_des_Produits_{currentDate}.pdf");
 
                 document.Save(fileName);
-            }
 
-            await DisplayAlert("Téléchargement", "Le fichier PDF de la liste des produits a été enregistré dans le dossier Téléchargements.", "OK");
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
+
+            }
         }
         catch (Exception ex)
         {

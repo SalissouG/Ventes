@@ -210,6 +210,7 @@ namespace VenteApp
 
         private async void OnDeconnexionClicked(object sender, EventArgs e)
         {
+            UserService.Instance.ClearConnectedUser();
             await Navigation.PushAsync(new MainPage());
 
             ResetButtonStyles();  // Reset styles for all buttons
@@ -255,7 +256,6 @@ namespace VenteApp
             ClientsButton.TextColor = Colors.Black;
             UsersButton.TextColor = Colors.Black;
             BillingButton.TextColor = Colors.Black;
-            DeconnexionButton.TextColor = Colors.Black;
         }
     }
 }

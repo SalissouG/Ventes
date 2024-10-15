@@ -124,6 +124,9 @@ public partial class ClientsPage : ContentPage
                 {
                     document.Save(stream);
                 }
+
+                // Navigate to PdfViewerPage
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
             }
 
             await DisplayAlert("Téléchargement", "Le fichier PDF de la liste des clients a été enregistré dans le dossier Téléchargements.", "OK");

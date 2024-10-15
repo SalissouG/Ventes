@@ -172,6 +172,9 @@ namespace VenteApp
                         string fileName = Path.Combine(downloadFolder, $"Liste_des_Facturations_{currentDate}.pdf");
 
                         document.Save(fileName);
+
+                        // Navigate to PdfViewerPage
+                        await Navigation.PushAsync(new PdfViewerPage(fileName));
                     }
 
                     await DisplayAlert("Téléchargement", "Le fichier PDF de la liste des facturations a été enregistré dans le dossier Téléchargements.", "OK");

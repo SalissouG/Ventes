@@ -65,8 +65,8 @@ namespace VenteApp
                     document.Save(stream);
                 }
 
-                // Notify the user
-                await DisplayAlert("Téléchargement", "Le fichier PDF a été enregistré dans le dossier Téléchargements.", "OK");
+                // Navigate to PdfViewerPage
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
             }
             catch (Exception ex)
             {

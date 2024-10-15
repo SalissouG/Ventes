@@ -103,9 +103,11 @@ public partial class HistoricalPage : ContentPage
                 {
                     document.Save(stream);
                 }
+
+                // Navigate to PdfViewerPage
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
             }
 
-            await DisplayAlert("Téléchargement", "Le fichier PDF de l'historique des ventes a été enregistré dans le dossier Téléchargements.", "OK");
         }
         catch (Exception ex)
         {

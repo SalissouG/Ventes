@@ -254,33 +254,26 @@ namespace VenteApp
 
             try
             {
-                // Define the path for the download folder
                 string downloadFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Download");
 
-                // Check if the folder exists, if not, create it
                 if (!Directory.Exists(downloadFolder))
                 {
                     Directory.CreateDirectory(downloadFolder);
                 }
 
-                // Get the current date formatted as yyyyMMdd_HHmm
                 string currentDate = DateTime.Now.ToString("yyyyMMdd_HHmm");
-
-                // Define the file name with the current date included
                 string fileName = Path.Combine(downloadFolder, $"Panier_{currentDate}.pdf");
 
-                // Save the PDF file
                 using (var stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     document.Save(stream);
                 }
 
-                // Notify the user about the successful save
-                await DisplayAlert("Téléchargement", "Le fichier PDF a été enregistré dans le dossier Téléchargements.", "OK");
+                // Navigate to PdfViewerPage
+                await Navigation.PushAsync(new PdfViewerPage(fileName));
             }
             catch (Exception ex)
             {
-                // Handle the exception (log it or display an error message)
                 await DisplayAlert("Erreur", $"Une erreur s'est produite lors de la création du fichier PDF : {ex.Message}", "OK");
             }
         }

@@ -43,7 +43,11 @@
                 <Button x:Name="LicenseButton" Text="Licence" Clicked="OnLicenseClicked">
                     <!-- Add VisualStateManager for LicenseButton -->
                 </Button>
-                <Button x:Name="DeconnexionButton" Text="Deconnexion" Clicked="OnDeconnexionClicked">
+                
+                <Button x:Name="DeconnexionButton"
+                        TextColor="Red"
+                        Text="Deconnexion" 
+                        Clicked="OnDeconnexionClicked">
                     <!-- Add VisualStateManager for LicenseButton -->
                 </Button>
 

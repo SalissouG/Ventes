@@ -15,13 +15,42 @@ public partial class App : Application
         // Vérifier si la licence est valide au démarrage
         if (LicenseValidator.IsLicenceValid())
         {
-            MainPage = new NavigationPage(new MenuPage());
+            if (UserService.Instance.IsConnectedUser())
+            {
+                MainPage = new NavigationPage(new MenuPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
         else
         {
             MainPage = new NavigationPage(new LicensePage()); // Rediriger vers la page de licence
         }
 
-        
+        CartService.Instance.LoadCart();
+
     }
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+        // Any additional startup logic can go here
+    }
+
+    protected override void OnSleep()
+    {
+        // Save the cart when the application goes to sleep
+        CartService.Instance.SaveCart();
+        base.OnSleep();
+    }
+
+    protected override void OnResume()
+    {
+        // Optionally, reload the cart when the application resumes
+        CartService.Instance.LoadCart();
+        base.OnResume();
+    }
+
 }

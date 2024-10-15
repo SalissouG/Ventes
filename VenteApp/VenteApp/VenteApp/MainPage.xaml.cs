@@ -21,7 +21,6 @@
                 {
                     // If login is successful, navigate to the MenuPage
 
-
                     await Navigation.PushAsync(new MenuPage());
                 }
                 else
@@ -45,7 +44,7 @@
                 var user = db.Users.FirstOrDefault(u => u.Login == login);
                 if (user == null)
                 {
-                    result = false; // User not found
+                  return false; // User not found
                 }
 
                 // Decrypt the stored password
@@ -70,7 +69,5 @@
             // Navigate to forgot password page
             DisplayAlert("Forgot Password", "Redirecting to forgot password page", "OK");
         }
-
-
     }
 }

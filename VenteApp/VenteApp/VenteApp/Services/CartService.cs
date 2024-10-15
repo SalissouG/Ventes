@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace VenteApp
 {
@@ -49,6 +50,26 @@ namespace VenteApp
         public decimal GetTotalPrice()
         {
             return CartItems.Sum(item => item.TotalPrice);
+        }
+
+        public void SaveCart()
+        {
+            var cartJson = JsonConvert.SerializeObject(CartItems);
+            Preferences.Set("CartItems", cartJson);
+        }
+
+        public void LoadCart()
+        {
+            var cartJson = Preferences.Get("CartItems", string.Empty);
+            if (!string.IsNullOrEmpty(cartJson))
+            {
+                var items = JsonConvert.DeserializeObject<ObservableCollection<Sale>>(cartJson);
+                CartItems.Clear();
+                foreach (var item in items)
+                {
+                    CartItems.Add(item);
+                }
+            }
         }
     }
 }

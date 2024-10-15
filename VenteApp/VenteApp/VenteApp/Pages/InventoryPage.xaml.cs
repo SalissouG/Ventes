@@ -103,10 +103,10 @@ namespace VenteApp
                     {
                         document.Save(stream);
                     }
-                }
 
-                // Notify the user
-                await DisplayAlert("Téléchargement", "Le fichier PDF de l'inventaire a été enregistré dans le dossier Téléchargements.", "OK");
+                    await Navigation.PushAsync(new PdfViewerPage(fileName));
+                }
+                
             }
             catch (Exception ex)
             {
