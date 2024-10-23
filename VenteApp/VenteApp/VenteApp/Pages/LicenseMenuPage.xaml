@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.LicenseMenuPage"
-             Title="Entrer Licence">
+             Title="Entrer Licence"
+             NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
 
         <!-- Input for Licence Key -->
-        <Label Text="Entrez votre licence" FontSize="18" HorizontalOptions="Center" />
+        <Label Text="Entrez votre licence" FontSize="24" HorizontalOptions="Center"   FontAttributes="Bold"/>
         <Entry x:Name="LicenceEntry" Placeholder="Clé de licence" WidthRequest="300" />
 
         <!-- Button to Validate the Licence -->

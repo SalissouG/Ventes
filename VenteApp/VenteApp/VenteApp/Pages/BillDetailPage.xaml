@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VenteApp.BillDetailPage">
+             x:Class="VenteApp.BillDetailPage"
+             NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
@@ -11,7 +12,7 @@
                 <VerticalStackLayout Spacing="20">
 
                     <!-- Invoice Title -->
-                    <Label Text="Facture" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="Facture" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
                     <!-- Client Information -->
                     <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto" Padding="5">

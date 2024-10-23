@@ -2,15 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ClientsPage"
-             Title="Clients">
+             Title="Clients"
+             NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
 
+            <Grid ColumnDefinitions="*,auto">
+                <Label Text="Produits"
+           FontSize="24"
+           VerticalOptions="Center" 
+                         FontAttributes="Bold"/>
+                <Button Text="Ajouter un client" Clicked="OnAddClientClicked" Grid.Column="1" VerticalOptions="Center"/>
+            </Grid>
+            
             <!-- Search and Add Client Button -->
             <HorizontalStackLayout Spacing="20">
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Ajouter un client" Clicked="OnAddClientClicked" />
                 <Button Text="Télécharger PDF" 
                     Clicked="OnDownloadClientsPdfClicked"/>
             </HorizontalStackLayout>

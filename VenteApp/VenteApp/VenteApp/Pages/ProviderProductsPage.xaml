@@ -1,9 +1,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VenteApp.ProviderProductsPage">
+             x:Class="VenteApp.ProviderProductsPage"
+             NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
+
+            <!-- Page Title -->
+            <Label Text="Produis du fournisseur"
+         FontSize="24"
+         HorizontalOptions="Start"
+         FontAttributes="Bold" />
 
             <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
                 <ListView.Header>

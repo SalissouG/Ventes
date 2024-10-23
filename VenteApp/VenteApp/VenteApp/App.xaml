@@ -5,10 +5,26 @@
              x:Class="VenteApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Merged Resource Dictionaries -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Label" Class="MenuLabel">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style TargetType="HorizontalStackLayout" Class="MenuLayout">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Padding" Value="10,5"/>
+                
+            </Style>
+
+           
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

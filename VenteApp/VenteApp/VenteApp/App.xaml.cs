@@ -29,6 +29,8 @@ public partial class App : Application
             MainPage = new NavigationPage(new LicensePage()); // Rediriger vers la page de licence
         }
 
+        NavigationPage.SetHasNavigationBar(MainPage, false);
+
         CartService.Instance.LoadCart();
 
     }

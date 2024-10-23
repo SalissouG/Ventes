@@ -21,6 +21,7 @@ public partial class ProductsPage : ContentPage
             // Log the inner exception to see what exactly is causing the issue
             Console.WriteLine($"Error: {ex.Message}, Inner Exception: {ex.InnerException?.Message}");
         }
+
     }
 
     private async Task<bool> ConfirmDeleteProduct(Product product)

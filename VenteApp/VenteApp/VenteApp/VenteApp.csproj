@@ -49,6 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\FluentSystemIcons-Regular.ttf" />
+	  <None Remove="Resources\Images\logo.jpg" />
+	  <None Remove="Resources\Images\logoWhite.jpg" />
+	  <None Remove="Resources\Images\products_icon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Microcharts.Maui" Version="1.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

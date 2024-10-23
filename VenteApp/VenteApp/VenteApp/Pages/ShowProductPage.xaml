@@ -2,13 +2,20 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ShowProductPage"
-             Title="Détails du produit">
+             Title="Détails du produit"
+            NavigationPage.HasNavigationBar="False">
 
     <!-- Product Tab -->
-    <ContentPage Title="Détails du produit">
+    <ContentPage Title="Détails du produit" NavigationPage.HasNavigationBar="False">
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
                 <!-- Product Details -->
+
+                <!-- Page Title -->
+                <Label Text="Détails du produit"
+                        FontSize="24"
+                        HorizontalOptions="Start"
+                        FontAttributes="Bold" />
 
                 <HorizontalStackLayout Spacing="20">
                     <Label Text="Nom:" FontAttributes="Bold" />
@@ -45,7 +52,7 @@
     </ContentPage>
 
     <!-- Provider Tab -->
-    <ContentPage Title="Détails du fournisseur">
+    <ContentPage Title="Détails du fournisseur" NavigationPage.HasNavigationBar="False">
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
                 <!-- Provider Details (only shown if Provider exists) -->

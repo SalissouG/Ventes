@@ -1,66 +1,158 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="VenteApp.MenuPage">
+            x:Class="VenteApp.MenuPage"
+            NavigationPage.HasNavigationBar="False">
 
     <!-- Side Menu -->
     <FlyoutPage.Flyout>
-        <ContentPage Title="Menu">
-            <VerticalStackLayout Padding="10" Spacing="10">
-                <Button x:Name="ProductsButton" Text="Produits" Clicked="OnProductsClicked">
-                    <!-- Add VisualStateManager for ProductsButton -->
-                </Button>
-                <Button x:Name="ProvidersButton" Text="Fournisseurs" Clicked="OnProvidersClicked">
-                    <!-- Add VisualStateManager for ProvidersButton -->
-                </Button>
-                <Button x:Name="SalesButton" Text="Ventes" Clicked="OnSalesClicked">
-                    <!-- Add VisualStateManager for SalesButton -->
-                </Button>
-                <Button x:Name="BasketButton" Text="Panier" Clicked="OnBasketClicked">
-                    <!-- Add VisualStateManager for SalesButton -->
-                </Button>
-                <Button x:Name="BillingButton" Text="Factures" Clicked="OnBillingClicked">
-                    <!-- Add VisualStateManager for BillingButton -->
-                </Button>
-                <Button x:Name="ClientsButton" Text="Clients" Clicked="OnClientsClicked">
-                    <!-- Add VisualStateManager for ClientsButton -->
-                </Button>
-                <Button x:Name="HistoricalButton" Text="Historiques" Clicked="OnHistoricalClicked">
-                    <!-- Add VisualStateManager for DashboardButton -->
-                </Button>
-                <Button x:Name="InventoryButton" Text="Inventaires" Clicked="OnInventoryClicked">
-                    <!-- Add VisualStateManager for InventoryButton -->
-                </Button>
-                <Button x:Name="SalesSummaryButton" Text="Total des ventes" Clicked="OnSalesSummaryClicked">
-                    <!-- Add VisualStateManager for HistoricalButton -->
-                </Button>
-                <Button x:Name="DashboardButton" Text="Tableau de bord" Clicked="OnDashboardClicked">
-                    <!-- Add VisualStateManager for DashboardButton -->
-                </Button>
-                <Button x:Name="UsersButton" Text="Utilisateurs" Clicked="OnUsersClicked">
-                    <!-- Add VisualStateManager for UsersButton -->
-                </Button>
-                <Button x:Name="LicenseButton" Text="Licence" Clicked="OnLicenseClicked">
-                    <!-- Add VisualStateManager for LicenseButton -->
-                </Button>
-                
-                <Button x:Name="DeconnexionButton"
-                        TextColor="Red"
-                        Text="Deconnexion" 
-                        Clicked="OnDeconnexionClicked">
-                    <!-- Add VisualStateManager for LicenseButton -->
-                </Button>
+        <ContentPage Title="Menu" BackgroundColor="#e4f8fa" NavigationPage.HasNavigationBar="False">
+        <!--<ContentPage Title="Menu" BackgroundColor="#f0f4fa">-->
+            <ScrollView>
+                <VerticalStackLayout Padding="10" Spacing="15">
+                <!-- Logo Section -->
+                    <Image Source="logowhite.jpg" HeightRequest="150" HorizontalOptions="Center" Margin="0,15,0,0"/>
+                <!-- User Information -->
+                <Frame Padding="10" BackgroundColor="White" CornerRadius="10" HasShadow="True" Margin="0,10,0,20">
+                    <VerticalStackLayout>
+                            <Label Text="{Binding ConnectedUserName}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Vente App" FontSize="Small" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
 
+                <!-- Menu Labels -->
+                    <HorizontalStackLayout x:Name="ProductsLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24" />
+                        <Label x:Name="ProductsLabel" Text="Produits" StyleClass="MenuLabel">
+                            
+                        </Label>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProductsClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="ProvidersLabel"
+           Text="Fournisseurs"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProvidersClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="SalesLabel"
+           Text="Ventes"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSalesClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="BasketLabel"
+           Text="Panier"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBasketClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="BillingLabel"
+           Text="Factures"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBillingClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="ClientsLabel"
+           Text="Clients"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClientsClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="HistoricalLabel"
+           Text="Historiques"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHistoricalClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="InventoryLabel"
+           Text="Inventaires"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnInventoryClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="SalesSummaryLabel"
+           Text="Total des ventes"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSalesSummaryClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="DashboardLabel"
+           Text="Tableau de bord"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDashboardClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="UsersLabel"
+           Text="Utilisateurs"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnUsersClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="LicenseLabel"
+           Text="Licence"
+           StyleClass="MenuLabel"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLicenseClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!-- Logout Label -->
+                <Label x:Name="DeconnexionLabel"
+           Text="Deconnexion"
+           StyleClass="MenuLabel"
+           TextColor="Red"
+           HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDeconnexionClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </VerticalStackLayout>
+           </ScrollView>
         </ContentPage>
     </FlyoutPage.Flyout>
 
-    <!-- Main Content Area - Default to UsersPage -->
+    <!-- Main Content Area -->
     <FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>
+                <ContentPage Title="Welcome">
+                    <Label Text="Welcome to the VenteApp" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </ContentPage>
             </x:Arguments>
         </NavigationPage>
     </FlyoutPage.Detail>
-
 </FlyoutPage>

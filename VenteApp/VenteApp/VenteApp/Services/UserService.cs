@@ -57,5 +57,14 @@ namespace VenteApp
             Preferences.Remove("ConnectedUser");
             ConnectedUser = null;
         }
+
+        public string GetConnectedUserName()
+        {
+            if (ConnectedUser != null)
+            {
+                return $"{ConnectedUser.Prenom} {ConnectedUser.Nom}";
+            }
+            return "No user connected";
+        }
     }
 }

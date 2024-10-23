@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VenteApp.ProductsPage">
+             x:Class="VenteApp.ProductsPage"
+             xmlns:local="VenteApp.FluentIcons.FluentIcons"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F8F8FF">
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
+
+            <Grid ColumnDefinitions="*,auto">
+                <Label Text="Produits"
+                       FontSize="24"
+                         FontAttributes="Bold"
+                       VerticalOptions="Center" />
+                <Button Text="Ajouter un produit" Clicked="OnAddProductClicked" Grid.Column="1" VerticalOptions="Center" BackgroundColor="#056296"/>
+            </Grid>
 
             <!-- Search and Add Product Button -->
             <HorizontalStackLayout Spacing="20">
                 <!-- Search Bar -->
                 <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
                 <!-- Add Product Button -->
-                <Button Text="Ajouter un produit" Clicked="OnAddProductClicked" />
                 <Button Text="Télécharger PDF" Clicked="OnDownloadProductsPdfClicked" />
             </HorizontalStackLayout>
 
             <!-- Product List with Header -->
-            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView ItemsSource="{Binding Products}">
 
                 <!-- ListView Header -->
                 <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
-                        <Label Text="Code" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Description" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Prix d'achat" FontAttributes="Bold" Grid.Column="5" />
-                        <Label Text="Prix de vente" FontAttributes="Bold" Grid.Column="6" />
-                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="7" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="8" Grid.ColumnSpan="3" HorizontalOptions="Start" />
+                    <Grid Padding="15" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*" >
+                        <Label TextColor="White" Text="Code" FontAttributes="Bold" Grid.Column="0"/>
+                        <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="1" />
+                        <Label TextColor="White" Text="Description" FontAttributes="Bold" Grid.Column="2" />
+                        <Label TextColor="White" Text="Catégorie" FontAttributes="Bold" Grid.Column="3" />
+                        <Label TextColor="White" Text="Taille" FontAttributes="Bold" Grid.Column="4" />
+                        <Label TextColor="White" Text="Prix d'achat" FontAttributes="Bold" Grid.Column="5" />
+                        <Label TextColor="White" Text="Prix de vente" FontAttributes="Bold" Grid.Column="6" />
+                        <Label TextColor="White" Text="Stock" FontAttributes="Bold" Grid.Column="7" />
+                        <Label TextColor="White" Text="Actions" FontAttributes="Bold" Grid.Column="8" Grid.ColumnSpan="3" HorizontalOptions="Start" />
                     </Grid>
                 </ListView.Header>
 
@@ -36,7 +46,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
+                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*" BackgroundColor="White">
                                 <!-- Product Data Columns -->
                                 <Label Text="{Binding Code}" Grid.Column="0" VerticalOptions="Center" />
                                 <Label Text="{Binding Nom}" Grid.Column="1" VerticalOptions="Center" />
@@ -48,14 +58,15 @@
                                 <Label Text="{Binding Quantite}" Grid.Column="7" VerticalOptions="Center" />
 
                                 <!-- Action Buttons -->
-                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="8"/>
+                                <Button Text="Afficher" Clicked="OnShowProductClicked" Grid.Column="8"/>
+                                <Button Text="Modifier" Clicked="OnEditProductClicked" Grid.Column="9"/>
                                 <Button Text="Supprimer"
-                                        Grid.Column="9"
-                                        BackgroundColor="Red"
+                                        Grid.Column="10"
+                                        BackgroundColor="#FF4136"
                                         TextColor="White"
                                         Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                         CommandParameter="{Binding .}" />
-                                <Button Text="Afficher" Clicked="OnShowProductClicked" Grid.Column="10"/>
+                                
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

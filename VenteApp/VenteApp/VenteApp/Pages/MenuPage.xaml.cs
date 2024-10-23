@@ -1,261 +1,272 @@
+using Newtonsoft.Json;
+
 namespace VenteApp
 {
     public partial class MenuPage : FlyoutPage
     {
-        // Define the color you want to use for the buttons
-        private readonly Color SelectedButtonColor = Color.FromHex("#512bd4");  // Purple color from image
+        // Define the color you want to use for the selected menu item
+        private readonly Color SelectedLabelColor = Color.FromHex("#16e7ed");  // Purple color
+
+        public string ConnectedUserName { get; set; }
 
         public MenuPage()
         {
             InitializeComponent();
 
-            // Check if the connected user is an admin and show/hide buttons accordingly
+            // Check if the connected user is an admin and show/hide menu items accordingly
             ConfigureMenuVisibility();
 
-            // Vérifier si la licence est valide au démarrage
+            // Verify if the license is valid on startup
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new SalesPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                SalesButton.BackgroundColor = SelectedButtonColor;  // Highlight Users button
-                SalesButton.TextColor = Colors.White;
+                ResetLabelStyles();  // Reset styles for all labels
+                SetSelectedStyle(SalesLabel);  // Highlight the Sales label
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();  // Reset styles for all labels
+                SetSelectedStyle(LicenseLabel);  // Highlight the License label
             }
-           
+
+            // Set the connected user's name
+            ConnectedUserName = GetConnectedUserName();
         }
 
+        public string GetConnectedUserName()
+        {
+            var userJson = Preferences.Get("ConnectedUser", string.Empty);
+            if (!string.IsNullOrEmpty(userJson))
+            {
+                var user = JsonConvert.DeserializeObject<User>(userJson);
+                return $"{user.Prenom} {user.Nom}";
+            }
+            return "No user connected";
+        }
 
         // Navigate to Products Page
         private async void OnProductsClicked(object sender, EventArgs e)
         {
-
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new ProductsPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                ProductsButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                ProductsButton.TextColor = Colors.White;
+                ResetLabelStyles();  // Reset styles for all labels
+                SetSelectedStyle(ProductsLabel);  // Set selected label color
+                SetSelectedStyleLa(ProductsLayout);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
 
-        // Add more methods for Inventory, Sales, and Dashboard
+        // Navigate to Inventory Page
         private async void OnInventoryClicked(object sender, EventArgs e)
         {
-            
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new InventoryPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                InventoryButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                InventoryButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(InventoryLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
 
+        // Navigate to Sales Page
         private async void OnSalesClicked(object sender, EventArgs e)
         {
-            
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new SalesPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                SalesButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                SalesButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(SalesLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
 
+        // Add similar methods for the other menu items
         private async void OnHistoricalClicked(object sender, EventArgs e)
         {
-
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new HistoricalPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                HistoricalButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                HistoricalButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(HistoricalLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
 
         private async void OnBasketClicked(object sender, EventArgs e)
         {
-          
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new BasketPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                BasketButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                BasketButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(BasketLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
-        
+
         private async void OnSalesSummaryClicked(object sender, EventArgs e)
         {
-
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new SalesSummaryPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                SalesSummaryButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                SalesSummaryButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(SalesSummaryLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
 
         private async void OnDashboardClicked(object sender, EventArgs e)
         {
-
             if (LicenseValidator.IsLicenceValid())
             {
                 Detail = new NavigationPage(new DashboardPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                DashboardButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                DashboardButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(DashboardLabel);
             }
             else
             {
                 Detail = new NavigationPage(new LicenseMenuPage());
-                ResetButtonStyles();  // Reset styles for all buttons
-                LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-                LicenseButton.TextColor = Colors.White;
+                ResetLabelStyles();
+                SetSelectedStyle(LicenseLabel);
             }
         }
-
 
         private async void OnLicenseClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new LicenseMenuPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            LicenseButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-            LicenseButton.TextColor = Colors.White;
+            ResetLabelStyles();
+            SetSelectedStyle(LicenseLabel);
         }
 
         private async void OnProvidersClicked(object sender, EventArgs e)
         {
-
             Detail = new NavigationPage(new ProvidersPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            ProvidersButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-            ProvidersButton.TextColor = Colors.White;
+            ResetLabelStyles();
+            SetSelectedStyle(ProvidersLabel);
         }
 
         private async void OnClientsClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new ClientsPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            ClientsButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-            ClientsButton.TextColor = Colors.White;
+            ResetLabelStyles();
+            SetSelectedStyle(ClientsLabel);
         }
 
         private async void OnUsersClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new UsersPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            UsersButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-            UsersButton.TextColor = Colors.White;
+            ResetLabelStyles();
+            SetSelectedStyle(UsersLabel);
         }
 
         private async void OnBillingClicked(object sender, EventArgs e)
         {
             Detail = new NavigationPage(new BillingPage());
-            ResetButtonStyles();  // Reset styles for all buttons
-            BillingButton.BackgroundColor = SelectedButtonColor;  // Set selected button color
-            BillingButton.TextColor = Colors.White;
+            ResetLabelStyles();
+            SetSelectedStyle(BillingLabel);
         }
+
 
         private async void OnDeconnexionClicked(object sender, EventArgs e)
         {
             UserService.Instance.ClearConnectedUser();
+
+            // Update the ConnectedUserName after logout
+            ConnectedUserName = UserService.Instance.GetConnectedUserName();
+            OnPropertyChanged(nameof(ConnectedUserName));
+
             await Navigation.PushAsync(new MainPage());
 
-            ResetButtonStyles();  // Reset styles for all buttons
+            ResetLabelStyles();
         }
 
+        // Configure menu visibility based on user role
         private void ConfigureMenuVisibility()
         {
             bool isAdmin = UserService.Instance.IsAdmin();
 
-            // Show or hide the Users and License buttons based on admin status
-            UsersButton.IsVisible = isAdmin;
-            LicenseButton.IsVisible = isAdmin;
+            // Show or hide the Users and License menu items based on admin status
+            UsersLabel.IsVisible = isAdmin;
+            LicenseLabel.IsVisible = isAdmin;
         }
 
-        // Reset all buttons to default style
-        private void ResetButtonStyles()
+        // Reset all labels to default style
+        private void ResetLabelStyles()
         {
-            // Reset background color and text color for all buttons
-            ProductsButton.BackgroundColor = Colors.Transparent;
-            InventoryButton.BackgroundColor = Colors.Transparent;
-            SalesButton.BackgroundColor = Colors.Transparent;
-            HistoricalButton.BackgroundColor = Colors.Transparent;
-            BasketButton.BackgroundColor = Colors.Transparent;
-            SalesSummaryButton.BackgroundColor = Colors.Transparent;
-            DashboardButton.BackgroundColor = Colors.Transparent;
-            LicenseButton.BackgroundColor = Colors.Transparent;
-            ProvidersButton.BackgroundColor = Colors.Transparent;
-            ClientsButton.BackgroundColor = Colors.Transparent;
-            UsersButton.BackgroundColor = Colors.Transparent;
-            BillingButton.BackgroundColor = Colors.Transparent;
-            DeconnexionButton.BackgroundColor = Colors.Transparent;
+            // Reset background color and text color for all labels
+            ProductsLabel.BackgroundColor = Colors.Transparent;
+            InventoryLabel.BackgroundColor = Colors.Transparent;
+            SalesLabel.BackgroundColor = Colors.Transparent;
+            HistoricalLabel.BackgroundColor = Colors.Transparent;
+            BasketLabel.BackgroundColor = Colors.Transparent;
+            SalesSummaryLabel.BackgroundColor = Colors.Transparent;
+            DashboardLabel.BackgroundColor = Colors.Transparent;
+            LicenseLabel.BackgroundColor = Colors.Transparent;
+            ProvidersLabel.BackgroundColor = Colors.Transparent;
+            ClientsLabel.BackgroundColor = Colors.Transparent;
+            UsersLabel.BackgroundColor = Colors.Transparent;
+            BillingLabel.BackgroundColor = Colors.Transparent;
+            DeconnexionLabel.BackgroundColor = Colors.Transparent;
+
+            ProductsLayout.BackgroundColor = Colors.Transparent;
 
             // Reset text color to black (default)
-            ProductsButton.TextColor = Colors.Black;
-            InventoryButton.TextColor = Colors.Black;
-            SalesButton.TextColor = Colors.Black;
-            HistoricalButton.TextColor = Colors.Black;
-            BasketButton.TextColor = Colors.Black;
-            SalesSummaryButton.TextColor = Colors.Black;
-            DashboardButton.TextColor = Colors.Black;
-            LicenseButton.TextColor = Colors.Black;
-            ProvidersButton.TextColor = Colors.Black;
-            ClientsButton.TextColor = Colors.Black;
-            UsersButton.TextColor = Colors.Black;
-            BillingButton.TextColor = Colors.Black;
+            ProductsLabel.TextColor = Colors.Black;
+            InventoryLabel.TextColor = Colors.Black;
+            SalesLabel.TextColor = Colors.Black;
+            HistoricalLabel.TextColor = Colors.Black;
+            BasketLabel.TextColor = Colors.Black;
+            SalesSummaryLabel.TextColor = Colors.Black;
+            DashboardLabel.TextColor = Colors.Black;
+            LicenseLabel.TextColor = Colors.Black;
+            ProvidersLabel.TextColor = Colors.Black;
+            ClientsLabel.TextColor = Colors.Black;
+            UsersLabel.TextColor = Colors.Black;
+            BillingLabel.TextColor = Colors.Black;
         }
+
+        // Set the selected style for the current label
+        private void SetSelectedStyle(Label label)
+        {
+            label.BackgroundColor = SelectedLabelColor;
+            label.TextColor = Colors.White;
+        }
+
+        private void SetSelectedStyleLa(HorizontalStackLayout label)
+        {
+            label.BackgroundColor = SelectedLabelColor;
+        }
+
     }
 }

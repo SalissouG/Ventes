@@ -2,10 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.UsersPage"
-             Title="Utilisateurs">
+             Title="Utilisateurs"
+             NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
+
+            <Grid ColumnDefinitions="*,auto">
+                <Label Text="Utilisateurs"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+                <Button Text="Ajouter un utilisateur" Clicked="OnAddUserClicked" Grid.Column="1" VerticalOptions="Center"/>
+            </Grid>
 
             <!-- Search and Add User Button -->
             <HorizontalStackLayout Spacing="20">
