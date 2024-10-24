@@ -2,64 +2,94 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.InventoryPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Page Title -->
-            <Label Text="Inventaire"
-         FontSize="24"
-         HorizontalOptions="Start"
-         FontAttributes="Bold"/>
+            <Label Text="Inventaires"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10"/>
 
-            <!-- Search Bar -->
-            <HorizontalStackLayout>
-                <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Télécharger PDF" Clicked="OnDownloadInventoryPdfClicked" Margin="10,0,0,0" />
-            </HorizontalStackLayout>
+            <!-- Search Bar and Download Button -->
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="15"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Entry Placeholder="Rechercher un produit"
+                               HorizontalOptions="FillAndExpand"
+                               TextChanged="OnSearchTextChanged"
+                               BackgroundColor="#F0F8FF"
+                               HeightRequest="40"/>
+                        <Button Text="Télécharger PDF"
+                                Clicked="OnDownloadInventoryPdfClicked"
+                                BackgroundColor="#056296"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Padding="12,6"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Product List with Header -->
-            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
-
-                <!-- ListView Header -->
-                <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Stock" FontAttributes="Bold" Grid.Column="4" />
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <!-- Table Headers -->
+                    <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*">
+                        <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
+                        <Label TextColor="White" Text="Description" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label TextColor="White" Text="Catégorie" FontAttributes="Bold" Grid.Column="2"/>
+                        <Label TextColor="White" Text="Taille" FontAttributes="Bold" Grid.Column="3"/>
+                        <Label TextColor="White" Text="Stock" FontAttributes="Bold" Grid.Column="4"/>
                     </Grid>
-                </ListView.Header>
 
-                <!-- Product List Content -->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*">
-                                <!-- Product Data Columns -->
-                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding Quantite}" Grid.Column="4" VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <!-- Product List -->
+                    <ListView ItemsSource="{Binding Products}"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="Default">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*">
+                                        <!-- Product Data Columns -->
+                                        <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Description}" Grid.Column="1" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Categorie}" Grid.Column="2" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Taille}" Grid.Column="3" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Quantite}" Grid.Column="4" VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Pagination Controls -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
-  />
-
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="0,20,0,0">
+                <Button Text="Précédent"
+                        Command="{Binding PreviousPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
                 <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
-  VerticalOptions="Center" />
-
-                <Button Text="Suivant" Command="{Binding NextPageCommand}"
-  />
+                       VerticalOptions="Center"/>
+                <Button Text="Suivant"
+                        Command="{Binding NextPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
             </HorizontalStackLayout>
 
         </VerticalStackLayout>

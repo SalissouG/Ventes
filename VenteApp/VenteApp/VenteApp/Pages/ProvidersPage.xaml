@@ -1,72 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ProvidersPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Grid ColumnDefinitions="*,auto">
+            <!-- Header Section with Title and Add Button -->
+            <Grid ColumnDefinitions="*,auto,auto" Padding="0,0,0,10">
                 <Label Text="Fournisseurs"
-                        FontSize="24"
-                         FontAttributes="Bold"
-                        VerticalOptions="Center" /> 
-                <Button Text="Ajouter un Fournisseur" Clicked="OnAddProviderClicked" Grid.Column="1" VerticalOptions="Center"/>
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                <Button Text="Ajouter un Fournisseur"
+                        Clicked="OnAddProviderClicked"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                       />
+                <Button Text="Télécharger PDF"
+         Clicked="OnDownloadProvidersPdfClicked"
+         BackgroundColor="#056296"
+                          Grid.Column="2"
+         TextColor="White"
+         />
             </Grid>
 
-            <!-- Search and Add Provider Button -->
-            <HorizontalStackLayout Spacing="20">
-                <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Télécharger PDF" Clicked="OnDownloadProvidersPdfClicked" />
-            </HorizontalStackLayout>
+            <!-- Search Bar and Download Button -->
+            
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Entry Placeholder="Rechercher un fournisseur"
+                               HorizontalOptions="FillAndExpand"
+                               TextChanged="OnSearchTextChanged"
+                               BackgroundColor="White"
+                                WidthRequest="300"
+                               HeightRequest="40"/>
+                       
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
 
             <!-- Provider List with Header -->
-            <ListView ItemsSource="{Binding Providers}" HasUnevenRows="True" SeparatorVisibility="None">
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                <ListView ItemsSource="{Binding Providers}"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="Default">
 
-                <!-- ListView Header -->
-                <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,*">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Prénom" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Numéro" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Adresse" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Email" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="3" HorizontalOptions="Start" />
-                    </Grid>
-                </ListView.Header>
+                    <!-- ListView Header -->
+                    <ListView.Header>
+                        <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,*,*,*">
+                            <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
+                            <Label TextColor="White" Text="Prénom" FontAttributes="Bold" Grid.Column="1"/>
+                            <Label TextColor="White" Text="Numéro" FontAttributes="Bold" Grid.Column="2"/>
+                            <Label TextColor="White" Text="Adresse" FontAttributes="Bold" Grid.Column="3"/>
+                            <Label TextColor="White" Text="Email" FontAttributes="Bold" Grid.Column="4"/>
+                            <Label TextColor="White" Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="3"/>
+                        </Grid>
+                    </ListView.Header>
 
-                <!-- Provider List Content -->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,*">
-                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Numero}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Adresse}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center" />
+                    <!-- Provider List Content -->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*,*,*">
+                                    <!-- Provider Data Columns -->
+                                    <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Numero}" Grid.Column="2" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Adresse}" Grid.Column="3" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center"/>
 
-                                <Button Text="Modifier" Clicked="OnEditProviderClicked" Grid.Column="5" />
-                                <Button Text="Supprimer" 
-        Grid.Column="6" 
-        BackgroundColor="Red" 
-        TextColor="White"
-        Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-        CommandParameter="{Binding .}" />
-
-                                <Button Text="Afficher Produits" Clicked="OnShowProviderProductsClicked" Grid.Column="7"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                    <!-- Action Buttons -->
+                                    <Button Text="Produits"
+        Clicked="OnShowProviderProductsClicked"
+        Grid.Column="5"
+        CornerRadius="10"
+        />
+                                    <Button Text="Modifier"
+                                            Clicked="OnEditProviderClicked"
+                                            Grid.Column="6"
+                                            CornerRadius="10"
+                                           />
+                                    <Button Text="Supprimer"
+                                            Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding .}"
+                                            Grid.Column="7"
+                                            BackgroundColor="#FF4136"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            />
+                                    
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
 
             <!-- Pagination Controls -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}" />
-                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}" VerticalOptions="Center" />
-                <Button Text="Suivant" Command="{Binding NextPageCommand}" />
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="0,20,0,0">
+                <Button Text="Précédent"
+                        Command="{Binding PreviousPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
+                <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
+                       VerticalOptions="Center"/>
+                <Button Text="Suivant"
+                        Command="{Binding NextPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
             </HorizontalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

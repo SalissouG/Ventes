@@ -1,25 +1,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ProviderProductsPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
         <VerticalStackLayout Padding="40" Spacing="20">
 
             <!-- Page Title -->
             <Label Text="Produis du fournisseur"
-         FontSize="24"
-         HorizontalOptions="Start"
-         FontAttributes="Bold" />
+                 FontSize="24"
+                 HorizontalOptions="Start"
+                 FontAttributes="Bold" />
 
             <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SeparatorVisibility="None">
                 <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Prix" FontAttributes="Bold" Grid.Column="4" />
+                    <Grid Padding="15" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,*">
+                        <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0" />
+                        <Label TextColor="White" Text="Description" FontAttributes="Bold" Grid.Column="1" />
+                        <Label TextColor="White" Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
+                        <Label TextColor="White" Text="Taille" FontAttributes="Bold" Grid.Column="3" />
+                        <Label TextColor="White" Text="Prix" FontAttributes="Bold" Grid.Column="4" />
                         <Label Text="Stock" FontAttributes="Bold" Grid.Column="5" />
                     </Grid>
                 </ListView.Header>

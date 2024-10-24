@@ -4,7 +4,8 @@
              xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="VenteApp.DashboardPage"
              Title="Tableau de bord des produits"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">

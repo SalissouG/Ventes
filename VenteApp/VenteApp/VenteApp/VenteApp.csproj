@@ -51,6 +51,8 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\FluentSystemIcons-Regular.ttf" />
 	  <None Remove="Resources\Images\logo.jpg" />
+	  <None Remove="Resources\Images\logodark.jpg" />
+	  <None Remove="Resources\Images\logoshort.jpg" />
 	  <None Remove="Resources\Images\logoWhite.jpg" />
 	  <None Remove="Resources\Images\products_icon.svg" />
 	</ItemGroup>

@@ -2,24 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.BasketPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Center">
 
-            <!-- Basket Card -->
+            <!-- Basket Section -->
             <Frame BorderColor="LightGray"
                    CornerRadius="10"
-                   Padding="20"
+                   Padding="0"
                    BackgroundColor="White"
                    HorizontalOptions="Center">
 
-                <VerticalStackLayout Spacing="20">
+                <VerticalStackLayout Spacing="20" Padding="20">
 
-                    <!-- Card Header with Title and Total -->
-                    <Grid ColumnDefinitions="*,auto">
+                    <!-- Header with Title and Total -->
+                    <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
                         <Label Text="Panier"
-                               FontSize="20"
+                               FontSize="24"
+                               FontAttributes="Bold"
                                VerticalOptions="Center" />
                         <Label Text="{Binding TotalPrice, StringFormat='Total: {0:C}'}"
                                FontSize="20"
@@ -34,64 +36,75 @@
                             ItemDisplayBinding="{Binding Nom}"
                             SelectedItem="{Binding SelectedClient}" />
 
-                    <!-- ListView with Header for column titles -->
-                    <ListView ItemsSource="{Binding CartItems}" HasUnevenRows="True" SeparatorVisibility="None">
+                    <!-- Basket List with Header -->
+                    <Frame BorderColor="LightGray"
+                           CornerRadius="10"
+                           Padding="0"
+                           BackgroundColor="White">
+                        <VerticalStackLayout>
 
-                        <!-- Header for the ListView -->
-                        <ListView.Header>
-                            <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
-                                <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                                <Label Text="Prix" FontAttributes="Bold" Grid.Column="1" />
-                                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="2" />
-                                <Label Text="" FontAttributes="Bold" Grid.Column="3" />
+                            <!-- Table Headers -->
+                            <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*">
+                                <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
+                                <Label TextColor="White" Text="Prix" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label TextColor="White" Text="Quantité" FontAttributes="Bold" Grid.Column="2"/>
+                                <Label TextColor="White" Text="Action" FontAttributes="Bold" Grid.Column="3"/>
                             </Grid>
-                        </ListView.Header>
 
-                        <!-- ListView Content Template -->
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="5" ColumnDefinitions="*,*,*,*" HorizontalOptions="FillAndExpand">
-                                        <!-- Basket Item Data -->
-                                        <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                        <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center" />
+                            <!-- Basket Items List -->
+                            <ListView ItemsSource="{Binding CartItems}"
+                                      HasUnevenRows="True"
+                                      SeparatorVisibility="Default">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="10" ColumnDefinitions="*,*,*,*">
+                                                <!-- Basket Item Data -->
+                                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center"/>
+                                                <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Grid.Column="1" VerticalOptions="Center"/>
 
-                                        <!-- Increment/Decrement Buttons and Quantity Display -->
-                                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="Start">
-                                            <Button Text="-" Clicked="OnDecrementClicked" />
-                                            <Entry Text="{Binding Quantite}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                            <Button Text="+" Clicked="OnIncrementClicked" />
-                                        </HorizontalStackLayout>
+                                                <!-- Increment/Decrement Buttons and Quantity Display -->
+                                                <HorizontalStackLayout Grid.Column="2" HorizontalOptions="Start" Spacing="5">
+                                                    <Button Text="-" Clicked="OnDecrementClicked" WidthRequest="40" CornerRadius="10"/>
+                                                    <Entry Text="{Binding Quantite}" WidthRequest="50" HorizontalTextAlignment="Center"/>
+                                                    <Button Text="+" Clicked="OnIncrementClicked" WidthRequest="40" CornerRadius="10"/>
+                                                </HorizontalStackLayout>
 
-                                        <!-- Remove Button -->
-                                        <Button Text="Supprimer"
-                                                BackgroundColor="Red"
-                                                TextColor="White"
-                                                Command="{Binding BindingContext.RemoveCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                CommandParameter="{Binding .}"
-                                                WidthRequest="100"
-                                                Grid.Column="3" />
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                                <!-- Remove Button -->
+                                                <Button Text="Supprimer"
+                                                        BackgroundColor="#FF4136"
+                                                        TextColor="White"
+                                                        CornerRadius="10"
+                                                        HorizontalOptions="Start"
+                                                        Command="{Binding BindingContext.RemoveCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                        CommandParameter="{Binding .}"
+                                                        WidthRequest="100"
+                                                        Grid.Column="3"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
-                    <!-- Footer Button: Validate Basket -->
-                    <HorizontalStackLayout HorizontalOptions="Center">
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Footer Buttons: Validate Basket and Download PDF -->
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="0,20,0,0">
                         <Button Text="Valider le panier"
-                                BackgroundColor="Green"
+                                BackgroundColor="#056296"
                                 TextColor="White"
                                 WidthRequest="150"
                                 HeightRequest="40"
                                 CornerRadius="10"
-                                Clicked="OnValiderClicked" />
-
+                                Clicked="OnValiderClicked"/>
                         <Button Text="Télécharger PDF"
+                                BackgroundColor="#056296"
+                                TextColor="White"
                                 WidthRequest="150"
                                 HeightRequest="40"
                                 CornerRadius="10"
-                                Clicked="OnDownloadPdfClicked" />       
+                                Clicked="OnDownloadPdfClicked"/>
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>

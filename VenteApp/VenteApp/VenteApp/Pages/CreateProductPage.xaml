@@ -2,55 +2,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.CreateProductPage"
              Title="Produit"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="15"
             Padding="20,20"
-            VerticalOptions="Start"
-            HorizontalOptions="Start">
-
-         
+            HorizontalOptions="Center">
 
             <!-- Page Title -->
             <Label Text="Produit" FontSize="24" HorizontalOptions="Start" FontAttributes="Bold"/>
 
             <!-- Nom Entry -->
             <Label Text="Nom" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start" TextChanged="OnNomTextChanged" />
+            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start" TextChanged="OnNomTextChanged" BackgroundColor="White" />
             <Label x:Name="NomError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Description Entry -->
             <Label Text="Description" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Description" x:Name="DescriptionEntry" WidthRequest="300" HorizontalOptions="Start" TextChanged="OnDescriptionTextChanged" />
+            <Entry Placeholder="Description" x:Name="DescriptionEntry" WidthRequest="300" HorizontalOptions="Start" TextChanged="OnDescriptionTextChanged" BackgroundColor="White" />
             <Label x:Name="DescriptionError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Prix Entry -->
             <Label Text="Prix d'achat" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Prix d'achat" x:Name="PrixAchatEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixAchatTextChanged" />
+            <Entry Placeholder="Prix d'achat" x:Name="PrixAchatEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixAchatTextChanged" BackgroundColor="White"/>
             <Label x:Name="PrixAchatError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Prix Entry -->
             <Label Text="Prix de vente" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Prix de vente" x:Name="PrixVenteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixVenteTextChanged" />
+            <Entry Placeholder="Prix de vente" x:Name="PrixVenteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnPrixVenteTextChanged" BackgroundColor="White"/>
             <Label x:Name="PrixVenteError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Quantité Entry -->
             <Label Text="Stock" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Stock" x:Name="QuantiteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnQuantiteTextChanged" />
+            <Entry Placeholder="Stock" x:Name="QuantiteEntry" WidthRequest="300" Keyboard="Numeric" HorizontalOptions="Start" TextChanged="OnQuantiteTextChanged" BackgroundColor="White"/>
             <Label x:Name="QuantiteError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Catégorie Entry (optional) -->
             <Label Text="Catégorie" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Catégorie" x:Name="CategorieEntry" WidthRequest="300" HorizontalOptions="Start" />
+            <Entry Placeholder="Catégorie" x:Name="CategorieEntry" WidthRequest="300" HorizontalOptions="Start" BackgroundColor="White"/>
 
             <!-- Taille Entry (optional) -->
             <Label Text="Taille" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Taille" x:Name="TailleEntry" WidthRequest="300" HorizontalOptions="Start" />
+            <Entry Placeholder="Taille" x:Name="TailleEntry" WidthRequest="300" HorizontalOptions="Start" BackgroundColor="White"/>
 
             <!-- Provider Picker -->
-            <Picker x:Name="ProviderPicker" Title="Sélectionner un fournisseur" WidthRequest="300" HorizontalOptions="Start"
+            <Picker x:Name="ProviderPicker" Title="Sélectionner un fournisseur" WidthRequest="300" HorizontalOptions="Start" BackgroundColor="White"
                     ItemsSource="{Binding Providers}" ItemDisplayBinding="{Binding Nom}" />
             <Label x:Name="ProviderError" TextColor="Red" FontSize="12" IsVisible="False" />
 

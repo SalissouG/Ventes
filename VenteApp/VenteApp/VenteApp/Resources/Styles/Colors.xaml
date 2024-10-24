@@ -5,36 +5,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <!-- Primary Color -->
-    <Color x:Key="Primary">#16e7ed</Color>
-    <!-- Bright Cyan -->
+    <Color x:Key="Primary">#056296</Color>
+    <!-- Dark Blue -->
 
     <!-- Complementary and Accent Colors -->
-    <Color x:Key="Secondary">#8df1f5</Color>
-    <!-- Light Cyan -->
-    <Color x:Key="Tertiary">#0a7376</Color>
-    <!-- Dark Cyan -->
+    <Color x:Key="Secondary">#5ca3c7</Color>
+    <!-- Light Blue -->
+    <Color x:Key="Tertiary">#033d56</Color>
+    <!-- Darker Blue -->
 
     <!-- Neutral Colors -->
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
 
     <!-- Grayscale Colors -->
-    <Color x:Key="Gray100">#e6fcfd</Color>
-    <!-- Very Light Cyan -->
-    <Color x:Key="Gray200">#bff7f9</Color>
-    <!-- Pale Cyan -->
-    <Color x:Key="Gray300">#8df1f5</Color>
-    <!-- Light Cyan -->
-    <Color x:Key="Gray400">#5aebf0</Color>
-    <!-- Medium Cyan -->
-    <Color x:Key="Gray500">#16e7ed</Color>
-    <!-- Cyan (Primary) -->
-    <Color x:Key="Gray600">#0fbcc1</Color>
-    <!-- Dark Cyan -->
-    <Color x:Key="Gray900">#0a7376</Color>
-    <!-- Very Dark Cyan -->
-    <Color x:Key="Gray950">#053a3c</Color>
-    <!-- Almost Black Cyan -->
+    <Color x:Key="Gray100">#e0f0f8</Color>
+    <!-- Very Light Blue -->
+    <Color x:Key="Gray200">#b2d8e8</Color>
+    <!-- Pale Blue -->
+    <Color x:Key="Gray300">#80c2d8</Color>
+    <!-- Light Blue -->
+    <Color x:Key="Gray400">#4fabc7</Color>
+    <!-- Medium Blue -->
+    <Color x:Key="Gray500">#056296</Color>
+    <!-- Blue (Primary) -->
+    <Color x:Key="Gray600">#044a6f</Color>
+    <!-- Dark Blue -->
+    <Color x:Key="Gray900">#033d56</Color>
+    <!-- Very Dark Blue -->
+    <Color x:Key="Gray950">#022233</Color>
+    <!-- Almost Black Blue -->
 
     <!-- Brushes for UI Elements -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
@@ -57,10 +57,10 @@
     <Color x:Key="Yellow200Accent">#FFF68F</Color>
     <!-- Light Gold for Highlights -->
 
-    <Color x:Key="Cyan100Accent">#16e7ed</Color>
-    <!-- Bright Cyan (Primary) for Highlights -->
-    <Color x:Key="Cyan200Accent">#bff7f9</Color>
-    <!-- Light Cyan for Backgrounds -->
+    <Color x:Key="Cyan100Accent">#5ca3c7</Color>
+    <!-- Light Blue for Highlights -->
+    <Color x:Key="Cyan200Accent">#b2d8e8</Color>
+    <!-- Pale Blue for Backgrounds -->
 
     <Color x:Key="Blue100Accent">#1E90FF</Color>
     <!-- Dodger Blue for Links or Buttons -->

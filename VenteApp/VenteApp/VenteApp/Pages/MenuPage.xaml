@@ -6,142 +6,127 @@
 
     <!-- Side Menu -->
     <FlyoutPage.Flyout>
-        <ContentPage Title="Menu" BackgroundColor="#e4f8fa" NavigationPage.HasNavigationBar="False">
-        <!--<ContentPage Title="Menu" BackgroundColor="#f0f4fa">-->
+        <ContentPage Title="Menu" BackgroundColor="#cefaf7" NavigationPage.HasNavigationBar="False">
             <ScrollView>
                 <VerticalStackLayout Padding="10" Spacing="15">
-                <!-- Logo Section -->
+                    <!-- Logo Section -->
                     <Image Source="logowhite.jpg" HeightRequest="150" HorizontalOptions="Center" Margin="0,15,0,0"/>
-                <!-- User Information -->
-                <Frame Padding="10" BackgroundColor="White" CornerRadius="10" HasShadow="True" Margin="0,10,0,20">
-                    <VerticalStackLayout>
-                            <Label Text="{Binding ConnectedUserName}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Center"/>
-                            <Label Text="Vente App" FontSize="Small" TextColor="Gray" HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </Frame>
 
-                <!-- Menu Labels -->
+                    <!-- User Information -->
+                    <Frame Padding="10" BackgroundColor="White" CornerRadius="10" HasShadow="True" Margin="0,10,0,20">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding ConnectedUserName}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Vente App" FontSize="Small" TextColor="Gray" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Menu Items -->
                     <HorizontalStackLayout x:Name="ProductsLayout" Spacing="10" StyleClass="MenuLayout">
-                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24" />
-                        <Label x:Name="ProductsLabel" Text="Produits" StyleClass="MenuLabel">
-                            
-                        </Label>
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="ProductsLabel" Text="Produits" StyleClass="MenuLabel"/>
                         <HorizontalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnProductsClicked"/>
                         </HorizontalStackLayout.GestureRecognizers>
                     </HorizontalStackLayout>
 
-                    <Label x:Name="ProvidersLabel"
-           Text="Fournisseurs"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnProvidersClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="ProvidersLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="ProvidersLabel" Text="Fournisseurs" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProvidersClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="SalesLabel"
-           Text="Ventes"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSalesClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="SalesLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="SalesLabel" Text="Ventes" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSalesClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="BasketLabel"
-           Text="Panier"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnBasketClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="BasketLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="BasketLabel" Text="Panier" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBasketClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="BillingLabel"
-           Text="Factures"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnBillingClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="BillingLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="BillingLabel" Text="Factures" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBillingClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="ClientsLabel"
-           Text="Clients"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnClientsClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="ClientsLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="ClientsLabel" Text="Clients" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnClientsClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="HistoricalLabel"
-           Text="Historiques"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnHistoricalClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="HistoricalLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="HistoricalLabel" Text="Historiques" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnHistoricalClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="InventoryLabel"
-           Text="Inventaires"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnInventoryClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="InventoryLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="InventoryLabel" Text="Inventaires" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnInventoryClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="SalesSummaryLabel"
-           Text="Total des ventes"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSalesSummaryClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="SalesSummaryLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="SalesSummaryLabel" Text="Total des ventes" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSalesSummaryClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="DashboardLabel"
-           Text="Tableau de bord"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnDashboardClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="DashboardLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="DashboardLabel" Text="Tableau de bord" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDashboardClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="UsersLabel"
-           Text="Utilisateurs"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnUsersClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="UsersLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="UsersLabel" Text="Utilisateurs" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnUsersClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <Label x:Name="LicenseLabel"
-           Text="Licence"
-           StyleClass="MenuLabel"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnLicenseClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    <HorizontalStackLayout x:Name="LicenseLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="LicenseLabel" Text="Licence" StyleClass="MenuLabel"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLicenseClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
 
-                <!-- Logout Label -->
-                <Label x:Name="DeconnexionLabel"
-           Text="Deconnexion"
-           StyleClass="MenuLabel"
-           TextColor="Red"
-           HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnDeconnexionClicked"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </VerticalStackLayout>
-           </ScrollView>
+                    <!-- Logout Label -->
+                    <HorizontalStackLayout x:Name="DeconnexionLayout" Spacing="10" StyleClass="MenuLayout">
+                        <Image Source="logowhite.jpg" HeightRequest="24" WidthRequest="24"/>
+                        <Label x:Name="DeconnexionLabel" Text="Deconnexion" StyleClass="MenuLabel" TextColor="Red" HorizontalOptions="Center"/>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDeconnexionClicked"/>
+                        </HorizontalStackLayout.GestureRecognizers>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
         </ContentPage>
     </FlyoutPage.Flyout>
 

@@ -2,83 +2,110 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.HistoricalPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Page Title -->
-            <Label Text="Historique"
-         FontSize="24"
-         HorizontalOptions="Start"
-         FontAttributes="Bold" />
+            <Label Text="Historiques"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,10"/>
 
             <!-- Date and Search Controls -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Start">
-                <!-- Date Debut Picker -->
-                <Label Text="Date début:" VerticalOptions="Center" />
-                <DatePicker Date="{Binding DateDebut}" 
-                            Format="dd/MM/yyyy" />
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="15"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <!-- Date Debut Picker -->
+                        <Label Text="Date début:" VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding DateDebut}"
+                                    Format="dd/MM/yyyy"/>
 
-                <!-- Date Fin Picker -->
-                <Label Text="Date fin:" VerticalOptions="Center"/>
-                <DatePicker Date="{Binding DateFin}" 
-                            Format="dd/MM/yyyy" />
+                        <!-- Date Fin Picker -->
+                        <Label Text="Date fin:" VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding DateFin}"
+                                    Format="dd/MM/yyyy"/>
 
-                <!-- Search Entry -->
-                <Entry Placeholder="Recherche"
-                       WidthRequest="300" 
-                       x:Name="SearchEntry" 
-                       TextChanged="OnSearchTextChanged" />
+                        <!-- Search Entry -->
+                        <Entry Placeholder="Recherche"
+                               HorizontalOptions="FillAndExpand"
+                               TextChanged="OnSearchTextChanged"
+                               BackgroundColor="#F0F8FF"
+                               HeightRequest="40"/>
 
-                <Button Text="Télécharger PDF" Clicked="OnDownloadHistoricalPdfClicked" />
+                        <Button Text="Télécharger PDF"
+                                Clicked="OnDownloadHistoricalPdfClicked"
+                                BackgroundColor="#056296"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Padding="12,6"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
-            </HorizontalStackLayout>
-
-            <!-- ListView with Header for Sales -->
-            <ListView ItemsSource="{Binding FilteredSales}" HasUnevenRows="True" SeparatorVisibility="None">
-                <!-- ListView Header -->
-                <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*,auto,auto">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Description" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Catégorie" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Taille" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Date Vente" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Prix de ventes" FontAttributes="Bold" Grid.Column="5" />
-                        <Label Text="Quantité vendu" FontAttributes="Bold" Grid.Column="6" />
+            <!-- Historical List with Header -->
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <!-- Table Headers -->
+                    <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,*,*">
+                        <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
+                        <Label TextColor="White" Text="Description" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label TextColor="White" Text="Catégorie" FontAttributes="Bold" Grid.Column="2"/>
+                        <Label TextColor="White" Text="Taille" FontAttributes="Bold" Grid.Column="3"/>
+                        <Label TextColor="White" Text="Date Vente" FontAttributes="Bold" Grid.Column="4"/>
+                        <Label TextColor="White" Text="Prix de vente" FontAttributes="Bold" Grid.Column="5"/>
+                        <Label TextColor="White" Text="Quantité vendue" FontAttributes="Bold" Grid.Column="6"/>
                     </Grid>
-                </ListView.Header>
 
-                <!-- ListView Content -->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*,auto,auto" HorizontalOptions="FillAndExpand">
-                                <!-- Product Data from SaleTransaction -->
-                                <Label Text="{Binding Product.Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                <Label Text="{Binding Product.Description}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Product.Categorie}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Product.Taille}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding DateDeVente, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="4" VerticalOptions="Center" />
-                                <Label Text="{Binding Product.Prix, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center" />
-                                <Label Text="{Binding Quantite}" Grid.Column="6" VerticalOptions="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <!-- Historical List -->
+                    <ListView ItemsSource="{Binding FilteredSales}"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="Default">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*,*">
+                                        <!-- Product Data from SaleTransaction -->
+                                        <Label Text="{Binding Product.Nom}" Grid.Column="0" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Product.Description}" Grid.Column="1" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Product.Categorie}" Grid.Column="2" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Product.Taille}" Grid.Column="3" VerticalOptions="Center"/>
+                                        <Label Text="{Binding DateDeVente, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="4" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Product.Prix, StringFormat='{0:C}'}" Grid.Column="5" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Quantite}" Grid.Column="6" VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Pagination Controls -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
-            />
-
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="0,20,0,0">
+                <Button Text="Précédent"
+                        Command="{Binding PreviousPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
                 <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
-            VerticalOptions="Center" />
-
-                <Button Text="Suivant" Command="{Binding NextPageCommand}"
-            />
+                       VerticalOptions="Center"/>
+                <Button Text="Suivant"
+                        Command="{Binding NextPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
             </HorizontalStackLayout>
 
         </VerticalStackLayout>

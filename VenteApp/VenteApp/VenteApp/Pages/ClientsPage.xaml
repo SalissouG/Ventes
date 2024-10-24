@@ -3,79 +3,119 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VenteApp.ClientsPage"
              Title="Clients"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F0F8FF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="40" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Grid ColumnDefinitions="*,auto">
-                <Label Text="Produits"
-           FontSize="24"
-           VerticalOptions="Center" 
-                         FontAttributes="Bold"/>
-                <Button Text="Ajouter un client" Clicked="OnAddClientClicked" Grid.Column="1" VerticalOptions="Center"/>
+            <!-- Header Section with Title and Add Button -->
+            <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
+                <Label Text="Clients"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"/>
+                <Button Text="Ajouter un client"
+                        Clicked="OnAddClientClicked"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
             </Grid>
-            
-            <!-- Search and Add Client Button -->
-            <HorizontalStackLayout Spacing="20">
-                <Entry Placeholder="Recherche" WidthRequest="400" TextChanged="OnSearchTextChanged" />
-                <Button Text="Télécharger PDF" 
-                    Clicked="OnDownloadClientsPdfClicked"/>
-            </HorizontalStackLayout>
+
+            <!-- Search Bar and Download Button -->
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="15"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Entry Placeholder="Rechercher un client"
+                               HorizontalOptions="FillAndExpand"
+                               TextChanged="OnSearchTextChanged"
+                               BackgroundColor="#F0F8FF"
+                               HeightRequest="40"/>
+                        <Button Text="Télécharger PDF"
+                                Clicked="OnDownloadClientsPdfClicked"
+                                BackgroundColor="#056296"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Padding="12,6"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Client List with Header -->
-            <ListView ItemsSource="{Binding Clients}" HasUnevenRows="True" SeparatorVisibility="None">
-
-                <!-- ListView Header -->
-                <ListView.Header>
-                    <Grid Padding="5" BackgroundColor="LightGray" ColumnDefinitions="*,*,*,*,*,*,*">
-                        <Label Text="Nom" FontAttributes="Bold" Grid.Column="0" />
-                        <Label Text="Prénom" FontAttributes="Bold" Grid.Column="1" />
-                        <Label Text="Numéro" FontAttributes="Bold" Grid.Column="2" />
-                        <Label Text="Adresse" FontAttributes="Bold" Grid.Column="3" />
-                        <Label Text="Email" FontAttributes="Bold" Grid.Column="4" />
-                        <Label Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2" />
+            <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                <VerticalStackLayout>
+                    <!-- Table Headers -->
+                    <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,auto,auto">
+                        <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
+                        <Label TextColor="White" Text="Prénom" FontAttributes="Bold" Grid.Column="1"/>
+                        <Label TextColor="White" Text="Numéro" FontAttributes="Bold" Grid.Column="2"/>
+                        <Label TextColor="White" Text="Adresse" FontAttributes="Bold" Grid.Column="3"/>
+                        <Label TextColor="White" Text="Email" FontAttributes="Bold" Grid.Column="4"/>
+                        <Label TextColor="White" Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2"/>
                     </Grid>
-                </ListView.Header>
 
-                <!-- Client List Content -->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="5" ColumnDefinitions="*,*,*,*,*,*,*">
-                                <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center" />
-                                <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center" />
-                                <Label Text="{Binding Numero}" Grid.Column="2" VerticalOptions="Center" />
-                                <Label Text="{Binding Adresse}" Grid.Column="3" VerticalOptions="Center" />
-                                <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center" />
+                    <!-- Client List -->
+                    <ListView ItemsSource="{Binding Clients}"
+                              HasUnevenRows="True"
+                              SeparatorVisibility="Default">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,auto,auto">
+                                        <!-- Client Data Columns -->
+                                        <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Numero}" Grid.Column="2" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Adresse}" Grid.Column="3" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Email}" Grid.Column="4" VerticalOptions="Center"/>
 
-                                <!-- Action Buttons -->
-                                <Button Text="Modifier" Clicked="OnEditClientClicked" Grid.Column="5" />
-                                <Button Text="Supprimer"
-                                        Grid.Column="6"
-                                        BackgroundColor="Red"
-                                        TextColor="White"
-                                        Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                        <!-- Action Buttons -->
+                                        <Button Text="Modifier"
+                                                Clicked="OnEditClientClicked"
+                                                CornerRadius="10"
+                                                Grid.Column="5"/>
+                                        <Button Text="Supprimer"
+                                                BackgroundColor="#FF4136"
+                                                TextColor="White"
+                                                CornerRadius="10"
+                                                Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding .}"
+                                                Grid.Column="6"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Frame>
 
             <!-- Pagination Controls -->
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <Button Text="Précédent" Command="{Binding PreviousPageCommand}"
-  />
-
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Padding="0,20,0,0">
+                <Button Text="Précédent"
+                        Command="{Binding PreviousPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
                 <Label Text="{Binding CurrentPage, StringFormat='Page {0} de {Binding TotalPages}'}"
-  VerticalOptions="Center" />
-
-                <Button Text="Suivant" Command="{Binding NextPageCommand}"
-  />
+                       VerticalOptions="Center"/>
+                <Button Text="Suivant"
+                        Command="{Binding NextPageCommand}"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="12,6"/>
             </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
