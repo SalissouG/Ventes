@@ -7,34 +7,37 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Header Section with Title -->
-            <Label Text="Factures"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Start"
-                   Margin="0,0,0,10"/>
+            <!-- Header Section with Title and Add Button -->
+            <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
+                <!-- Header Section with Title -->
+                <Label Text="Factures"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Margin="0,0,0,10"/>
+                <Button Text="Télécharger PDF"
+                        Clicked="OnDownloadAllBillingsPdfClicked"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        Grid.Column="1"
+                        CornerRadius="10"
+                        Padding="12,6"/>
+            </Grid>
+           
 
             <!-- Search Bar and Download Button -->
-            <Frame BorderColor="LightGray"
-                   CornerRadius="10"
-                   Padding="15"
-                   BackgroundColor="White">
+            
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="15">
                         <Entry Placeholder="Recherche par client ou total"
                                HorizontalOptions="FillAndExpand"
                                TextChanged="OnSearchTextChanged"
-                               BackgroundColor="#F0F8FF"
+                               BackgroundColor="White"
+                               WidthRequest="300"
                                HeightRequest="40"/>
-                        <Button Text="Télécharger PDF"
-                                Clicked="OnDownloadAllBillingsPdfClicked"
-                                BackgroundColor="#056296"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="12,6"/>
+                        
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
 
             <!-- Billing List with Header -->
             <Frame BorderColor="LightGray"

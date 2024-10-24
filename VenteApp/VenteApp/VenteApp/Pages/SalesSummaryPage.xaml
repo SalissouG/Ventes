@@ -9,45 +9,49 @@
         <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Page Title -->
-            <Label Text="Total des ventes"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Start"
-                   Margin="0,0,0,10"/>
+
+            <!-- Header Section with Title and Add Button -->
+            <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
+                <Label Text="Total des ventes"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"
+                       Margin="0,0,0,10"/>
+
+                <Button Text="Télécharger PDF"
+                        Clicked="OnDownloadSalesSummaryPdfClicked"
+                        BackgroundColor="#056296"
+                        TextColor="White"
+                        Grid.Column="1"
+                        CornerRadius="10"
+                        Padding="12,6"/>
+            </Grid>
 
             <!-- Date and Search Controls -->
-            <Frame BorderColor="LightGray"
-                   CornerRadius="10"
-                   Padding="15"
-                   BackgroundColor="White">
+            
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="15">
                         <!-- Date Debut Picker -->
                         <Label Text="Date début:" VerticalOptions="Center"/>
                         <DatePicker Date="{Binding DateDebut}"
+                                    BackgroundColor="White"
                                     Format="dd/MM/yyyy"/>
 
                         <!-- Date Fin Picker -->
                         <Label Text="Date fin:" VerticalOptions="Center"/>
                         <DatePicker Date="{Binding DateFin}"
+                                    BackgroundColor="White"
                                     Format="dd/MM/yyyy"/>
 
                         <!-- Search Entry -->
                         <Entry Placeholder="Rechercher"
                                HorizontalOptions="FillAndExpand"
                                TextChanged="OnSearchTextChanged"
-                               BackgroundColor="#F0F8FF"
+                               BackgroundColor="White"
+                               WidthRequest="300"
                                HeightRequest="40"/>
-
-                        <Button Text="Télécharger PDF"
-                                Clicked="OnDownloadSalesSummaryPdfClicked"
-                                BackgroundColor="#056296"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="12,6"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
 
             <!-- Product Sales Summary List -->
             <Frame BorderColor="LightGray"

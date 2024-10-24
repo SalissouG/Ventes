@@ -10,58 +10,60 @@
         <VerticalStackLayout
             Spacing="15"
             Padding="20,20"
-            VerticalOptions="Start"
-            HorizontalOptions="Start">
+            HorizontalOptions="Center">
 
             <!-- Page Title -->
             <Label Text="Utilisateur"
-                    FontSize="24"
-                    HorizontalOptions="Start"
-                    FontAttributes="Bold"/>
+                   FontSize="24"
+                   HorizontalOptions="Start"
+                   FontAttributes="Bold"/>
 
             <!-- Nom Entry -->
             <Label Text="Nom" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start" 
-                   TextChanged="OnNomTextChanged" />
+            <Entry Placeholder="Nom" x:Name="NomEntry" WidthRequest="300" HorizontalOptions="Start"
+                   TextChanged="OnNomTextChanged" BackgroundColor="White"/>
             <Label x:Name="NomError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Prénom Entry -->
             <Label Text="Prénom" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Prénom" x:Name="PrenomEntry" WidthRequest="300" HorizontalOptions="Start" 
-                   TextChanged="OnPrenomTextChanged" />
+            <Entry Placeholder="Prénom" x:Name="PrenomEntry" WidthRequest="300" HorizontalOptions="Start"
+                   TextChanged="OnPrenomTextChanged" BackgroundColor="White"/>
             <Label x:Name="PrenomError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Numéro de téléphone Entry -->
             <Label Text="Numéro de téléphone" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Numéro de téléphone" x:Name="NumeroEntry" WidthRequest="300" Keyboard="Telephone" HorizontalOptions="Start" 
-                   TextChanged="OnNumeroTextChanged" />
+            <Entry Placeholder="Numéro de téléphone" x:Name="NumeroEntry" WidthRequest="300" Keyboard="Telephone"
+                   HorizontalOptions="Start" TextChanged="OnNumeroTextChanged" BackgroundColor="White"/>
             <Label x:Name="NumeroError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Adresse Entry -->
             <Label Text="Adresse" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Adresse" x:Name="AdresseEntry" WidthRequest="300" HorizontalOptions="Start" />
+            <Entry Placeholder="Adresse" x:Name="AdresseEntry" WidthRequest="300" HorizontalOptions="Start"
+                   BackgroundColor="White"/>
 
             <!-- Email Entry -->
             <Label Text="Email" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Email" x:Name="EmailEntry" WidthRequest="300" Keyboard="Email" HorizontalOptions="Start" 
-                   TextChanged="OnEmailTextChanged" />
+            <Entry Placeholder="Email" x:Name="EmailEntry" WidthRequest="300" Keyboard="Email"
+                   HorizontalOptions="Start" TextChanged="OnEmailTextChanged" BackgroundColor="White"/>
             <Label x:Name="EmailError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Login Entry -->
             <Label Text="Login" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Login" x:Name="LoginEntry" WidthRequest="300" HorizontalOptions="Start" 
-                   TextChanged="OnLoginTextChanged" />
+            <Entry Placeholder="Login" x:Name="LoginEntry" WidthRequest="300" HorizontalOptions="Start"
+                   TextChanged="OnLoginTextChanged" BackgroundColor="White"/>
             <Label x:Name="LoginError" TextColor="Red" FontSize="12" IsVisible="False" />
 
             <!-- Password Entry -->
             <Label Text="Mot de passe" FontSize="14" HorizontalOptions="Start" />
-            <Entry Placeholder="Mot de passe" x:Name="PasswordEntry" IsPassword="True" WidthRequest="300" HorizontalOptions="Start" 
-                   TextChanged="OnPasswordTextChanged" />
+            <Entry Placeholder="Mot de passe" x:Name="PasswordEntry" IsPassword="True" WidthRequest="300"
+                   HorizontalOptions="Start" TextChanged="OnPasswordTextChanged" BackgroundColor="White"/>
             <Label x:Name="PasswordError" TextColor="Red" FontSize="12" IsVisible="False" />
 
+            <!-- Role Picker -->
             <Label Text="Role" FontSize="14" HorizontalOptions="Start" />
-            <Picker x:Name="RolePicker" WidthRequest="300" HorizontalOptions="Start"/>
+            <Picker x:Name="RolePicker" WidthRequest="300" HorizontalOptions="Start" BackgroundColor="White"/>
 
+            <!-- Action Buttons -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                 <Button Text="Enregistrer" Clicked="OnSaveUserClicked" WidthRequest="150"/>
                 <Button Text="Annuler" Clicked="OnCancelClicked" WidthRequest="150"/>

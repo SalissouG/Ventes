@@ -10,7 +10,7 @@
         <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Header Section with Title and Add Button -->
-            <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
+            <Grid ColumnDefinitions="*,auto,auto" Padding="0,0,0,10">
                 <Label Text="Clients"
                        FontSize="28"
                        FontAttributes="Bold"
@@ -21,31 +21,27 @@
                         VerticalOptions="Center"
                         BackgroundColor="#056296"
                         TextColor="White"
-                        CornerRadius="10"
-                        Padding="12,6"/>
+                        />
+                <Button Text="Télécharger PDF"
+                        Clicked="OnDownloadClientsPdfClicked"
+                        Grid.Column="2"
+                         BackgroundColor="#056296"
+                         TextColor="White"
+                        />
             </Grid>
 
             <!-- Search Bar and Download Button -->
-            <Frame BorderColor="LightGray"
-                   CornerRadius="10"
-                   Padding="15"
-                   BackgroundColor="White">
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="15">
                         <Entry Placeholder="Rechercher un client"
                                HorizontalOptions="FillAndExpand"
                                TextChanged="OnSearchTextChanged"
-                               BackgroundColor="#F0F8FF"
+                               BackgroundColor="White"
+                               WidthRequest="300"
                                HeightRequest="40"/>
-                        <Button Text="Télécharger PDF"
-                                Clicked="OnDownloadClientsPdfClicked"
-                                BackgroundColor="#056296"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="12,6"/>
+                       
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
 
             <!-- Client List with Header -->
             <Frame BorderColor="LightGray"
@@ -54,13 +50,13 @@
                    BackgroundColor="White">
                 <VerticalStackLayout>
                     <!-- Table Headers -->
-                    <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,auto,auto">
+                    <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*,*,*,*,*">
                         <Label TextColor="White" Text="Nom" FontAttributes="Bold" Grid.Column="0"/>
                         <Label TextColor="White" Text="Prénom" FontAttributes="Bold" Grid.Column="1"/>
                         <Label TextColor="White" Text="Numéro" FontAttributes="Bold" Grid.Column="2"/>
                         <Label TextColor="White" Text="Adresse" FontAttributes="Bold" Grid.Column="3"/>
                         <Label TextColor="White" Text="Email" FontAttributes="Bold" Grid.Column="4"/>
-                        <Label TextColor="White" Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2"/>
+                        <Label TextColor="White" Text="Actions" FontAttributes="Bold" Grid.Column="5" Grid.ColumnSpan="2" />
                     </Grid>
 
                     <!-- Client List -->
@@ -70,7 +66,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,auto,auto">
+                                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,*,*">
                                         <!-- Client Data Columns -->
                                         <Label Text="{Binding Nom}" Grid.Column="0" VerticalOptions="Center"/>
                                         <Label Text="{Binding Prenom}" Grid.Column="1" VerticalOptions="Center"/>

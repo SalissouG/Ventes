@@ -9,33 +9,37 @@
         <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- Page Title -->
-            <Label Text="Inventaires"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Start"
-                   Margin="0,0,0,10"/>
+           
+
+            <!-- Header Section with Title and Add Button -->
+            <Grid ColumnDefinitions="*,auto" Padding="0,0,0,10">
+                <Label Text="Inventaires"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Margin="0,0,0,10"/>
+                <Button Text="Télécharger PDF"
+                         Clicked="OnDownloadInventoryPdfClicked"
+                         BackgroundColor="#056296"
+                         Grid.Column="1"
+                         TextColor="White"
+                         CornerRadius="10"
+                         Padding="12,6"/>
+            </Grid>
 
             <!-- Search Bar and Download Button -->
-            <Frame BorderColor="LightGray"
-                   CornerRadius="10"
-                   Padding="15"
-                   BackgroundColor="White">
+            
                 <VerticalStackLayout>
                     <HorizontalStackLayout Spacing="15">
                         <Entry Placeholder="Rechercher un produit"
                                HorizontalOptions="FillAndExpand"
                                TextChanged="OnSearchTextChanged"
-                               BackgroundColor="#F0F8FF"
+                               BackgroundColor="White"
+                                WidthRequest="300"
                                HeightRequest="40"/>
-                        <Button Text="Télécharger PDF"
-                                Clicked="OnDownloadInventoryPdfClicked"
-                                BackgroundColor="#056296"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="12,6"/>
+                       
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
 
             <!-- Product List with Header -->
             <Frame BorderColor="LightGray"
