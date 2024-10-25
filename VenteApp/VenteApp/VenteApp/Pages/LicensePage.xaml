@@ -10,7 +10,7 @@
 
         <!-- Input for Licence Key -->
         <Label Text="Entrez votre licence" FontSize="24" HorizontalOptions="Center"   FontAttributes="Bold" />
-        <Entry x:Name="LicenceEntry" Placeholder="Clé de licence" WidthRequest="300" />
+        <Entry x:Name="LicenceEntry" Placeholder="Clé de licence" WidthRequest="300" BackgroundColor="White"/>
 
         <!-- Button to Validate the Licence -->
         <Button Text="Valider" Clicked="OnValidateLicence" WidthRequest="150" />

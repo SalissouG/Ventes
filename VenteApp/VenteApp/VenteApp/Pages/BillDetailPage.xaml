@@ -28,14 +28,20 @@
                     <Label Text="{Binding Bill.TotalAmount, StringFormat='Total: {0:C}'}" FontSize="20" FontAttributes="Bold" HorizontalOptions="End" />
 
                     <!-- Product List with Header -->
-                    <ListView ItemsSource="{Binding Bill.Products}" HasUnevenRows="True" SeparatorVisibility="None">
+                    <Frame BorderColor="LightGray"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                        <ListView ItemsSource="{Binding Bill.Products}"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="Default">
 
                         <!-- ListView Header -->
                         <ListView.Header>
-                            <Grid Padding="15" BackgroundColor="#056296" ColumnDefinitions="*,*,*">
-                                <Label Text="Produit" FontAttributes="Bold" Grid.Column="0" />
-                                <Label Text="Quantité" FontAttributes="Bold" Grid.Column="1" />
-                                <Label Text="Prix" FontAttributes="Bold" Grid.Column="2" />
+                            <Grid Padding="10" BackgroundColor="#056296" ColumnDefinitions="*,*,*">
+                                <Label TextColor="White" Text="Produit" FontAttributes="Bold" Grid.Column="0"/>
+                                <Label TextColor="White" Text="Quantité" FontAttributes="Bold" Grid.Column="1"/>
+                                <Label TextColor="White" Text="Prix" FontAttributes="Bold" Grid.Column="2"/>
                             </Grid>
                         </ListView.Header>
 
@@ -43,16 +49,16 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Padding="5" ColumnDefinitions="*,*,*">
-                                        <Label TextColor="White" Text="{Binding ProductName}" Grid.Column="0" VerticalOptions="Center" />
-                                        <Label TextColor="White" Text="{Binding Quantity}" Grid.Column="1" VerticalOptions="Center"  />
-                                        <Label TextColor="White" Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="2" VerticalOptions="Center" />
+                                    <Grid Padding="10" ColumnDefinitions="*,*,*">
+                                        <Label Text="{Binding ProductName}" Grid.Column="0" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Quantity}" Grid.Column="1" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Price, StringFormat='{0:C}'}" Grid.Column="2" VerticalOptions="Center"/>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-
+                    </Frame>
                     <Button Text="Télécharger PDF" Clicked="OnDownloadPdfClicked" HorizontalOptions="Center"/>
 
 
